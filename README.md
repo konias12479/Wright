@@ -1,26 +1,25 @@
-# DJI Mini 5 Pro — Pilotní trenažér
+# DJI Mini 5 Pro: pilotní trenažér a letová příprava
 
-Interaktivní učební aplikace pro začínající piloty dronu **DJI Mini 5 Pro**. Jeden HTML soubor bez závislostí — stačí otevřít `index.html` v prohlížeči (funguje i na mobilu).
+Učební aplikace v jednom HTML souboru pro DJI Mini 5 Pro Fly More Combo (třída C0, ovladač DJI RC 2).
 
-## Co aplikace obsahuje
+## Obsah
 
-1. **Ovladač** — interaktivní schéma DJI RC-N3 s popisem všech tlačítek a páček
-2. **Trénink páček** — virtuální páčky (Mode 2) a simulovaný dron s telemetrií, tlačítkem RTH a čtyřmi cvičnými úkoly
-3. **První let** — checklist 10 kroků od nabití baterií po přistání
-4. **Pravidla** — souhrn podmínek létání v ČR/EU pro třídu C0 (registrace ÚCL, 120 m, VLOS, DronView…)
-5. **Kvíz** — 8 otázek s vysvětlením
+1. **Začni tady**: postup, třída C0 a pozor na baterie Plus
+2. **Obnova A1/A3**: prodloužení kvalifikace u ÚCL (180 dní předem, dron.caa.gov.cz)
+3. **Pravidla k testu**: otevřená kategorie, A1/A2/A3, třídy, zóny (DroneMap), soukromí, nehody
+4. **Cvičný test**: 51 otázek, procvičení 10 otázek, zkouška nanečisto 40 otázek / 60 min / 75 %, opakování chyb
+5. **Dron a ovladač**: obsah balení, schéma dronu, interaktivní RC 2, světla, letové režimy
+6. **Trenažér páček**: virtuální páčky Mode 2, telemetrie, Pauza a RTH, 6 úkolů včetně letu nosem k sobě
+7. **Před startem**: interaktivní checklist (ukládá se)
+8. **První lety a nouze**: tréninkový plán, RTH, nouzové situace
+9. **Tipy a triky**, **Pojištění**, **Odkazy**
 
 ## Spuštění
 
-Aplikace běží online na GitHub Pages: **<https://konias12479.github.io/Wright/>**
+Online: https://konias12479.github.io/Wright/ nebo otevři `index.html` v prohlížeči (funguje i offline).
 
-Případně stačí otevřít `index.html` v prohlížeči — nasazení na Pages zajišťuje workflow `.github/workflows/pages.yml` automaticky při každém pushi.
-
-## Ovládání trenažéru
-
-- Páčky: tažení myší / prstem
-- Klávesnice: `W` `A` `S` `D` = levá páčka, šipky = pravá páčka
+Trenažér: páčky tažením myší nebo prstem; klávesnice `W` `S` výška, `A` `D` otáčení, šipky = pravá páčka, mezerník = Pauza, `H` = RTH.
 
 ## Upozornění
 
-Sekce Pravidla je orientační souhrn, ne právní poradenství. Aktuální předpisy ověřuj na [caa.gov.cz](https://www.caa.gov.cz) a letové zóny v [DronView](https://dronview.rlp.cz).
+Orientační přehled, ne právní ani pojišťovací poradenství. Stav 10/2026. Pravidla ověřuj na [caa.gov.cz](https://www.caa.gov.cz), zóny v [DroneMap](https://dronemap.gov.cz). Schémata jsou vlastní; oficiální manuál DJI je odkazovaný.
