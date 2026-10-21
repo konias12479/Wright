@@ -189,6 +189,38 @@ summary{cursor:pointer;font-weight:600}
 .gbtns .dial{flex-direction:row;align-items:center;gap:8px;padding:6px 10px}.gbtns .dial input{width:120px}
 @media (max-width:980px){.gctl{grid-template-columns:1fr 1fr}.gbtns{grid-column:1/-1;order:-1}.gwrap{aspect-ratio:4/3}}
 
+
+.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px;align-items:start}
+.simwrap .rc2{grid-template-columns:168px minmax(0,1fr) 168px;gap:12px;padding:14px}
+.simwrap .rc-col .stick-zone{width:158px;height:158px}
+.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:360px;border:3px solid #1d262f}
+#cam3d{width:100%;height:100%;display:block}
+.thirds{position:absolute;inset:0;pointer-events:none;background:
+ linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% + .5px),transparent calc(66.66% + .5px)),
+ linear-gradient(transparent calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% + .5px),transparent calc(66.66% + .5px))}
+.thirds.off{display:none}
+.cross{position:absolute;left:50%;top:50%;width:18px;height:18px;transform:translate(-50%,-50%);pointer-events:none;
+ background:linear-gradient(#fff,#fff) center/2px 100% no-repeat,linear-gradient(#fff,#fff) center/100% 2px no-repeat;opacity:.8}
+.gscale{position:absolute;right:8px;top:40px;bottom:40px;width:6px;border-radius:3px;background:rgba(255,255,255,.45)}
+.gscale i{position:absolute;left:-4px;width:14px;height:4px;border-radius:2px;background:#F28C28}
+.camview .hud{background:rgba(15,25,35,.55);color:#fff}
+.camview .hud-tr{right:22px}.camview .hud-br{right:22px}
+.camoff{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;color:#fff;background:rgba(15,25,35,.6);font-weight:600}
+.camoff[hidden]{display:none}
+.mapside{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow)}
+.mapside h3{margin:0 0 8px}
+.mapside .field{height:auto;aspect-ratio:1;box-shadow:none;background-size:20px 20px,20px 20px,auto}
+.mapside .src{margin:8px 0 0;font-size:13px}
+#drone svg{overflow:visible}
+.mapside #drone{width:30px;height:30px}
+.mapside #home-pad{width:28px;height:28px;font-size:12px}
+.north{position:absolute;left:8px;top:6px;font:700 12px var(--font);color:var(--muted)}
+.mobj{position:absolute;transform:translate(-50%,-50%);border-radius:50%}
+.mobj.tree{background:#2f7d3a}.mobj.house{background:#b58b6a;border-radius:2px}.mobj.pond{background:#4a90e2;opacity:.75}
+.mobj.road{background:#9aa3ad;border-radius:0;transform:none}
+@media (max-width:1250px){.simwrap{grid-template-columns:1fr}.mapside{max-width:360px}}
+@media (max-width:980px){.simwrap .rc2{grid-template-columns:1fr 1fr}.camview{height:260px}.simwrap .rc-col .stick-zone{width:150px;height:150px}}
+
 /* ---- simulator ---- */
 .sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
 .field{position:relative;border-radius:var(--r);height:380px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);
@@ -278,7 +310,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
   <a class="card" href="#zony"><span class="n" data-n="4"></span><b>DroneMap a zóny</b><span>Co mapa ukazuje, jak číst zóny LKR310 až 318 a postup před letem.</span></a>
   <a class="card" href="#test"><span class="n" data-n="5"></span><b>Cvičný test</b><span>57 otázek, zkouška nanečisto na 75 %.</span></a>
   <a class="card" href="#dron"><span class="n" data-n="6"></span><b>Dron a ovladač</b><span>Balení, schéma dronu, RC 2 krok za krokem, světla.</span></a>
-  <a class="card" href="#trenazer"><span class="n" data-n="7"></span><b>Trenažér páček</b><span>Virtuální RC 2: páčky, kamera, režimy, 8 úkolů.</span></a>
+  <a class="card" href="#trenazer"><span class="n" data-n="7"></span><b>Trenažér páček</b><span>Virtuální RC 2: obraz kamery, mapa polohy, gimbal, zoom, 9 úkolů.</span></a>
   <a class="card" href="#hra"><span class="n" data-n="8"></span><b>3D letová hra</b><span>Proleť brány nad krajinou, vyhni se stromům, doleť domů.</span></a>
   <a class="card" href="#checklist"><span class="n" data-n="9"></span><b>Před startem</b><span>Checklist, který si odškrtáváš.</span></a>
   <a class="card" href="#lety"><span class="n" data-n="10"></span><b>První lety a nouze</b><span>Tréninkový plán a co dělat, když se něco pokazí.</span></a>
@@ -697,8 +729,9 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <!-- ============ TRENAŽÉR (virtuální RC 2) ============ -->
 <section id="trenazer">
 <h1>Trenažér páček</h1>
-<p class="lead">Virtuální RC 2: páčky, displej uprostřed a všechny ovládací prvky na svém místě. Tahej za páčky myší nebo prstem, klikej na kolečka a tlačítka. Dron vidíš shora, oranžová šipka je jeho předek.</p>
+<p class="lead">Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
 
+<div class="simwrap">
 <div class="rc2">
   <div class="rc-col">
     <div class="rc-top">
@@ -711,21 +744,16 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
   </div>
 
   <div class="rc-mid">
-    <div class="field" id="field">
-      <div id="home-pad">H</div>
-      <div id="drone"><svg viewBox="0 0 64 64"><g id="drone-g">
-        <line x1="14" y1="14" x2="50" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
-        <line x1="50" y1="14" x2="14" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
-        <circle cx="14" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/><circle cx="50" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/>
-        <circle cx="14" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/><circle cx="50" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/>
-        <rect x="24" y="22" width="16" height="22" rx="6" fill="#3A4652"/><circle cx="32" cy="26" r="3" fill="#4A90E2"/>
-        <polygon points="32,12 26,22 38,22" fill="#E8682A"/></g></svg></div>
-      <div class="hud hud-tl"><span id="h-mode">N</span> <span id="h-rec" hidden>● <b id="h-rect">00:00</b></span></div>
+    <div class="camview" id="camview">
+      <canvas id="cam3d" aria-label="Pohled kamery dronu"></canvas>
+      <div class="thirds" id="thirds"></div>
+      <div class="cross"></div>
+      <div class="gscale"><i id="gmark"></i></div>
+      <div class="hud hud-tl"><span id="h-mode">N</span> · fotky <b id="h-photos">0</b> <span id="h-rec" hidden>● <b id="h-rect">00:00</b></span></div>
       <div class="hud hud-tr"><span id="h-bat">100 %</span> <span id="h-sat">GNSS 14</span></div>
-      <div class="hud hud-bl">gimbal <b id="h-tilt">0°</b> zoom <b id="h-zoom">1×</b></div>
-      <div class="hud hud-br">fotky <b id="h-photos">0</b></div>
+      <div class="hud hud-bl">gimbal <b id="h-tilt">0°</b> zoom <b id="h-zoom">1×</b> výška <b id="h-alt">0 m</b></div>
       <div class="flash" id="flash"></div>
-      <div class="alt-bar" title="Výška"><div class="alt-fill" id="alt-fill"></div></div>
+      <div class="camoff" id="camoff" hidden>Obraz kamery potřebuje internet (knihovna three.js). Poloha na mapě funguje i offline.</div>
     </div>
     <div class="rc-bottom">
       <button class="rcbtn" id="btn-pause">Pauza</button>
@@ -733,6 +761,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
         <button class="rcbtn" data-mode="C">C</button><button class="rcbtn on" data-mode="N">N</button><button class="rcbtn" data-mode="S">S</button>
       </div>
       <button class="rcbtn" id="btn-rth">RTH</button>
+      <button class="rcbtn" id="b-grid" title="Mřížka třetin">Mřížka</button>
     </div>
   </div>
 
@@ -747,13 +776,33 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
   </div>
 </div>
 
+<aside class="mapside">
+  <h3>Poloha dronu</h3>
+  <div class="field" id="field">
+    <div id="map-objs"></div>
+    <div id="home-pad">H</div>
+    <div id="drone"><svg viewBox="0 0 64 64"><g id="drone-g">
+      <polygon id="fov" points="32,30 8,-26 56,-26" fill="var(--blue)" opacity=".18"/>
+      <line x1="14" y1="14" x2="50" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
+      <line x1="50" y1="14" x2="14" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="14" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/><circle cx="50" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/>
+      <circle cx="14" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/><circle cx="50" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/>
+      <rect x="24" y="22" width="16" height="22" rx="6" fill="#3A4652"/><circle cx="32" cy="26" r="3" fill="#4A90E2"/>
+      <polygon points="32,12 26,22 38,22" fill="#E8682A"/></g></svg></div>
+    <div class="alt-bar" title="Výška"><div class="alt-fill" id="alt-fill"></div></div>
+    <span class="north">S ↑</span>
+  </div>
+  <p class="src">Modrý klín = kam míří kamera. Mapa 100 × 100 m. Domy, stromy a rybník vidíš i v obrazu kamery.</p>
+</aside>
+</div>
+
 <div class="telemetry">
   <div class="tele"><small>Výška</small><b id="t-alt">0 m</b></div>
   <div class="tele"><small>Rychlost</small><b id="t-spd">0 m/s</b></div>
   <div class="tele"><small>Kurz</small><b id="t-hdg">0°</b></div>
   <div class="tele"><small>Stav</small><b id="t-state">Na zemi</b></div>
 </div>
-<div class="task-strip" aria-live="polite"><b id="task-n">Úkol 1 z 8:</b> <span id="task-text"></span> <button class="btn ghost" id="btn-reset" style="float:right;padding:4px 12px;font-size:14px">Znovu</button></div>
+<div class="task-strip" aria-live="polite"><b id="task-n">Úkol 1 z 9:</b> <span id="task-text"></span> <button class="btn ghost" id="btn-reset" style="float:right;padding:4px 12px;font-size:14px">Znovu</button></div>
 
 <h3>Co dělají jednotlivé prvky</h3>
 <div class="tbl"><table>
@@ -766,7 +815,17 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <tr><td>Pauza / RTH</td><td>Krátký stisk zastaví dron a ukončí inteligentní režim. Podržení spustí návrat domů, další stisk ho zruší.</td><td>Pauza = <kbd>Mezerník</kbd>, RTH = <kbd>H</kbd></td></tr>
 <tr><td>C1 (zadní tlačítko)</td><td>Z výroby vycentruje gimbal; nastavitelné.</td><td>Tlačítko C1</td></tr>
 <tr><td>C2 (zadní tlačítko)</td><td>Doporučené nastavení: Autopilot. Dron udrží aktuální rychlost a směr, ty jen koriguješ. Zruší ho pohyb páčky nebo Pauza.</td><td>Tlačítko C2 nebo <kbd>T</kbd></td></tr>
+<tr><td>Mřížka (v DJI Fly v nastavení kamery)</td><td>Pravidlo třetin: důležitý objekt dej na průsečík čar, horizont na horní nebo dolní třetinu.</td><td>Tlačítko Mřížka nebo <kbd>G</kbd></td></tr>
 </table></div>
+
+<h3>Natáčení kamerou: na co se dívat</h3>
+<ul>
+<li><b>Horizont</b> drž na horní nebo dolní třetině, ne uprostřed. Gimbal kolem −10° až −20° dává klasický krajinný záběr.</li>
+<li><b>Pohled kolmo dolů (−90°)</b> je „top-down“ záběr: výborný na geometrii polí, cest a střech.</li>
+<li><b>Odhalení (reveal):</b> začni s kamerou dolů a během letu dopředu ji pomalu zvedej k horizontu.</li>
+<li><b>Orbit:</b> pravá páčka do strany a levou současně otáčej, aby objekt zůstal uprostřed.</li>
+<li><b>Zoom zplošťuje perspektivu</b> a zvýrazní každé chvění. Se zoomem létej pomaleji a v režimu C.</li>
+</ul>
 <p class="src">Simulace je zjednodušená: bez větru a setrvačnosti, baterie se vybíjí rychleji než ve skutečnosti. Při 15 % spustí dron sám návrat domů, stejně jako skutečný Mini.</p>
 <div class="mark"><button class="btn" data-done="trenazer">Označit jako prostudované</button></div>
 </section>
@@ -1332,7 +1391,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
   const el=id=>document.getElementById(id);
   const L=makeStick("stick-l"),RS=makeStick("stick-r"),keys={};
   const active=()=>el("trenazer").classList.contains("active");
-  const MAXALT=120, SPEED={C:.1,N:.2,S:.32}, YAW={C:70,N:120,S:180};
+  const MAXALT=120, SPEED={C:.04,N:.1,S:.16}, YAW={C:50,N:90,S:150};
   const TASKS=[
     "Vzlétni: levou páčku nahoru a vystoupej nad 10 m.",
     "Otoč se: levou páčkou do strany otoč dron aspoň o 180°.",
@@ -1340,30 +1399,32 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     "Nosem k sobě: natoč dron šipkou dolů (k sobě) a pravou páčkou ho popolétni doleva a doprava.",
     "Kamera: nakloň gimbal pod −45° a spusť nahrávání (REC).",
     "Přepni do režimu C (Cine), přibliž zoom na 2× a pořiď fotku.",
+    "Záběr shora: nastav gimbal na −90° (kolmo dolů), vystoupej nad 30 m a vyfoť.",
     "Zabrzdi: stiskni Pauza (nebo mezerník) a pusť páčky.",
     "Vrať se: podrž RTH a nech dron přistát na H.",
-    "Hotovo. Zkoušej dál volně, třeba čtverec nosem k sobě v režimu C s kamerou dolů."];
+    "Hotovo. Zkus odhalovací záběr: kamera dolů, leť k rybníku a pomalu zvedej gimbal k horizontu."];
   let D,task,acc;
   function reset(){
     D={x:.5,y:.72,hdg:0,alt:0,mode:"manual",hold:0,fm:"N",tilt:0,zoom:1,rec:false,recT:0,photos:0,bat:100,cruise:null,lowRth:false};
     task=0;acc={turn:0,fly:0,nose:0};
     el("g-tilt").value=0;el("g-zoom").value=1;setMode("N");paintRec();setTask();
   }
-  function setTask(){el("task-text").textContent=TASKS[task];el("task-n").textContent=task<8?"Úkol "+(task+1)+" z 8:":"Splněno."}
+  function setTask(){el("task-text").textContent=TASKS[task];el("task-n").textContent=task<9?"Úkol "+(task+1)+" z 9:":"Splněno."}
   function next(i){if(task===i){task++;setTask()}}
   function setMode(m){D.fm=m;document.querySelectorAll(".mode .rcbtn").forEach(b=>b.classList.toggle("on",b.dataset.mode===m));el("h-mode").textContent=m}
-  function pause(){D.cruise=null;if(D.alt>0){D.mode="pause";D.hold=1.2;next(6)}}
+  function pause(){D.cruise=null;if(D.alt>0){D.mode="pause";D.hold=1.2;next(7)}}
   function rth(){if(D.alt>0){D.mode=D.mode==="rth"?"manual":"rth";D.cruise=null}}
   function paintRec(){el("b-rec").classList.toggle("on",D.rec);el("h-rec").hidden=!D.rec}
   function toggleRec(){D.rec=!D.rec;if(D.rec)D.recT=0;paintRec();if(D.tilt<=-45&&D.rec)next(4)}
-  function shoot(){D.photos++;el("h-photos").textContent=D.photos;const f=el("flash");f.classList.add("on");setTimeout(()=>f.classList.remove("on"),60);if(D.fm==="C"&&D.zoom>=2)next(5)}
-  function tilt(v){D.tilt=Math.max(-90,Math.min(60,v));el("g-tilt").value=D.tilt;el("g-tilt-v").textContent=D.tilt+"°";el("h-tilt").textContent=D.tilt+"°"}
+  function shoot(){D.photos++;el("h-photos").textContent=D.photos;const f=el("flash");f.classList.add("on");setTimeout(()=>f.classList.remove("on"),60);if(D.fm==="C"&&D.zoom>=2)next(5); if(D.tilt<=-90&&D.alt>=30)next(6)}
+  function tilt(v){D.tilt=Math.max(-90,Math.min(60,v));el("g-tilt").value=D.tilt;el("g-tilt-v").textContent=D.tilt+"°";el("h-tilt").textContent=D.tilt+"°";el("gmark").style.top=((60-D.tilt)/150*100)+"%"}
   function zoom(v){D.zoom=Math.max(1,Math.min(4,Math.round(v*2)/2));el("g-zoom").value=D.zoom;el("g-zoom-v").textContent=D.zoom+"×";el("h-zoom").textContent=D.zoom+"×"}
   el("g-tilt").addEventListener("input",e=>tilt(+e.target.value));
   el("g-zoom").addEventListener("input",e=>zoom(+e.target.value));
   el("b-rec").addEventListener("click",toggleRec);el("b-shot").addEventListener("click",shoot);
   el("b-c1").addEventListener("click",()=>tilt(0));
   el("b-c2").addEventListener("click",()=>cruise());
+  el("b-grid").addEventListener("click",()=>el("thirds").classList.toggle("off"));
   el("btn-pause").addEventListener("click",pause);el("btn-rth").addEventListener("click",rth);el("btn-reset").addEventListener("click",reset);
   document.querySelectorAll(".mode .rcbtn").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
   function cruise(){ if(D.alt===0)return; D.cruise=D.cruise?null:{...lastIn}; el("b-c2").classList.toggle("on",!!D.cruise) }
@@ -1373,11 +1434,62 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     if(e.repeat)return;
     if(k===" "){pause();return} if(k==="h"){rth();return} if(k==="r"){toggleRec();return} if(k==="f"){shoot();return}
     if(k==="q"){tilt(D.tilt-5);return} if(k==="e"){tilt(D.tilt+5);return} if(k==="z"){zoom(D.zoom-.5);return} if(k==="x"){zoom(D.zoom+.5);return}
-    if(k==="1"){setMode("C");return} if(k==="2"){setMode("N");return} if(k==="3"){setMode("S");return} if(k==="t"){cruise();return}
+    if(k==="g"){el("thirds").classList.toggle("off");return} if(k==="1"){setMode("C");return} if(k==="2"){setMode("N");return} if(k==="3"){setMode("S");return} if(k==="t"){cruise();return}
     keys[k]=true});
   addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
   const kb=()=>({lx:(keys.d?1:0)-(keys.a?1:0),ly:(keys.w?1:0)-(keys.s?1:0),rx:(keys.arrowright?1:0)-(keys.arrowleft?1:0),ry:(keys.arrowup?1:0)-(keys.arrowdown?1:0)});
   const droneEl=el("drone");
+  /* ---- svět: objekty v normalizovaných souřadnicích mapy (100 × 100 m) ---- */
+  const OBJ=[
+    {t:"pond",x:.2,y:.25,r:.09},
+    {t:"house",x:.72,y:.3,w:.08,d:.06,h:7},{t:"house",x:.84,y:.36,w:.06,d:.06,h:6},{t:"house",x:.76,y:.45,w:.07,d:.05,h:8},
+    {t:"tree",x:.35,y:.5,h:12},{t:"tree",x:.4,y:.42,h:10},{t:"tree",x:.6,y:.15,h:14},{t:"tree",x:.12,y:.6,h:11},{t:"tree",x:.88,y:.75,h:13},{t:"tree",x:.3,y:.85,h:9},{t:"tree",x:.55,y:.62,h:10},{t:"tree",x:.66,y:.88,h:12}
+  ];
+  const mo=el("map-objs");
+  mo.innerHTML='<div class="mobj road" style="left:0;right:0;top:58%;height:2.5%"></div>'+OBJ.map(o=>{
+    if(o.t==="pond")return '<div class="mobj pond" style="left:'+o.x*100+'%;top:'+o.y*100+'%;width:'+o.r*200+'%;height:'+o.r*150+'%"></div>';
+    if(o.t==="house")return '<div class="mobj house" style="left:'+o.x*100+'%;top:'+o.y*100+'%;width:'+o.w*100+'%;height:'+o.d*100+'%"></div>';
+    return '<div class="mobj tree" style="left:'+o.x*100+'%;top:'+o.y*100+'%;width:4%;height:4%"></div>'}).join("");
+  const W=100, wx=x=>(x-.5)*W, wz=y=>(y-.5)*W;
+  let V=null;
+  function load3(cb){ if(window.THREE){cb();return} if(load3.p){load3.q.push(cb);return} load3.p=true;load3.q=[cb];
+    const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    sc.onload=()=>load3.q.forEach(f=>f()); sc.onerror=()=>{el("camoff").hidden=false}; document.head.appendChild(sc) }
+  window.__load3=load3;
+  function init3(){
+    if(V)return; const cv=el("cam3d");
+    const ren=new THREE.WebGLRenderer({canvas:cv,antialias:true}); ren.setPixelRatio(Math.min(devicePixelRatio,2));
+    const sc=new THREE.Scene(); sc.background=new THREE.Color(0xa9d3f0); sc.fog=new THREE.Fog(0xa9d3f0,150,700);
+    const cam=new THREE.PerspectiveCamera(82,16/9,.1,1500); cam.rotation.order="YXZ";
+    sc.add(new THREE.HemisphereLight(0xffffff,0x5f7f45,.95)); const sun=new THREE.DirectionalLight(0xffffff,.7); sun.position.set(80,150,40); sc.add(sun);
+    const M=c=>new THREE.MeshLambertMaterial({color:c});
+    const g=new THREE.Mesh(new THREE.PlaneGeometry(1600,1600),M(0x86b86b)); g.rotation.x=-Math.PI/2; sc.add(g);
+    for(let i=-8;i<=8;i++){const z=i*60; if(Math.abs(z)<70)continue; const f=new THREE.Mesh(new THREE.PlaneGeometry(1600,30),M(i%2?0x9cc47a:0x7fae62));f.rotation.x=-Math.PI/2;f.position.set(0,.01,z);sc.add(f)}
+    const road=new THREE.Mesh(new THREE.PlaneGeometry(1600,5),M(0x8f989f)); road.rotation.x=-Math.PI/2; road.position.set(0,.03,wz(.58)+1.25); sc.add(road);
+    const line=new THREE.Mesh(new THREE.PlaneGeometry(1600,.25),M(0xffffff)); line.rotation.x=-Math.PI/2; line.position.set(0,.04,wz(.58)+1.25); sc.add(line);
+    const pad=new THREE.Mesh(new THREE.CircleGeometry(2,32),M(0xf2f2f2)); pad.rotation.x=-Math.PI/2; pad.position.set(wx(.5),.05,wz(.72)); sc.add(pad);
+    const hM=M(0x1e8a5a); [[-0.6,0,.25,1.8],[0.6,0,.25,1.8],[0,0,1.2,.25]].forEach(([x,z,w,d])=>{const b=new THREE.Mesh(new THREE.PlaneGeometry(w,d),hM);b.rotation.x=-Math.PI/2;b.position.set(wx(.5)+x,.06,wz(.72)+z);sc.add(b)});
+    OBJ.forEach(o=>{
+      if(o.t==="pond"){const p=new THREE.Mesh(new THREE.CircleGeometry(1,40),M(0x3f7fc4));p.scale.set(o.r*W,o.r*W*.75,1);p.rotation.x=-Math.PI/2;p.position.set(wx(o.x),.05,wz(o.y));sc.add(p)}
+      else if(o.t==="house"){const w=o.w*W,d=o.d*W;const b=new THREE.Mesh(new THREE.BoxGeometry(w,o.h,d),M(0xe8dfd2));b.position.set(wx(o.x),o.h/2,wz(o.y));sc.add(b);
+        const r=new THREE.Mesh(new THREE.ConeGeometry(Math.max(w,d)*.75,3,4),M(0xb5532f));r.rotation.y=Math.PI/4;r.position.set(wx(o.x),o.h+1.5,wz(o.y));sc.add(r)}
+      else{const t=new THREE.Mesh(new THREE.CylinderGeometry(.3,.4,o.h*.4,6),M(0x6b4a2b));t.position.set(wx(o.x),o.h*.2,wz(o.y));sc.add(t);
+        const l=new THREE.Mesh(new THREE.ConeGeometry(o.h*.28,o.h*.7,8),M(0x2f7d3a));l.position.set(wx(o.x),o.h*.4+o.h*.35,wz(o.y));sc.add(l)}
+    });
+    for(let i=0;i<140;i++){const a=Math.random()*Math.PI*2,r=180+Math.random()*350,h=10+Math.random()*12;const l=new THREE.Mesh(new THREE.ConeGeometry(h*.3,h,7),M(0x2c6e35));l.position.set(Math.cos(a)*r,h/2,Math.sin(a)*r);sc.add(l)}
+    for(let i=0;i<10;i++){const a=i/10*Math.PI*2,h=40+Math.random()*50;const k=new THREE.Mesh(new THREE.SphereGeometry(140,16,8),M(0x6f9a58));k.scale.set(1,h/140,1);k.position.set(Math.cos(a)*750,0,Math.sin(a)*750);sc.add(k)}
+    V={ren,sc,cam,cv};
+  }
+  function render3(){
+    if(!V)return; const {ren,cam,cv}=V; const w=cv.clientWidth,h=cv.clientHeight;
+    if(w&&h&&(cv.width!==Math.round(w*ren.getPixelRatio())||cv.height!==Math.round(h*ren.getPixelRatio()))){ren.setSize(w,h,false);cam.aspect=w/h}
+    cam.position.set(wx(D.x),D.alt+.35,wz(D.y));
+    cam.rotation.y=-D.hdg*Math.PI/180; cam.rotation.x=D.tilt*Math.PI/180; cam.rotation.z=0;
+    cam.fov=82/D.zoom; cam.updateProjectionMatrix(); const hw=24/D.zoom; el("fov").setAttribute("points","32,30 "+(32-hw)+",-26 "+(32+hw)+",-26");
+    ren.render(V.sc,cam);
+  }
+  const try3=()=>{ if(active()) load3(init3) };
+  addEventListener("hashchange",try3); setTimeout(try3,0);
   reset();
   let last=performance.now();
   function loop(t){
@@ -1392,9 +1504,9 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     if(D.mode==="rth"){
       const dx=.5-D.x,dy=.72-D.y,dist=Math.hypot(dx,dy);
       if(D.alt<30&&dist>.02) D.alt=Math.min(30,D.alt+8*dt);
-      else if(dist>.01){D.x+=dx/dist*.18*dt;D.y+=dy/dist*.18*dt}
+      else if(dist>.01){D.x+=dx/dist*.1*dt;D.y+=dy/dist*.1*dt}
       else if(D.alt>0) D.alt=Math.max(0,D.alt-5*dt);
-      else {D.mode="manual";next(7);if(D.rec)toggleRec()}
+      else {D.mode="manual";next(8);if(D.rec)toggleRec()}
       rx=ry=0;
     } else if(D.alt>0||ly>.15){
       D.alt=Math.max(0,Math.min(MAXALT,D.alt+ly*6*dt));
@@ -1414,12 +1526,14 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     droneEl.style.transform="translate(-50%,-50%) scale("+(1+Math.min(D.alt,60)/60*.5)+")";
     el("drone-g").setAttribute("transform","rotate("+D.hdg+" 32 32)");
     el("alt-fill").style.height=(D.alt/MAXALT*100)+"%";
-    const spd=D.mode==="rth"?(D.alt>=30?10:0):Math.hypot(rx,ry)*(D.alt>0?(D.fm==="S"?18:D.fm==="C"?6:12):0);
+    const spd=D.mode==="rth"?(D.alt>=30?10:0):Math.hypot(rx,ry)*(D.alt>0?(D.fm==="S"?16:D.fm==="C"?4:10):0);
     el("t-alt").textContent=Math.round(D.alt)+" m"; el("t-spd").textContent=spd.toFixed(0)+" m/s";
     el("t-hdg").textContent=Math.round(D.hdg)+"°";
     el("t-state").textContent=D.mode==="rth"?(D.lowRth?"RTH slabá baterie":"RTH"):D.mode==="pause"?"Brzdí":D.cruise?"Autopilot":(D.alt>0?"Ve vzduchu":"Na zemi");
     el("h-bat").textContent=Math.round(D.bat)+" %"; el("h-bat").style.color=D.bat<=20?"var(--bad)":"";
     if(D.rec){const m=Math.floor(D.recT/60),sec=Math.floor(D.recT%60);el("h-rect").textContent=String(m).padStart(2,"0")+":"+String(sec).padStart(2,"0")}
+    el("h-alt").textContent=Math.round(D.alt)+" m";
+    if(active())render3();
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
@@ -1443,7 +1557,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
   const L=makeStick("stick3-l"),RS=makeStick("stick3-r"),keys={};
   const active=()=>sec.classList.contains("active");
   let G; const SPD={C:4,N:10,S:16},YAWR={C:60,N:100,S:160};
-  function loadThree(cb){ if(window.THREE){cb();return} const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"; sc.onload=cb; sc.onerror=()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (jsi offline?)"}; document.head.appendChild(sc) }
+  function loadThree(cb){ if(window.THREE){cb();return} if(window.__load3){window.__load3(cb);return} const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"; sc.onload=cb; sc.onerror=()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (jsi offline?)"}; document.head.appendChild(sc) }
   function init(){
     if(inited)return; inited=true;
     const cv=el("g3d"), renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
