@@ -146,6 +146,49 @@ summary{cursor:pointer;font-weight:600}
 .svgt{font:500 13px var(--font);fill:var(--ink)}
 .svgm{font:500 12px var(--font);fill:var(--muted)}
 .svgc{font:700 13px var(--font);fill:var(--chart)}
+
+.rc2{display:grid;grid-template-columns:200px minmax(0,1fr) 200px;gap:14px;align-items:stretch;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow)}
+.rc-col{display:flex;flex-direction:column;gap:10px;justify-content:space-between}
+.rc-col .stick-card{box-shadow:none;border:0;padding:4px;background:transparent}
+.rc-top{display:flex;flex-direction:column;gap:8px}
+.dial{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.dial b{font:700 15px var(--head);color:var(--ink)}
+.dial input{width:100%;accent-color:var(--blue)}
+.rcbtn{font:600 14px var(--font);background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 12px;cursor:pointer}
+.rcbtn:hover{border-color:var(--blue)}
+.rcbtn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.rcbtn.rec.on{background:var(--bad);border-color:var(--bad)}
+@media (prefers-color-scheme:dark){.rcbtn.on{color:#0F1923}}
+.rc-mid{display:flex;flex-direction:column;gap:10px;min-width:0}
+.rc-mid .field{height:400px;border-radius:14px;box-shadow:none;background-color:var(--paper)}
+.rc-bottom{display:flex;justify-content:center;align-items:center;gap:14px}
+.mode{display:flex;gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px}
+.mode .rcbtn{border:0;padding:6px 14px;background:transparent}
+.mode .rcbtn.on{background:var(--blue)}
+.hud{position:absolute;font:600 13px var(--font);color:var(--ink);background:color-mix(in srgb,var(--panel) 80%,transparent);padding:3px 8px;border-radius:6px;pointer-events:none}
+.hud-tl{top:8px;left:8px}.hud-tr{top:8px;right:34px}.hud-bl{bottom:8px;left:8px}.hud-br{bottom:8px;right:34px}
+#h-rec{color:var(--bad)}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;transition:opacity .25s}
+.flash.on{opacity:.8;transition:none}
+@media (max-width:980px){
+  .rc2{grid-template-columns:1fr 1fr;padding:10px}
+  .rc-mid{grid-column:1/-1;order:-1}
+  .rc-mid .field{height:300px}
+  .rc-col .stick-zone{width:150px;height:150px}
+}
+
+
+.game{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow)}
+.gwrap{position:relative;border-radius:14px;overflow:hidden;background:#9ec9ea;aspect-ratio:16/9}
+#g3d{width:100%;height:100%;display:block;touch-action:none}
+.gwrap .hud-tr{right:8px}.gwrap .hud-br{right:8px}
+.gover[hidden]{display:none}.gover{position:absolute;inset:0;display:grid;place-items:center;background:rgba(15,25,35,.55);color:#fff;text-align:center}
+.gover h3{margin:0 0 6px;font:700 30px var(--head);color:#fff}.gover p{margin:0 0 14px;color:#fff}
+.gctl{display:grid;grid-template-columns:200px minmax(0,1fr) 200px;gap:12px;align-items:center;margin-top:12px}
+.gbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.gbtns .dial{flex-direction:row;align-items:center;gap:8px;padding:6px 10px}.gbtns .dial input{width:120px}
+@media (max-width:980px){.gctl{grid-template-columns:1fr 1fr}.gbtns{grid-column:1/-1;order:-1}.gwrap{aspect-ratio:4/3}}
+
 /* ---- simulator ---- */
 .sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
 .field{position:relative;border-radius:var(--r);height:380px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);
@@ -197,8 +240,10 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
     <li><a href="#test"><span class="tick"></span>Cvičný test</a></li>
     <li><a href="#dron"><span class="tick"></span>Dron a ovladač</a></li>
     <li><a href="#trenazer"><span class="tick"></span>Trenažér páček</a></li>
+    <li><a href="#hra"><span class="tick"></span>3D letová hra</a></li>
     <li><a href="#checklist"><span class="tick"></span>Před startem</a></li>
     <li><a href="#lety"><span class="tick"></span>První lety a nouze</a></li>
+    <li><a href="#chovani"><span class="tick"></span>Chování a rizika</a></li>
     <li><a href="#tipy"><span class="tick"></span>Tipy a triky</a></li>
     <li><a href="#pojisteni"><span class="tick"></span>Pojištění</a></li>
     <li><a href="#odkazy"><span class="tick"></span>Odkazy</a></li>
@@ -212,7 +257,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
   <div>
     <h1>Letová příprava: DJI Mini 5 Pro</h1>
     <p>Obnova kvalifikace A1/A3, praktický kurz k tvému dronu a pojištění na jednom místě. Postupuj po kapitolách a odškrtávej si hotové.</p>
-    <div class="chips"><span class="chip">Fly More Combo</span><span class="chip">Třída C0</span><span class="chip">Ovladač RC 2</span><span class="chip">Test 51 otázek</span></div>
+    <div class="chips"><span class="chip">Fly More Combo</span><span class="chip">Třída C0</span><span class="chip">Ovladač RC 2</span><span class="chip">Test 54 otázek</span></div>
   </div>
   <svg viewBox="0 0 300 200" role="img" aria-label="Ilustrace dronu">
     <defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset="1" stop-color="#fff" stop-opacity=".05"/></linearGradient></defs>
@@ -229,14 +274,16 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <div class="cards" id="cards">
   <a class="card" href="#obnova"><span class="n" data-n="2"></span><b>Obnova A1/A3</b><span>Kdy a jak prodloužit kvalifikaci u ÚCL, než vyprší.</span></a>
   <a class="card" href="#pravidla"><span class="n" data-n="3"></span><b>Pravidla k testu</b><span>Výtah z nařízení EU: podkategorie, třídy, zóny, soukromí.</span></a>
-  <a class="card" href="#test"><span class="n" data-n="4"></span><b>Cvičný test</b><span>51 otázek, zkouška nanečisto na 75 %.</span></a>
+  <a class="card" href="#test"><span class="n" data-n="4"></span><b>Cvičný test</b><span>54 otázek, zkouška nanečisto na 75 %.</span></a>
   <a class="card" href="#dron"><span class="n" data-n="5"></span><b>Dron a ovladač</b><span>Balení, schéma dronu, RC 2 krok za krokem, světla.</span></a>
-  <a class="card" href="#trenazer"><span class="n" data-n="6"></span><b>Trenažér páček</b><span>Virtuální páčky, 6 úkolů, RTH.</span></a>
-  <a class="card" href="#checklist"><span class="n" data-n="7"></span><b>Před startem</b><span>Checklist, který si odškrtáváš.</span></a>
-  <a class="card" href="#lety"><span class="n" data-n="8"></span><b>První lety a nouze</b><span>Tréninkový plán a co dělat, když se něco pokazí.</span></a>
-  <a class="card" href="#tipy"><span class="n" data-n="9"></span><b>Tipy a triky</b><span>Lepší záběry, baterie, soukromí.</span></a>
-  <a class="card" href="#pojisteni"><span class="n" data-n="10"></span><b>Pojištění</b><span>Co je povinné, co se vyplatí, na co se ptát.</span></a>
-  <a class="card" href="#odkazy"><span class="n" data-n="11"></span><b>Odkazy</b><span>ÚCL, DroneMap, manuál a videa DJI.</span></a>
+  <a class="card" href="#trenazer"><span class="n" data-n="6"></span><b>Trenažér páček</b><span>Virtuální RC 2: páčky, kamera, režimy, 8 úkolů.</span></a>
+  <a class="card" href="#hra"><span class="n" data-n="7"></span><b>3D letová hra</b><span>Proleť brány nad krajinou, vyhni se stromům, doleť domů.</span></a>
+  <a class="card" href="#checklist"><span class="n" data-n="8"></span><b>Před startem</b><span>Checklist, který si odškrtáváš.</span></a>
+  <a class="card" href="#lety"><span class="n" data-n="9"></span><b>První lety a nouze</b><span>Tréninkový plán a co dělat, když se něco pokazí.</span></a>
+  <a class="card" href="#chovani"><span class="n" data-n="10"></span><b>Chování a rizika</b><span>Jak se chovat k lidem a kde dron ztrácí hlavu.</span></a>
+  <a class="card" href="#tipy"><span class="n" data-n="11"></span><b>Tipy a triky</b><span>Lepší záběry, baterie, soukromí.</span></a>
+  <a class="card" href="#pojisteni"><span class="n" data-n="12"></span><b>Pojištění</b><span>Co je povinné, co se vyplatí, na co se ptát.</span></a>
+  <a class="card" href="#odkazy"><span class="n" data-n="13"></span><b>Odkazy</b><span>ÚCL, DroneMap, manuál a videa DJI.</span></a>
 </div>
 
 <div class="note">
@@ -558,46 +605,113 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 </section>
 
 
-<!-- ============ TRENAŽÉR (původní, upravený) ============ -->
+<!-- ============ TRENAŽÉR (virtuální RC 2) ============ -->
 <section id="trenazer">
 <h1>Trenažér páček</h1>
-<p class="lead">Tahej za virtuální páčky myší nebo prstem a sleduj, jak dron reaguje. Ovládání odpovídá režimu Mode 2 na RC 2. Dron je vidět shora, oranžová šipka je jeho předek.</p>
-<div class="sim-grid">
-<div>
-  <div class="field" id="field">
-    <div id="home-pad">H</div>
-    <div id="drone"><svg viewBox="0 0 64 64"><g id="drone-g">
-      <line x1="14" y1="14" x2="50" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
-      <line x1="50" y1="14" x2="14" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
-      <circle cx="14" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/><circle cx="50" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/>
-      <circle cx="14" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/><circle cx="50" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/>
-      <rect x="24" y="22" width="16" height="22" rx="6" fill="#3A4652"/><circle cx="32" cy="26" r="3" fill="#4A90E2"/>
-      <polygon points="32,12 26,22 38,22" fill="#E8682A"/></g></svg></div>
-    <div class="alt-bar" title="Výška (max. 120 m)"><div class="alt-fill" id="alt-fill"></div></div>
+<p class="lead">Virtuální RC 2: páčky, displej uprostřed a všechny ovládací prvky na svém místě. Tahej za páčky myší nebo prstem, klikej na kolečka a tlačítka. Dron vidíš shora, oranžová šipka je jeho předek.</p>
+
+<div class="rc2">
+  <div class="rc-col">
+    <div class="rc-top">
+      <label class="dial"><span>Kolečko gimbalu</span><input type="range" id="g-tilt" min="-90" max="60" value="0" step="5" aria-label="Náklon kamery"><b id="g-tilt-v">0°</b></label>
+      <button class="rcbtn rec" id="b-rec" title="Nahrávání videa">● REC</button>
+    </div>
+    <div class="stick-card"><h3>Levá páčka</h3><div class="hint">výška a otáčení</div>
+      <div class="stick-zone" id="stick-l"><span class="axis t">stoupání</span><span class="axis b">klesání</span><span class="axis l">otočit vlevo</span><span class="axis r">otočit vpravo</span><div class="stick-base"></div><div class="stick-knob"></div></div></div>
+    <button class="rcbtn" id="b-c1" title="Zadní tlačítko C1">C1 střed gimbalu</button>
   </div>
-  <div class="telemetry">
-    <div class="tele"><small>Výška</small><b id="t-alt">0 m</b></div>
-    <div class="tele"><small>Rychlost</small><b id="t-spd">0 m/s</b></div>
-    <div class="tele"><small>Kurz</small><b id="t-hdg">0°</b></div>
-    <div class="tele"><small>Stav</small><b id="t-state">Na zemi</b></div>
+
+  <div class="rc-mid">
+    <div class="field" id="field">
+      <div id="home-pad">H</div>
+      <div id="drone"><svg viewBox="0 0 64 64"><g id="drone-g">
+        <line x1="14" y1="14" x2="50" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
+        <line x1="50" y1="14" x2="14" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/><circle cx="50" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/>
+        <circle cx="14" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/><circle cx="50" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/>
+        <rect x="24" y="22" width="16" height="22" rx="6" fill="#3A4652"/><circle cx="32" cy="26" r="3" fill="#4A90E2"/>
+        <polygon points="32,12 26,22 38,22" fill="#E8682A"/></g></svg></div>
+      <div class="hud hud-tl"><span id="h-mode">N</span> <span id="h-rec" hidden>● <b id="h-rect">00:00</b></span></div>
+      <div class="hud hud-tr"><span id="h-bat">100 %</span> <span id="h-sat">GNSS 14</span></div>
+      <div class="hud hud-bl">gimbal <b id="h-tilt">0°</b> zoom <b id="h-zoom">1×</b></div>
+      <div class="hud hud-br">fotky <b id="h-photos">0</b></div>
+      <div class="flash" id="flash"></div>
+      <div class="alt-bar" title="Výška"><div class="alt-fill" id="alt-fill"></div></div>
+    </div>
+    <div class="rc-bottom">
+      <button class="rcbtn" id="btn-pause">Pauza</button>
+      <div class="mode" role="radiogroup" aria-label="Letový režim">
+        <button class="rcbtn" data-mode="C">C</button><button class="rcbtn on" data-mode="N">N</button><button class="rcbtn" data-mode="S">S</button>
+      </div>
+      <button class="rcbtn" id="btn-rth">RTH</button>
+    </div>
   </div>
-  <div class="task-strip" aria-live="polite"><b id="task-n">Úkol 1 z 6:</b> <span id="task-text"></span></div>
-</div>
-<div class="sticks">
-  <div class="stick-card"><h3>Levá páčka</h3><div class="hint">výška a otáčení</div>
-    <div class="stick-zone" id="stick-l"><span class="axis t">stoupání</span><span class="axis b">klesání</span><span class="axis l">otočit vlevo</span><span class="axis r">otočit vpravo</span><div class="stick-base"></div><div class="stick-knob"></div></div></div>
-  <div class="stick-card"><h3>Pravá páčka</h3><div class="hint">dopředu, dozadu, do stran</div>
-    <div class="stick-zone" id="stick-r"><span class="axis t">dopředu</span><span class="axis b">dozadu</span><span class="axis l">doleva</span><span class="axis r">doprava</span><div class="stick-base"></div><div class="stick-knob"></div></div></div>
-  <div class="row" style="justify-content:center;margin:0">
-    <button class="btn" id="btn-pause">Pauza</button>
-    <button class="btn" id="btn-rth">RTH</button>
-    <button class="btn ghost" id="btn-reset">Znovu</button>
+
+  <div class="rc-col">
+    <div class="rc-top">
+      <label class="dial"><span>Kolečko kamery (zoom)</span><input type="range" id="g-zoom" min="1" max="4" value="1" step="0.5" aria-label="Zoom"><b id="g-zoom-v">1×</b></label>
+      <button class="rcbtn" id="b-shot" title="Spoušť">Fotka</button>
+    </div>
+    <div class="stick-card"><h3>Pravá páčka</h3><div class="hint">dopředu, dozadu, do stran</div>
+      <div class="stick-zone" id="stick-r"><span class="axis t">dopředu</span><span class="axis b">dozadu</span><span class="axis l">doleva</span><span class="axis r">doprava</span><div class="stick-base"></div><div class="stick-knob"></div></div></div>
+    <button class="rcbtn" id="b-c2" title="Zadní tlačítko C2">C2 autopilot</button>
   </div>
 </div>
+
+<div class="telemetry">
+  <div class="tele"><small>Výška</small><b id="t-alt">0 m</b></div>
+  <div class="tele"><small>Rychlost</small><b id="t-spd">0 m/s</b></div>
+  <div class="tele"><small>Kurz</small><b id="t-hdg">0°</b></div>
+  <div class="tele"><small>Stav</small><b id="t-state">Na zemi</b></div>
 </div>
-<p class="src">Klávesnice (když je otevřená tahle kapitola): <kbd>W</kbd> <kbd>S</kbd> stoupání a klesání, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky = pravá páčka, <kbd>Mezerník</kbd> = Pauza, <kbd>H</kbd> = RTH. Simulace je zjednodušená: bez větru a setrvačnosti. Skutečný dron reaguje měkčeji a ve větru driftuje.</p>
-<div class="note"><p><b>Proč úkol „nosem k sobě“:</b> když dron míří k tobě, pravá páčka doleva ho pošle z tvého pohledu doprava. Tady si to natrénuješ bez rizika, viz plán v kapitole První lety.</p></div>
+<div class="task-strip" aria-live="polite"><b id="task-n">Úkol 1 z 8:</b> <span id="task-text"></span> <button class="btn ghost" id="btn-reset" style="float:right;padding:4px 12px;font-size:14px">Znovu</button></div>
+
+<h3>Co dělají jednotlivé prvky</h3>
+<div class="tbl"><table>
+<tr><th>Prvek</th><th>Na skutečném RC 2</th><th>V trenažéru</th></tr>
+<tr><td>Kolečko gimbalu (vlevo nahoře)</td><td>Naklání kameru od −90° (kolmo dolů) po +60° (nahoru). Točí se palcem, pomalu pro plynulé záběry.</td><td>Posuvník vlevo nebo <kbd>Q</kbd> <kbd>E</kbd></td></tr>
+<tr><td>Tlačítko REC (vlevo nahoře)</td><td>Spustí a zastaví nahrávání videa. Na displeji běží čas záznamu.</td><td>Tlačítko REC nebo <kbd>R</kbd></td></tr>
+<tr><td>Kolečko ovládání kamery (vpravo nahoře)</td><td>Z výroby zoom 1× až 4×. Lze přenastavit na expozici, ISO nebo čas závěrky. S podrženým C1 otáčí gimbalem.</td><td>Posuvník vpravo nebo <kbd>Z</kbd> <kbd>X</kbd></td></tr>
+<tr><td>Spoušť (vpravo nahoře)</td><td>Namáčknutí zaostří, domáčknutí vyfotí.</td><td>Tlačítko Fotka nebo <kbd>F</kbd></td></tr>
+<tr><td>Přepínač C, N, S</td><td>Cine je pomalý a plynulý, Normal výchozí, Sport nejrychlejší bez snímačů překážek.</td><td>Tlačítka C N S nebo <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></td></tr>
+<tr><td>Pauza / RTH</td><td>Krátký stisk zastaví dron a ukončí inteligentní režim. Podržení spustí návrat domů, další stisk ho zruší.</td><td>Pauza = <kbd>Mezerník</kbd>, RTH = <kbd>H</kbd></td></tr>
+<tr><td>C1 (zadní tlačítko)</td><td>Z výroby vycentruje gimbal; nastavitelné.</td><td>Tlačítko C1</td></tr>
+<tr><td>C2 (zadní tlačítko)</td><td>Doporučené nastavení: Autopilot. Dron udrží aktuální rychlost a směr, ty jen koriguješ. Zruší ho pohyb páčky nebo Pauza.</td><td>Tlačítko C2 nebo <kbd>T</kbd></td></tr>
+</table></div>
+<p class="src">Simulace je zjednodušená: bez větru a setrvačnosti, baterie se vybíjí rychleji než ve skutečnosti. Při 15 % spustí dron sám návrat domů, stejně jako skutečný Mini.</p>
 <div class="mark"><button class="btn" data-done="trenazer">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ 3D HRA ============ -->
+<section id="hra">
+<h1>3D letová hra</h1>
+<p class="lead">Dron v prostoru: proleť všechny brány, vyhni se stromům a budovám, hlídej baterii a vrať se na H. Ovládání je stejné jako na RC 2 v režimu Mode 2.</p>
+<div class="game">
+  <div class="gwrap">
+    <canvas id="g3d" aria-label="3D letová scéna"></canvas>
+    <div class="hud hud-tl"><b id="g-score">Brány 0 / 10</b> <span id="g-time">0:00</span></div>
+    <div class="hud hud-tr"><span id="g-bat">100 %</span> <span id="g-mode">N</span></div>
+    <div class="hud hud-bl">výška <b id="g-alt">0 m</b> rychlost <b id="g-spd">0 m/s</b></div>
+    <div class="hud hud-br" id="g-msg">Stiskni Start</div>
+    <div class="gover" id="g-over" hidden><div><h3 id="g-over-h">Konec</h3><p id="g-over-p"></p><button class="btn" id="g-again">Znovu</button></div></div>
+  </div>
+  <div class="gctl">
+    <div class="stick-card"><h3>Levá</h3><div class="hint">výška, otáčení</div>
+      <div class="stick-zone" id="stick3-l"><div class="stick-base"></div><div class="stick-knob"></div></div></div>
+    <div class="gbtns">
+      <button class="btn" id="g-start">Start</button>
+      <button class="rcbtn" id="g-cam">Kamera: za dronem</button>
+      <div class="mode"><button class="rcbtn" data-gm="C">C</button><button class="rcbtn on" data-gm="N">N</button><button class="rcbtn" data-gm="S">S</button></div>
+      <button class="rcbtn" id="g-rth">RTH</button>
+      <label class="dial"><span>Gimbal (FPV)</span><input type="range" id="g3-tilt" min="-90" max="20" value="-15" step="5"></label>
+    </div>
+    <div class="stick-card"><h3>Pravá</h3><div class="hint">dopředu, dozadu, do stran</div>
+      <div class="stick-zone" id="stick3-r"><div class="stick-base"></div><div class="stick-knob"></div></div></div>
+  </div>
+</div>
+<p class="src">Klávesnice: <kbd>W</kbd> <kbd>S</kbd> výška, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky let, <kbd>V</kbd> přepnutí kamery, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> režim, <kbd>H</kbd> RTH. Na mobilu táhni za páčky. Hra načítá knihovnu three.js z internetu, offline nepoběží. Dron má setrvačnost: pusť páčky dřív, než chceš zastavit, přesně jako ve skutečnosti.</p>
+<div class="note"><p><b>Co se tu učíš:</b> odhad výšky a vzdálenosti v prostoru, brzdnou dráhu v režimu S, orientaci, když dron letí k tobě, a návyk hlídat baterii. Brány jsou v různých výškách, pořadí je na tobě.</p></div>
+<div class="mark"><button class="btn" data-done="hra">Označit jako prostudované</button></div>
 </section>
 
 <!-- ============ CHECKLIST ============ -->
@@ -749,6 +863,56 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 </table></div>
 <p class="src">Zdroj: DJI Mini 5 Pro User Manual v1.0, kap. 3.2–3.4, 5.1, 5.3, 5.4.</p>
 <div class="mark"><button class="btn" data-done="lety">Označit jako prostudované</button></div>
+</section>
+
+
+<!-- ============ CHOVÁNÍ A RIZIKA ============ -->
+<section id="chovani">
+<h1>Správné chování a rizika</h1>
+<p class="lead">Co dělat, aby se s tebou lidé nehádali a dron se nevrátil v kusech. První část je o ohleduplnosti, druhá o místech, kde technika selhává.</p>
+
+<h2>Lidé</h2>
+<div class="tbl"><table>
+<tr><th>Situace</th><th>Jak se zachovat</th></tr>
+<tr><td>Nezapojení lidé v okolí</td><td>C0 nad jednotlivci smí, ale drž se stranou. Lidé pod dronem se cítí sledovaní, i když je nenatáčíš. Pravidlo: dron ne nad hlavami, ale vedle nich, a výš než 30 m.</td></tr>
+<tr><td>Shromáždění: koncert, trh, náměstí, hřiště s dětmi, pláž v sezóně</td><td>Nikdy nepřelétat. V otevřené kategorii je to zakázané bez výjimky.</td></tr>
+<tr><td>Rodina a kamarádi, které natáčíš</td><td>Jsou zapojené osoby: vědí o letu a souhlasí. Vysvětli jim předem, co dron udělá, a nelétej nad hlavami ani jim.</td></tr>
+<tr><td>Někdo přijde a ptá se, co děláš</td><td>Zůstaň v klidu, nech dron viset nebo přistaň, usměj se a řekni, co natáčíš. Nabídni, že mu záběr ukážeš. Většina konfliktů končí tady.</td></tr>
+<tr><td>Někdo se rozčílí</td><td>Přistaň, nehádej se, nenatáčej ho. Můžeš odletět jinam. Nikdo nemá právo ti dron sebrat nebo ho sestřelit, ale ty nemáš důvod to testovat.</td></tr>
+<tr><td>Kontrola policie</td><td>Ukaž doklad A1/A3, registraci provozovatele a číslo na dronu. Měj je v telefonu i v RC 2. Policie smí let ukončit; dohaduj se až potom písemně, ne na místě.</td></tr>
+<tr><td>Sousedé a cizí pozemky</td><td>Nad cizí zahradou nelétej nízko a nezastavuj se. Záběry oken, zahrad a lidí na pozemku jsou zásah do soukromí. Když chceš natočit střechu nebo dům, zazvoň a zeptej se.</td></tr>
+<tr><td>Zvířata</td><td>Koně, krávy, ovce a psi se dronu lekají. Drž odstup aspoň 50 m a leť výš. Hnízdící ptáci v CHKO a rezervacích: v hnízdní sezóně tam nelétej vůbec.</td></tr>
+</table></div>
+
+<h2>Místa</h2>
+<ul>
+<li><b>Silnice, železnice, cyklostezky:</b> nepřelétávej je nízko, nikdy nad nimi nevis. Spadlý dron na dálnici způsobí nehodu.</li>
+<li><b>Nemocnice, heliporty, hasičské zásahy:</b> i mimo zónu se drž dál. Při požáru nebo nehodě nikdy nelétej, blokoval bys záchranný vrtulník.</li>
+<li><b>Zámky, hrady, památky:</b> často mají vlastní zákaz z provozního řádu nebo zónu v DroneMap. Zeptej se v pokladně.</li>
+<li><b>Chráněná území:</b> národní parky mají zákaz, CHKO omezení. DroneMap je ukazuje.</li>
+<li><b>Zahraničí:</b> každá země má vlastní mapu zón a často přísnější zvyklosti (Itálie, Německo). Odkaz na mapy je v kapitole Odkazy.</li>
+</ul>
+
+<h2>Kde dron ztrácí hlavu</h2>
+<p>Mini 5 Pro se drží ve vzduchu díky GNSS, kompasu a kamerám. Všechny tři se dají oklamat. Tohle jsou nejčastější příčiny ztráty kontroly u začátečníků.</p>
+<div class="tbl"><table>
+<tr><th>Riziko</th><th>Co se stane</th><th>Co dělat</th></tr>
+<tr><td><b>Velké ocelové konstrukce:</b> mosty, jeřáby, haly, stožáry, armované betonové střechy, kovové zábradlí vyhlídek</td><td>Zmatou kompas. Dron po vzletu letí jinam, než míří, nebo přejde do ATTI a driftuje. Nejčastější důvod ztráty dronu.</td><td>Startuj aspoň 10 m od kovu, nikdy z kovové plošiny ani z kapoty auta. Když aplikace hlásí rušení kompasu, nelétej. Kalibraci dělej jen na volném místě bez kovu.</td></tr>
+<tr><td><b>Elektrické vedení, trafostanice, vysílače</b></td><td>Rušení signálu i kompasu. Tenké dráty snímače nevidí, dron do nich narazí.</td><td>Drž se aspoň 50 m od vedení VN, nelétej pod ani mezi dráty, u vysílačů počítej s výpadky signálu.</td></tr>
+<tr><td><b>Voda, led, sníh</b></td><td>Spodní kamery nemají texturu, dron si myslí, že stojí, nebo klesá do vody. Přistání nad vodou nejde zrušit vizuálně.</td><td>Nad vodou leť aspoň 5 m vysoko, nikdy nízko a pomalu. Nad sněhem vypni ActiveTrack a QuickShots.</td></tr>
+<tr><td><b>Sklo, zrcadlové fasády, bílé zdi</b></td><td>Snímače překážek je nevidí, LiDAR sklo neodrazí.</td><td>U budov létej ručně, pomalu, v režimu C.</td></tr>
+<tr><td><b>Mezi budovami, v údolích, v lese</b></td><td>Slabý GNSS a odrazy signálu. Domovský bod je nepřesný, RTH může vést do překážky.</td><td>Vzlétni na otevřeném místě a počkej na dostatek satelitů. RTH v těchto místech raději ruč.</td></tr>
+<tr><td><b>Vítr ve výšce</b></td><td>U země bezvětří, ve 100 m může foukat dvakrát tolik. Mini neudrží pozici a vítr ho odnáší od tebe.</td><td>Nejdřív vystoupej nad sebe a sleduj varování. Zpáteční cestu plánuj proti větru. Mini má limit 12 m/s, pro klidné video létej do 8 m/s.</td></tr>
+<tr><td><b>Stromy a tenké větve</b></td><td>Jednotlivé větve snímače často nevidí, zvlášť bez listí.</td><td>Mezi stromy nelétej. Kolem korun drž odstup 10 m.</td></tr>
+<tr><td><b>Ptáci</b></td><td>Dravci na dron útočí, racci ho obletují. Náraz = pád.</td><td>Když se k dronu přiblíží pták, klesni a odleť pryč od něj, dravci útočí shora.</td></tr>
+<tr><td><b>Nízké slunce a západ</b></td><td>Oslní kamery snímačů i tebe. Dron proti slunci nevidíš.</td><td>Leť tak, abys měl slunce za zády, kameru dolů před obraty do slunce.</td></tr>
+<tr><td><b>Mráz a teplo</b></td><td>Pod 5 °C baterie ztrácí výkon, nad 35 °C se přehřívá ovladač i dron.</td><td>Baterie v kapse, kratší lety, v létě dron nenechávej na slunci v autě.</td></tr>
+<tr><td><b>Telefon a Wi-Fi rušení</b></td><td>Hotspoty, Wi-Fi routery, Bluetooth sluchátka a sportovní hodinky ruší přenos na 2,4 GHz.</td><td>Před letem vypni hotspot v telefonu a drž sluchátka dál od RC 2.</td></tr>
+</table></div>
+
+<div class="warn"><p><b>Jedno pravidlo nad ostatní:</b> když si nejsi jistý, nelétáš. Dron, který leží na zemi, nikomu neublíží a ušetří ti tisíce za opravu a rozčíleného souseda.</p></div>
+<p class="src">Zdroje: nařízení (EU) 2019/947; DJI Mini 5 Pro User Manual v1.0, kap. 2.2 a 5.4; praxe pilotů.</p>
+<div class="mark"><button class="btn" data-done="chovani">Označit jako prostudované</button></div>
 </section>
 
 <!-- ============ TIPY ============ -->
@@ -986,6 +1150,9 @@ const Q=[
  ["Jak natočíš antény RC 2 pro nejlepší signál?",["Plochou stranou k dronu","Špičkami přímo na dron","Složené k ovladači","Na orientaci nezáleží"],0,"Špičky antén vysílají nejslaběji. Drž ploché strany k dronu a nestav se k němu zády.","dron"],
  ["Co dělá dynamický domovský bod na RC 2?",["Domov se posouvá s polohou ovladače","Dron přistane na nejbližší rovné ploše","Zruší návrat domů","Uloží trasu letu"],0,"Hodí se, když se při letu přesouváš. Po RTH dron doletí k tobě a zůstane viset.","dron"],
  ["Proč musíš RC 2 občas připojit k internetu?",["Přihlášení do DJI Fly platí 90 dní a aktualizují se zóny a firmware","Bez internetu nefunguje spojení s dronem","Kvůli živému přenosu videa","Nemusíš nikdy"],0,"Bez přihlášení je let omezen na 30 m výšky a 50 m vzdálenosti.","dron"],
+ ["Chceš vzlétnout z vyhlídky s kovovým zábradlím u ocelového mostu. Co hrozí?",["Rušení kompasu, dron může letět jinam, než míří, nebo driftovat","Nic, GNSS to vyrovná","Jen slabší signál ovladače","Rychlejší vybití baterie"],0,"Velké ocelové konstrukce jsou nejčastější příčina ztráty dronu. Startuj aspoň 10 m od kovu.","dron"],
+ ["K dronu přiletěl kolemjdoucí a rozčiluje se, že ho natáčíš. Co uděláš?",["Přistanu, v klidu vysvětlím, co natáčím, a případně odletím jinam","Pokračuju, mám na to právo","Natočím ho jako důkaz","Zvýším výšku, ať nepřekáží"],0,"Hádka nikdy nepomůže. Přistání a klidné vysvětlení vyřeší většinu konfliktů.","pravidla"],
+ ["Letíš nízko nad rybníkem v režimu N. Co hrozí?",["Spodní kamery nevidí texturu, dron může ztratit výšku nebo přistát do vody","Nic, voda je rovná","Jen horší obraz","Kompas se ztratí"],0,"Nad vodou leť aspoň 5 m vysoko a nespoléhej na spodní snímače.","dron"],
  ["Jakou třídu má v EU dron ze standardního Fly More Combo?",["C0","C1","C2","Bez třídy"],0,"Standardní balení jsou C0, jen Combo Plus s bateriemi Plus je C1.","dron"],
  ["Co se stane, když do C0 dronu Mini 5 Pro vložíš baterii Plus?",["Překročí limit C0 a přestane být C0","Nic, je to oficiální příslušenství","Stane se z něj C1","Dron nepůjde zapnout"],0,"Proto do svého C0 dronu kupuj jen standardní baterie.","dron"],
  ["Co udělá krátký stisk tlačítka Pauza/RTH na RC 2?",["Dron zabrzdí a visí na místě","Spustí návrat domů","Vypne motory","Přepne do Sport"],0,"Podržení do pípnutí spustí RTH.","dron"],
@@ -1058,7 +1225,7 @@ $("#qExam").addEventListener("click",()=>start("exam"));
 $("#qWrong").addEventListener("click",()=>start("wrong"));
 
 
-/* ---------- simulator ---------- */
+/* ---------- simulator (virtuální RC 2) ---------- */
 (function sim(){
   function makeStick(id){
     const zone=document.getElementById(id),knob=zone.querySelector(".stick-knob"),st={x:0,y:0,active:false};
@@ -1070,72 +1237,215 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     zone.addEventListener("pointerup",rel);zone.addEventListener("pointercancel",rel);
     return st;
   }
+  const el=id=>document.getElementById(id);
   const L=makeStick("stick-l"),RS=makeStick("stick-r"),keys={};
-  const active=()=>document.getElementById("trenazer").classList.contains("active");
-  addEventListener("keydown",e=>{if(!active())return;const k=e.key.toLowerCase();
-    if(["arrowup","arrowdown","arrowleft","arrowright"," "].includes(k))e.preventDefault();
-    if(k===" "){pause();return} if(k==="h"){rth();return} keys[k]=true});
-  addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
-  const kb=()=>({lx:(keys.d?1:0)-(keys.a?1:0),ly:(keys.w?1:0)-(keys.s?1:0),rx:(keys.arrowright?1:0)-(keys.arrowleft?1:0),ry:(keys.arrowup?1:0)-(keys.arrowdown?1:0)});
-  const el=id=>document.getElementById(id), droneEl=el("drone"), MAXALT=120;
+  const active=()=>el("trenazer").classList.contains("active");
+  const MAXALT=120, SPEED={C:.1,N:.2,S:.32}, YAW={C:70,N:120,S:180};
   const TASKS=[
     "Vzlétni: levou páčku nahoru a vystoupej nad 10 m.",
     "Otoč se: levou páčkou do strany otoč dron aspoň o 180°.",
     "Leť: pravou páčkou proleť kus plochy dopředu, do stran i dozadu.",
     "Nosem k sobě: natoč dron šipkou dolů (k sobě) a pravou páčkou ho popolétni doleva a doprava.",
+    "Kamera: nakloň gimbal pod −45° a spusť nahrávání (REC).",
+    "Přepni do režimu C (Cine), přibliž zoom na 2× a pořiď fotku.",
     "Zabrzdi: stiskni Pauza (nebo mezerník) a pusť páčky.",
-    "Vrať se: stiskni RTH a nech dron přistát na H.",
-    "Hotovo. Zkoušej dál volně, třeba čtverec nosem k sobě."];
+    "Vrať se: podrž RTH a nech dron přistát na H.",
+    "Hotovo. Zkoušej dál volně, třeba čtverec nosem k sobě v režimu C s kamerou dolů."];
   let D,task,acc;
-  function reset(){D={x:.5,y:.72,hdg:0,alt:0,mode:"manual",hold:0};task=0;acc={turn:0,fly:0,nose:0};setTask()}
-  function setTask(){el("task-text").textContent=TASKS[task];el("task-n").textContent=task<6?"Úkol "+(task+1)+" z 6:":"Splněno."}
+  function reset(){
+    D={x:.5,y:.72,hdg:0,alt:0,mode:"manual",hold:0,fm:"N",tilt:0,zoom:1,rec:false,recT:0,photos:0,bat:100,cruise:null,lowRth:false};
+    task=0;acc={turn:0,fly:0,nose:0};
+    el("g-tilt").value=0;el("g-zoom").value=1;setMode("N");paintRec();setTask();
+  }
+  function setTask(){el("task-text").textContent=TASKS[task];el("task-n").textContent=task<8?"Úkol "+(task+1)+" z 8:":"Splněno."}
   function next(i){if(task===i){task++;setTask()}}
-  function pause(){if(D.alt>0){D.mode="pause";D.hold=1.2;next(4)}}
-  function rth(){if(D.alt>0){D.mode="rth";if(task===5){}}}
-  el("btn-pause").addEventListener("click",pause);
-  el("btn-rth").addEventListener("click",rth);
-  el("btn-reset").addEventListener("click",reset);
+  function setMode(m){D.fm=m;document.querySelectorAll(".mode .rcbtn").forEach(b=>b.classList.toggle("on",b.dataset.mode===m));el("h-mode").textContent=m}
+  function pause(){D.cruise=null;if(D.alt>0){D.mode="pause";D.hold=1.2;next(6)}}
+  function rth(){if(D.alt>0){D.mode=D.mode==="rth"?"manual":"rth";D.cruise=null}}
+  function paintRec(){el("b-rec").classList.toggle("on",D.rec);el("h-rec").hidden=!D.rec}
+  function toggleRec(){D.rec=!D.rec;if(D.rec)D.recT=0;paintRec();if(D.tilt<=-45&&D.rec)next(4)}
+  function shoot(){D.photos++;el("h-photos").textContent=D.photos;const f=el("flash");f.classList.add("on");setTimeout(()=>f.classList.remove("on"),60);if(D.fm==="C"&&D.zoom>=2)next(5)}
+  function tilt(v){D.tilt=Math.max(-90,Math.min(60,v));el("g-tilt").value=D.tilt;el("g-tilt-v").textContent=D.tilt+"°";el("h-tilt").textContent=D.tilt+"°"}
+  function zoom(v){D.zoom=Math.max(1,Math.min(4,Math.round(v*2)/2));el("g-zoom").value=D.zoom;el("g-zoom-v").textContent=D.zoom+"×";el("h-zoom").textContent=D.zoom+"×"}
+  el("g-tilt").addEventListener("input",e=>tilt(+e.target.value));
+  el("g-zoom").addEventListener("input",e=>zoom(+e.target.value));
+  el("b-rec").addEventListener("click",toggleRec);el("b-shot").addEventListener("click",shoot);
+  el("b-c1").addEventListener("click",()=>tilt(0));
+  el("b-c2").addEventListener("click",()=>cruise());
+  el("btn-pause").addEventListener("click",pause);el("btn-rth").addEventListener("click",rth);el("btn-reset").addEventListener("click",reset);
+  document.querySelectorAll(".mode .rcbtn").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
+  function cruise(){ if(D.alt===0)return; D.cruise=D.cruise?null:{...lastIn}; el("b-c2").classList.toggle("on",!!D.cruise) }
+  let lastIn={lx:0,ly:0,rx:0,ry:0};
+  addEventListener("keydown",e=>{if(!active()||e.target.tagName==="INPUT")return;const k=e.key.toLowerCase();
+    if(["arrowup","arrowdown","arrowleft","arrowright"," "].includes(k))e.preventDefault();
+    if(e.repeat)return;
+    if(k===" "){pause();return} if(k==="h"){rth();return} if(k==="r"){toggleRec();return} if(k==="f"){shoot();return}
+    if(k==="q"){tilt(D.tilt-5);return} if(k==="e"){tilt(D.tilt+5);return} if(k==="z"){zoom(D.zoom-.5);return} if(k==="x"){zoom(D.zoom+.5);return}
+    if(k==="1"){setMode("C");return} if(k==="2"){setMode("N");return} if(k==="3"){setMode("S");return} if(k==="t"){cruise();return}
+    keys[k]=true});
+  addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
+  const kb=()=>({lx:(keys.d?1:0)-(keys.a?1:0),ly:(keys.w?1:0)-(keys.s?1:0),rx:(keys.arrowright?1:0)-(keys.arrowleft?1:0),ry:(keys.arrowup?1:0)-(keys.arrowdown?1:0)});
+  const droneEl=el("drone");
   reset();
   let last=performance.now();
   function loop(t){
     const dt=Math.min((t-last)/1000,.05);last=t;const k=kb();
     let lx=L.active?L.x:k.lx,ly=L.active?L.y:k.ly,rx=RS.active?RS.x:k.rx,ry=RS.active?RS.y:k.ry;
+    const moving=Math.abs(lx)+Math.abs(ly)+Math.abs(rx)+Math.abs(ry)>.05;
+    if(moving)lastIn={lx,ly,rx,ry};
+    if(D.cruise){ if(moving){D.cruise=null;el("b-c2").classList.remove("on")} else ({lx,ly,rx,ry}=D.cruise) }
     if(D.mode==="pause"){D.hold-=dt;if(D.hold<=0)D.mode="manual";lx=ly=rx=ry=0}
+    if(D.alt>0){D.bat=Math.max(0,D.bat-dt*0.35);if(D.bat<=15&&!D.lowRth){D.lowRth=true;D.mode="rth";D.cruise=null}}
+    if(D.rec&&D.alt>0)D.recT+=dt;
     if(D.mode==="rth"){
-      if(Math.abs(lx)+Math.abs(ly)+Math.abs(rx)+Math.abs(ry)>.6){} // RTH se ruší jen tlačítkem Pauza
       const dx=.5-D.x,dy=.72-D.y,dist=Math.hypot(dx,dy);
       if(D.alt<30&&dist>.02) D.alt=Math.min(30,D.alt+8*dt);
       else if(dist>.01){D.x+=dx/dist*.18*dt;D.y+=dy/dist*.18*dt}
       else if(D.alt>0) D.alt=Math.max(0,D.alt-5*dt);
-      else {D.mode="manual"; next(5)}
+      else {D.mode="manual";next(7);if(D.rec)toggleRec()}
       rx=ry=0;
     } else if(D.alt>0||ly>.15){
       D.alt=Math.max(0,Math.min(MAXALT,D.alt+ly*6*dt));
-      const yaw=lx*120*dt; D.hdg=(D.hdg+yaw+360)%360;
+      const yaw=lx*YAW[D.fm]*dt; D.hdg=(D.hdg+yaw+360)%360;
       if(task===1){acc.turn+=Math.abs(yaw);if(acc.turn>=180)next(1)}
       if(D.alt>0){
-        const rad=D.hdg*Math.PI/180,sp=.2;
+        const rad=D.hdg*Math.PI/180,sp=SPEED[D.fm];
         D.x+=(Math.sin(rad)*ry+Math.cos(rad)*rx)*sp*dt; D.y+=(-Math.cos(rad)*ry+Math.sin(rad)*rx)*sp*dt;
         D.x=Math.max(.04,Math.min(.96,D.x));D.y=Math.max(.06,Math.min(.94,D.y));
         if(task===2&&Math.hypot(rx,ry)>.3){acc.fly+=dt;if(acc.fly>4)next(2)}
         if(task===3){const nose=Math.abs(((D.hdg-180)+540)%360-180)<35;if(nose&&Math.abs(rx)>.3){acc.nose+=dt;if(acc.nose>2.5)next(3)}}
       }
       if(task===0&&D.alt>10)next(0);
+      if(D.alt===0&&D.mode!=="rth"&&D.bat<100&&ly<=.15){/* landed manually */}
     }
     droneEl.style.left=(D.x*100)+"%";droneEl.style.top=(D.y*100)+"%";
     droneEl.style.transform="translate(-50%,-50%) scale("+(1+Math.min(D.alt,60)/60*.5)+")";
     el("drone-g").setAttribute("transform","rotate("+D.hdg+" 32 32)");
     el("alt-fill").style.height=(D.alt/MAXALT*100)+"%";
-    const spd=D.mode==="rth"?(D.alt>=30?10:0):Math.hypot(rx,ry)*(D.alt>0?12:0);
+    const spd=D.mode==="rth"?(D.alt>=30?10:0):Math.hypot(rx,ry)*(D.alt>0?(D.fm==="S"?18:D.fm==="C"?6:12):0);
     el("t-alt").textContent=Math.round(D.alt)+" m"; el("t-spd").textContent=spd.toFixed(0)+" m/s";
     el("t-hdg").textContent=Math.round(D.hdg)+"°";
-    el("t-state").textContent=D.mode==="rth"?"RTH":D.mode==="pause"?"Brzdí":(D.alt>0?"Ve vzduchu":"Na zemi");
+    el("t-state").textContent=D.mode==="rth"?(D.lowRth?"RTH slabá baterie":"RTH"):D.mode==="pause"?"Brzdí":D.cruise?"Autopilot":(D.alt>0?"Ve vzduchu":"Na zemi");
+    el("h-bat").textContent=Math.round(D.bat)+" %"; el("h-bat").style.color=D.bat<=20?"var(--bad)":"";
+    if(D.rec){const m=Math.floor(D.recT/60),sec=Math.floor(D.recT%60);el("h-rect").textContent=String(m).padStart(2,"0")+":"+String(sec).padStart(2,"0")}
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
 })();
 
-paintDone(); paintHist(); show();
+
+/* ---------- 3D hra (three.js) ---------- */
+(function game(){
+  const el=id=>document.getElementById(id);
+  const sec=el("hra"); let inited=false, T=null;
+  function makeStick(id){
+    const zone=document.getElementById(id),knob=zone.querySelector(".stick-knob"),st={x:0,y:0,active:false};
+    const set=e=>{const r=zone.getBoundingClientRect(),R=r.width*.3;let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);const d=Math.hypot(dx,dy);if(d>R){dx=dx/d*R;dy=dy/d*R}
+      st.x=dx/R;st.y=-dy/R;knob.style.transform="translate(calc(-50% + "+dx+"px),calc(-50% + "+dy+"px))"};
+    zone.addEventListener("pointerdown",e=>{st.active=true;zone.setPointerCapture(e.pointerId);set(e)});
+    zone.addEventListener("pointermove",e=>{if(st.active)set(e)});
+    const rel=()=>{st.active=false;st.x=0;st.y=0;knob.style.transform="translate(-50%,-50%)"};
+    zone.addEventListener("pointerup",rel);zone.addEventListener("pointercancel",rel);
+    return st;
+  }
+  const L=makeStick("stick3-l"),RS=makeStick("stick3-r"),keys={};
+  const active=()=>sec.classList.contains("active");
+  let G; const SPD={C:4,N:10,S:16},YAWR={C:60,N:100,S:160};
+  function loadThree(cb){ if(window.THREE){cb();return} const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"; sc.onload=cb; sc.onerror=()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (jsi offline?)"}; document.head.appendChild(sc) }
+  function init(){
+    if(inited)return; inited=true;
+    const cv=el("g3d"), renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    const scene=new THREE.Scene(); scene.background=new THREE.Color(0x9ec9ea); scene.fog=new THREE.Fog(0x9ec9ea,120,420);
+    const cam=new THREE.PerspectiveCamera(60,16/9,.5,600);
+    scene.add(new THREE.HemisphereLight(0xffffff,0x6b8a4a,.9)); const sun=new THREE.DirectionalLight(0xffffff,.8); sun.position.set(60,120,40); scene.add(sun);
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(800,800),new THREE.MeshLambertMaterial({color:0x7fb069})); ground.rotation.x=-Math.PI/2; scene.add(ground);
+    const grid=new THREE.GridHelper(800,80,0x6a9a55,0x6a9a55); grid.position.y=.02; scene.add(grid);
+    const pad=new THREE.Mesh(new THREE.CircleGeometry(2.5,32),new THREE.MeshLambertMaterial({color:0xf0f0f0})); pad.rotation.x=-Math.PI/2; pad.position.y=.05; scene.add(pad);
+    const padH=new THREE.Mesh(new THREE.RingGeometry(2.2,2.6,32),new THREE.MeshLambertMaterial({color:0x1e8a5a})); padH.rotation.x=-Math.PI/2; padH.position.y=.06; scene.add(padH);
+    const rnd=(a,b)=>a+Math.random()*(b-a);
+    const obst=[];
+    const trunkM=new THREE.MeshLambertMaterial({color:0x6b4a2b}), leafM=new THREE.MeshLambertMaterial({color:0x2f7d3a});
+    for(let i=0;i<60;i++){let x,z;do{x=rnd(-220,220);z=rnd(-220,220)}while(Math.hypot(x,z)<25);const h=rnd(6,16);
+      const tr=new THREE.Mesh(new THREE.CylinderGeometry(.4,.6,h*.45,6),trunkM);tr.position.set(x,h*.225,z);scene.add(tr);
+      const lf=new THREE.Mesh(new THREE.ConeGeometry(h*.28,h*.65,7),leafM);lf.position.set(x,h*.45+h*.3,z);scene.add(lf);obst.push({x,z,r:h*.28,h})}
+    const bM=[0xd9d2c5,0xc9b8a3,0xbfc7d1];
+    for(let i=0;i<12;i++){let x,z;do{x=rnd(-200,200);z=rnd(-200,200)}while(Math.hypot(x,z)<40);const w=rnd(8,18),d=rnd(8,18),h=rnd(8,30);
+      const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshLambertMaterial({color:bM[i%3]}));b.position.set(x,h/2,z);scene.add(b);obst.push({x,z,r:Math.max(w,d)/2+.5,h,box:true,w,d})}
+    const gates=[]; const gM=new THREE.MeshLambertMaterial({color:0xf28c28}), gDone=new THREE.MeshLambertMaterial({color:0x1e8a5a});
+    for(let i=0;i<10;i++){const a=i/10*Math.PI*2, r=rnd(40,150); let x=Math.cos(a)*r, z=Math.sin(a)*r;
+      if(obst.some(o=>Math.hypot(o.x-x,o.z-z)<o.r+6)){x*=1.15;z*=1.15}
+      const y=rnd(8,45); const ring=new THREE.Mesh(new THREE.TorusGeometry(3,.35,10,28),gM); ring.position.set(x,y,z); ring.lookAt(0,y,0); scene.add(ring);
+      const pole=new THREE.Mesh(new THREE.CylinderGeometry(.15,.15,y,6),new THREE.MeshLambertMaterial({color:0xbbbbbb}));pole.position.set(x,y/2,z);scene.add(pole);
+      gates.push({x,y,z,ring,done:false})}
+    // drone
+    const drone=new THREE.Group(); const body=new THREE.Mesh(new THREE.BoxGeometry(1.2,.5,1.8),new THREE.MeshLambertMaterial({color:0xeeeeee})); drone.add(body);
+    const nose=new THREE.Mesh(new THREE.BoxGeometry(.6,.3,.3),new THREE.MeshLambertMaterial({color:0xf28c28})); nose.position.set(0,.1,-1.0); drone.add(nose);
+    const props=[]; [[-1.1,-1.1],[1.1,-1.1],[-1.1,1.1],[1.1,1.1]].forEach(([px,pz],i)=>{const arm=new THREE.Mesh(new THREE.BoxGeometry(.2,.15,Math.hypot(px,pz)),new THREE.MeshLambertMaterial({color:0x2a343f}));arm.position.set(px/2,0,pz/2);arm.rotation.y=Math.atan2(px,pz);drone.add(arm);
+      const pr=new THREE.Mesh(new THREE.CylinderGeometry(.9,.9,.05,12),new THREE.MeshLambertMaterial({color:i<2?0xf28c28:0x8794a1,transparent:true,opacity:.6}));pr.position.set(px,.15,pz);drone.add(pr);props.push(pr)});
+    scene.add(drone);
+    const shadow=new THREE.Mesh(new THREE.CircleGeometry(1.2,16),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.25}));shadow.rotation.x=-Math.PI/2;shadow.position.y=.07;scene.add(shadow);
+    T={renderer,scene,cam,drone,props,shadow,gates,obst,gM,gDone};
+    function resize(){const w=cv.clientWidth,h=cv.clientHeight;if(w&&h&&(cv.width!==w*renderer.getPixelRatio()||cv.height!==h*renderer.getPixelRatio())){renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}}
+    T.resize=resize;
+    requestAnimationFrame(loop);
+  }
+  function reset(){G={x:0,y:0,z:0,hdg:0,vx:0,vz:0,vy:0,fm:"N",bat:100,t:0,score:0,run:false,over:false,cam:"chase",rth:false};
+    if(T){T.gates.forEach(g=>{g.done=false;g.ring.material=T.gM})} paint(); el("g-over").hidden=true; el("g-msg").textContent="Stiskni Start"; setMode("N")}
+  function setMode(m){if(!G)return;G.fm=m;document.querySelectorAll("#hra .mode .rcbtn").forEach(b=>b.classList.toggle("on",b.dataset.gm===m));el("g-mode").textContent=m}
+  function end(title,msg){G.over=true;G.run=false;el("g-over-h").textContent=title;el("g-over-p").textContent=msg;el("g-over").hidden=false}
+  function paint(){el("g-score").textContent="Brány "+G.score+" / 10";el("g-time").textContent=Math.floor(G.t/60)+":"+String(Math.floor(G.t%60)).padStart(2,"0");
+    el("g-bat").textContent=Math.round(G.bat)+" %";el("g-bat").style.color=G.bat<=20?"var(--bad)":"";el("g-alt").textContent=Math.round(G.y)+" m";el("g-spd").textContent=Math.hypot(G.vx,G.vz).toFixed(0)+" m/s"}
+  let last=performance.now();
+  function loop(t){
+    const dt=Math.min((t-last)/1000,.05);last=t; T.resize();
+    if(active()){
+      const k={lx:(keys.d?1:0)-(keys.a?1:0),ly:(keys.w?1:0)-(keys.s?1:0),rx:(keys.arrowright?1:0)-(keys.arrowleft?1:0),ry:(keys.arrowup?1:0)-(keys.arrowdown?1:0)};
+      let lx=L.active?L.x:k.lx,ly=L.active?L.y:k.ly,rx=RS.active?RS.x:k.rx,ry=RS.active?RS.y:k.ry;
+      if(G.run){
+        G.t+=dt; if(G.y>0.1)G.bat=Math.max(0,G.bat-dt*.5);
+        if(G.bat<=15&&!G.rth){G.rth=true;el("g-msg").textContent="Slabá baterie, dron se vrací"}
+        if(G.rth){const d=Math.hypot(G.x,G.z); if(d>2&&G.y<30){G.vy=4} else if(d>2){G.vy=0;const s=8;G.vx+=(-G.x/d*s-G.vx)*.05;G.vz+=(-G.z/d*s-G.vz)*.05;G.hdg=Math.atan2(G.x,G.z)} else {G.vx*=.8;G.vz*=.8;G.vy=-3;if(G.y<=0.1){G.y=0;G.rth=false;end("Přistál jsi doma",G.score+" z 10 bran za "+el("g-time").textContent)}}}
+        else{
+          if(G.bat<=0){G.vy=-6}
+          else{G.vy+=((ly*5)-G.vy)*.15;}
+          G.hdg-=lx*YAWR[G.fm]*Math.PI/180*dt;
+          const sp=SPD[G.fm], fx=Math.sin(G.hdg)*-1, fz=Math.cos(G.hdg)*-1;
+          const tx=(fx*ry + fz*rx)*sp, tz=(fz*ry - fx*rx)*sp; const acc=G.fm==="S"?.035:.06;
+          if(G.y>0.1||ly>.2){G.vx+=(tx-G.vx)*acc;G.vz+=(tz-G.vz)*acc}else{G.vx=G.vz=0}
+        }
+        G.x+=G.vx*dt;G.z+=G.vz*dt;G.y=Math.max(0,Math.min(120,G.y+G.vy*dt));
+        if(G.y===0&&G.vy<0&&!G.rth){ if(Math.abs(G.vy)>5.5){end("Tvrdé přistání","Padal jsi "+Math.abs(G.vy).toFixed(0)+" m/s. Před zemí zpomal.")} G.vy=0 }
+        if(Math.hypot(G.x,G.z)>380){end("Mimo dohled","Odletěl jsi příliš daleko. VLOS!")}
+        for(const o of T.obst){ if(G.y<o.h){ const hit=o.box?(Math.abs(G.x-o.x)<o.w/2+.8&&Math.abs(G.z-o.z)<o.d/2+.8):(Math.hypot(G.x-o.x,G.z-o.z)<o.r+.6); if(hit){end("Náraz","Narazil jsi do "+(o.box?"budovy":"stromu")+" ve výšce "+Math.round(G.y)+" m.");break} } }
+        for(const g of T.gates){ if(!g.done&&Math.hypot(g.x-G.x,g.z-G.z)<3&&Math.abs(g.y-G.y)<3){g.done=true;g.ring.material=T.gDone;G.score++;el("g-msg").textContent=G.score===10?"Všechny brány! Teď domů (RTH nebo ručně).":"Brána "+G.score} }
+        paint();
+      }
+      // render
+      const d=T.drone; d.position.set(G.x,G.y+.4,G.z); d.rotation.set(0,G.hdg,0);
+      d.rotation.x=Math.max(-.35,Math.min(.35,-(G.vx*-Math.sin(G.hdg)+G.vz*-Math.cos(G.hdg))*.03)); d.rotation.z=-(G.vx*Math.cos(G.hdg)-G.vz*Math.sin(G.hdg))*.03;
+      T.props.forEach(p=>p.rotation.y+=G.y>0||G.run?.6:0); T.shadow.position.set(G.x,.07,G.z); T.shadow.scale.setScalar(Math.max(.3,1-G.y/150));
+      const c=T.cam;
+      if(G.cam==="chase"){const bx=G.x+Math.sin(G.hdg)*10, bz=G.z+Math.cos(G.hdg)*10; c.position.lerp(new THREE.Vector3(bx,G.y+4,bz),.1); c.lookAt(G.x,G.y+.5,G.z)}
+      else{const tilt=+el("g3-tilt").value*Math.PI/180; c.position.set(G.x,G.y+.4,G.z); c.rotation.set(0,0,0); c.rotation.order="YXZ"; c.rotation.y=G.hdg; c.rotation.x=tilt}
+      T.renderer.render(T.scene,c);
+    }
+    requestAnimationFrame(loop);
+  }
+  el("g-start").addEventListener("click",()=>{if(!T)return;if(G.over)reset();G.run=true;el("g-msg").textContent="Vzlétni levou páčkou"});
+  el("g-again").addEventListener("click",()=>{reset();G.run=true;el("g-msg").textContent="Vzlétni levou páčkou"});
+  el("g-rth").addEventListener("click",()=>{if(G&&G.run&&G.y>0.1){G.rth=!G.rth;el("g-msg").textContent=G.rth?"Návrat domů":"RTH zrušen"}});
+  el("g-cam").addEventListener("click",()=>{G.cam=G.cam==="chase"?"fpv":"chase";el("g-cam").textContent="Kamera: "+(G.cam==="chase"?"za dronem":"FPV z dronu")});
+  document.querySelectorAll("#hra .mode .rcbtn").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.gm)));
+  addEventListener("keydown",e=>{if(!active()||e.target.tagName==="INPUT")return;const k=e.key.toLowerCase();
+    if(["arrowup","arrowdown","arrowleft","arrowright"," "].includes(k))e.preventDefault(); if(e.repeat)return;
+    if(k==="v"){el("g-cam").click();return} if(k==="h"){el("g-rth").click();return} if(k==="1")setMode("C");if(k==="2")setMode("N");if(k==="3")setMode("S"); keys[k]=true});
+  addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
+  reset();
+  const tryInit=()=>{ if(active()&&!inited) loadThree(init) };
+  addEventListener("hashchange",tryInit); window.__tryInit3d=tryInit;
+})();
+
+paintDone(); paintHist(); show(); if(window.__tryInit3d)window.__tryInit3d();
 })();
 </script>
 </body>
