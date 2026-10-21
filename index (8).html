@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Letová příprava: DJI Mini 5 Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EAF0F4; --panel:#FFFFFF; --ink:#12283B; --muted:#4B6073; --line:#C5D3DE;
+  --chart:#A3195B; --chart-soft:#F6E3EC; --sky:#22629E; --sky-soft:#E1ECF6;
+  --warn:#8A5A00; --warn-bg:#FFF4D6; --ok:#21704C; --ok-bg:#E3F3EA; --bad:#A8231B; --bad-bg:#FBE7E5;
+  --font:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --head:"Barlow Semi Condensed","Barlow",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0E1822; --panel:#15222E; --ink:#E2EBF2; --muted:#9DB1C2; --line:#2B3E4F;
+    --chart:#E86AA3; --chart-soft:#33192A; --sky:#82B6E8; --sky-soft:#17293A;
+    --warn:#F3C766; --warn-bg:#2D2513; --ok:#6FCB9A; --ok-bg:#132A1F; --bad:#F2928A; --bad-bg:#341A19;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--font);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:var(--sky)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--chart);outline-offset:2px}
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+nav.side{position:sticky;top:0;height:100vh;overflow:auto;padding:28px 18px;border-right:1px solid var(--line);background:var(--panel)}
+.brand{font:700 22px/1.15 var(--head);margin:0 0 4px}
+.brand small{display:block;font:500 14px var(--font);color:var(--muted);margin-top:6px}
+nav.side ol{list-style:none;margin:24px 0 0;padding:0;counter-reset:n}
+nav.side li{margin:2px 0}
+nav.side a{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-weight:500}
+nav.side a:hover{background:var(--sky-soft)}
+nav.side a[aria-current="page"]{background:var(--chart-soft);color:var(--chart);font-weight:600}
+nav.side .tick{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px;color:transparent}
+nav.side .done .tick{background:var(--ok);border-color:var(--ok);color:#fff}
+.progress{margin-top:22px;font-size:14px;color:var(--muted)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+main{padding:40px clamp(18px,4vw,56px) 80px;max-width:900px}
+section{display:none}
+section.active{display:block}
+h1{font:700 clamp(32px,5vw,46px)/1.05 var(--head);margin:0 0 14px;letter-spacing:-.01em}
+h2{font:700 28px/1.15 var(--head);margin:44px 0 16px;padding-bottom:12px;position:relative}
+h2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:7px;
+  background:linear-gradient(var(--chart),var(--chart)) top/100% 2px no-repeat,
+  repeating-linear-gradient(90deg,var(--chart) 0 2px,transparent 2px 9px) bottom/100% 5px no-repeat;opacity:.85}
+h3{font:600 20px/1.25 var(--head);margin:28px 0 8px}
+p,li{max-width:72ch}
+.lead{font-size:19px;color:var(--muted);max-width:62ch}
+.note{border-left:4px solid var(--sky);background:var(--sky-soft);padding:14px 18px;border-radius:0 8px 8px 0;margin:20px 0}
+.warn{border-left:4px solid var(--warn);background:var(--warn-bg);padding:14px 18px;border-radius:0 8px 8px 0;margin:20px 0}
+.stop{border-left:4px solid var(--bad);background:var(--bad-bg);padding:14px 18px;border-radius:0 8px 8px 0;margin:20px 0}
+.note>:first-child,.warn>:first-child,.stop>:first-child{margin-top:0}
+.note>:last-child,.warn>:last-child,.stop>:last-child{margin-bottom:0}
+.tbl{overflow-x:auto;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--panel)}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:var(--sky-soft);font-weight:600}
+figure{margin:22px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14.5px;color:var(--muted);margin-top:10px}
+.src{font-size:14px;color:var(--muted)}
+.btn{font:600 16px var(--font);border:2px solid var(--sky);background:var(--sky);color:var(--panel);border-radius:7px;padding:10px 18px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--sky)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+.mark{margin-top:48px;padding-top:20px;border-top:1px solid var(--line)}
+ol.steps{padding-left:22px}
+ol.steps li{margin:8px 0}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:600}
+/* checklist */
+.ck fieldset{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:18px 0;padding:8px 18px 14px}
+.ck legend{font:700 18px var(--head);padding:0 6px}
+.ck label{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.ck label:last-child{border-bottom:0}
+.ck input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok);flex:none}
+.ck input:checked+span{color:var(--muted);text-decoration:line-through}
+/* RC */
+.rcwrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:start}
+.hot{cursor:pointer}
+.hot circle.ring{fill:var(--chart);stroke:var(--panel);stroke-width:2}
+.hot text{fill:#fff;font:700 13px var(--font);pointer-events:none}
+.hot.sel circle.ring{fill:var(--sky)}
+#rcinfo{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;min-height:160px}
+#rcinfo h3{margin-top:0}
+/* quiz */
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+.qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:10px}
+.qtext{font:600 20px/1.35 var(--head);margin:0 0 16px}
+.opt{display:block;width:100%;text-align:left;font:500 16.5px var(--font);color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--sky)}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.chosen{border-color:var(--sky);background:var(--sky-soft)}
+.expl{margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--sky-soft);font-size:15.5px}
+.result{font:700 40px var(--head)}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:14px;font-weight:600}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.links{list-style:none;padding:0}
+.links li{padding:10px 0;border-bottom:1px solid var(--line)}
+.links a{font-weight:600}
+.links span{display:block;color:var(--muted);font-size:15px}
+.svgt{font:500 13px var(--font);fill:var(--ink)}
+.svgm{font:500 12px var(--font);fill:var(--muted)}
+.svgc{font:700 13px var(--font);fill:var(--chart)}
+
+/* simulator (z původního trenažéru) */
+.sim-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}
+.field{position:relative;border-radius:10px;height:380px;overflow:hidden;border:1px solid var(--line);
+  background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/40px 40px,var(--panel)}
+#home-pad{position:absolute;left:50%;top:72%;width:46px;height:46px;border:2px dashed var(--ok);border-radius:50%;display:grid;place-items:center;font-weight:700;color:var(--ok);transform:translate(-50%,-50%)}
+#drone{position:absolute;width:64px;height:64px;transform:translate(-50%,-50%);will-change:transform}
+#drone svg{width:100%;height:100%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.25))}
+.alt-bar{position:absolute;right:10px;top:10px;bottom:10px;width:14px;background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.alt-fill{position:absolute;bottom:0;left:0;right:0;background:var(--sky);height:0}
+.telemetry{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.tele{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.tele small{display:block;font-size:12.5px;color:var(--muted)} .tele b{font:700 19px var(--head)}
+.task-strip{margin-top:10px;background:var(--ok-bg);border-left:4px solid var(--ok);padding:10px 14px;border-radius:0 8px 8px 0}
+.sticks{display:flex;flex-direction:column;gap:14px}
+.stick-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.stick-card h3{margin:0}.stick-card .hint{font-size:14px;color:var(--muted);margin-bottom:6px}
+.stick-zone{position:relative;width:180px;height:180px;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.stick-base{position:absolute;inset:22px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#3d4854,#1f2730 70%)}
+.stick-knob{position:absolute;width:60px;height:60px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 50% 35%,#6a7683,#2f3944 65%);border:3px solid #1b232b;box-shadow:0 5px 9px rgba(0,0,0,.35)}
+.axis{position:absolute;font-size:12px;color:var(--muted);white-space:nowrap}
+.axis.t{top:0;left:50%;transform:translateX(-50%)}.axis.b{bottom:0;left:50%;transform:translateX(-50%)}
+.axis.l{left:0;top:50%;transform:translate(-30%,-50%) rotate(-90deg)}.axis.r{right:0;top:50%;transform:translate(30%,-50%) rotate(90deg)}
+kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px}
+@media (max-width:980px){.sim-grid{grid-template-columns:1fr}.sticks{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sticks .row{grid-column:1/-1}.stick-card{padding:8px}.stick-zone{width:150px;height:150px}.field{height:300px}.telemetry{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  nav.side{position:sticky;top:0;height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
+  .brand small,.progress{display:none}
+  .brand{font-size:17px}
+  nav.side ol{display:flex;overflow-x:auto;gap:4px;margin-top:8px}
+  nav.side a{white-space:nowrap;padding:7px 10px}
+  .rcwrap{grid-template-columns:1fr}
+  main{padding-top:24px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{nav.side{display:none}.app{display:block}section{display:block!important;page-break-after:always}}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="side" aria-label="Kapitoly">
+  <p class="brand">Letová příprava<small>DJI Mini 5 Pro Fly More Combo (RC 2), A1/A3, pojištění</small></p>
+  <ol id="nav">
+    <li><a href="#start"><span class="tick">✓</span>Začni tady</a></li>
+    <li><a href="#obnova"><span class="tick">✓</span>Obnova A1/A3</a></li>
+    <li><a href="#pravidla"><span class="tick">✓</span>Pravidla k testu</a></li>
+    <li><a href="#test"><span class="tick">✓</span>Cvičný test</a></li>
+    <li><a href="#dron"><span class="tick">✓</span>Dron a ovladač</a></li>
+    <li><a href="#trenazer"><span class="tick">✓</span>Trenažér páček</a></li>
+    <li><a href="#checklist"><span class="tick">✓</span>Před startem</a></li>
+    <li><a href="#lety"><span class="tick">✓</span>První lety a nouze</a></li>
+    <li><a href="#tipy"><span class="tick">✓</span>Tipy a triky</a></li>
+    <li><a href="#pojisteni"><span class="tick">✓</span>Pojištění</a></li>
+    <li><a href="#odkazy"><span class="tick">✓</span>Odkazy</a></li>
+  </ol>
+  <div class="progress">Prostudováno <b id="pct">0 %</b><div class="bar"><i id="pbar"></i></div></div>
+</nav>
+<main>
+<!-- ============ START ============ -->
+<section id="start">
+<h1>Letová příprava: DJI Mini 5 Pro</h1>
+<p class="lead">Obnova kvalifikace A1/A3, praktický kurz k tvému dronu a pojištění na jednom místě. Kapitoly jdou v pořadí, v jakém je budeš potřebovat. Na konci každé si ji označ jako prostudovanou.</p>
+
+<div class="note">
+<h3>Tvůj dron: Fly More Combo, třída C0</h3>
+<p>Dron ve standardním <b>Fly More Combo</b> (3× Intelligent Flight Battery, až 36 min) má v EU označení <b>C0</b> a létá v podkategorii <b>A1</b>. To je nejvolnější režim:</p>
+<ul>
+<li>Smíš přeletět nad nezapojenými osobami, ale <b>nikdy nad shromážděním</b> lidí. I tak se přeletům zbytečně vyhýbej.</li>
+<li>Registrace provozovatele je povinná (dron má kameru), číslo provozovatele musí být nalepené na dronu.</li>
+<li>Test A1/A3 pro C0 ze zákona povinný není, ale ty ho máš, a hodí se, kdybys jednou létal s jiným dronem.</li>
+</ul>
+</div>
+<div class="stop">
+<p><b>Nikdy nepoužívej baterie Plus</b> (prodávají se mimo EU nebo v balení Combo Plus). S nimi dron překročí limit C0 a přestane být C0, takže by se na něj vztahovala přísnější pravidla. Při nákupu náhradních baterií kontroluj, že kupuješ standardní Intelligent Flight Battery.</p>
+<p class="src">Zdroj: DJI, FAQ k Mini 5 Pro (EU certifikace).</p>
+</div>
+
+<h2>Postup</h2>
+<ol class="steps">
+<li><b>Zjisti datum konce platnosti</b> svého A1/A3 v Profilu pilota na <a href="https://dron.caa.gov.cz/" target="_blank" rel="noopener">dron.caa.gov.cz</a>. Prodloužení se aktivuje 180 dní předem.</li>
+<li><b>Projdi pravidla</b> a udělej si cvičný test, dokud nemáš stabilně nad 75 %.</li>
+<li><b>Udělej udržovací test</b> přímo v Profilu pilota. Úspěch = +5 let.</li>
+<li><b>Vyřeš pojištění</b> ještě před prvním letem (v A1 není povinné, ale odpovídáš za škodu i bez zavinění).</li>
+<li><b>Po vybalení</b>: aktivace, firmware, číslo provozovatele, nastavení RTH. Vše je v kapitole Před startem.</li>
+<li><b>První lety</b> podle tréninkového plánu, na prázdné louce, bez spěchu.</li>
+</ol>
+
+<div class="note">
+<p><b>K obrázkům:</b> schémata v aplikaci jsou vlastní, kreslená pro výuku. Oficiální manuál DJI výslovně zakazuje přebírání svého obsahu, proto na něj odkazuju po kapitolách (čísla kapitol jsou stejná v české i anglické verzi). Manuál v češtině a výuková videa DJI najdeš v kapitole Odkazy.</p>
+</div>
+<div class="mark"><button class="btn" data-done="start">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ OBNOVA ============ -->
+<section id="obnova">
+<h1>Obnova A1/A3</h1>
+<p class="lead">Doklad o online výcviku A1/A3 platí 5 let. Prodloužení je online, zdarma a trvá zhruba hodinu, pokud ho stihneš před koncem platnosti.</p>
+
+<h2>Jak prodloužení funguje</h2>
+<ol class="steps">
+<li><b>180 dní před koncem platnosti</b> se ti v Profilu pilota na <a href="https://dron.caa.gov.cz/" target="_blank" rel="noopener">dron.caa.gov.cz</a> zpřístupní tlačítko pro prodloužení. Dřív to nejde.</li>
+<li><b>Udržovací výcvik A1/3</b> znamená seznámit se s materiály ÚCL v sekci <a href="https://www.caa.gov.cz/provoz/bezpilotni-letadla/online-skoleni-a-informace-k-vyuziti/" target="_blank" rel="noopener">Online školení a informace k využití</a>. Kapitola Pravidla k testu v této aplikaci je jejich výtah.</li>
+<li><b>Test teoretických znalostí</b> v Profilu pilota. Úspěšné složení = dokončený udržovací výcvik a platnost se automaticky prodlouží o dalších 5 let.</li>
+<li>Stáhni si nový doklad a ulož ho do telefonu i do RC 2 (při kontrole ho musíš předložit).</li>
+</ol>
+<div class="stop">
+<p><b>Když to nestihneš:</b> po konci platnosti už prodloužit nejde a kvalifikaci musíš získat znovu stejně jako napoprvé: registrace pilota a plný test 40 otázek, 75 % správně, 60 minut, dva pokusy (po druhém neúspěchu nová registrace pilota).</p>
+</div>
+<div class="note">
+<p><b>Tip:</b> dej si do kalendáře připomínku na den, kdy se prodloužení otevře, a druhou měsíc před koncem platnosti.</p>
+</div>
+
+<h2>Registrace provozovatele je něco jiného</h2>
+<p>Kvalifikace pilota (A1/A3) a registrace provozovatele jsou dvě různé věci. Registrace provozovatele má vlastní platnost uvedenou na dokladu. Zkontroluj ji ve stejném portálu. Číslo provozovatele (začíná CZE) má být:</p>
+<ul>
+<li>čitelně nalepené na dronu (stačí pod krytem baterie, pokud je přístupné bez nářadí),</li>
+<li>pokud ho DJI Fly nabídne, zadané i v nastavení Remote ID (u C0 to povinné není, ale neuškodí).</li>
+</ul>
+
+<p class="src">Zdroje: ÚCL, Prodloužení platnosti kvalifikace A1/3 a A2 (aktualizováno 1/2026); ÚCL, Udržovací výcvik č. j. 16646-25-701; ÚCL, Registrace pilota bezpilotního systému.</p>
+<div class="mark"><button class="btn" data-done="obnova">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ PRAVIDLA ============ -->
+<section id="pravidla">
+<h1>Pravidla k testu</h1>
+<p class="lead">Výtah z nařízení (EU) 2019/947 a 2019/945 pro otevřenou kategorii, doplněný o české specifikum. Tohle se objevuje v testu i v praxi.</p>
+
+<h2>Kategorie provozu</h2>
+<div class="tbl"><table>
+<tr><th>Kategorie</th><th>Pro koho</th><th>Povolení</th></tr>
+<tr><td>Otevřená (Open)</td><td>Rekreační i jednoduchý komerční provoz s nízkým rizikem, do 25 kg</td><td>Ne, stačí registrace a kvalifikace</td></tr>
+<tr><td>Specifická (Specific)</td><td>Provoz mimo limity otevřené kategorie (např. BVLOS, nad lidmi s těžším dronem)</td><td>Ano, ÚCL nebo standardní scénář</td></tr>
+<tr><td>Certifikovaná</td><td>Vysoké riziko (přeprava osob, nebezpečné zboží)</td><td>Certifikace jako u letadel</td></tr>
+</table></div>
+
+<h2>Podkategorie otevřené kategorie</h2>
+<div class="tbl"><table>
+<tr><th></th><th>A1: nad lidmi</th><th>A2: blízko lidí</th><th>A3: daleko od lidí</th></tr>
+<tr><td>Typické drony</td><td>C0, C1</td><td>C2</td><td>C2, C3, C4, nad 250 g bez třídy</td></tr>
+<tr><td>Nezapojené osoby</td><td>C0 smí přeletět; C1 přelet neočekáván, při nečekaném co nejkratší</td><td>Vodorovně min. 30 m (5 m v nízkorychlostním režimu)</td><td>Žádné v oblasti letu</td></tr>
+<tr><td>Zástavba</td><td>Smí</td><td>Smí</td><td>Min. 150 m od obytných, obchodních, průmyslových a rekreačních oblastí</td></tr>
+<tr><td>Kvalifikace</td><td>A1/A3 (u C0 doporučeno, u C1 povinně)</td><td>A1/A3 + A2</td><td>A1/A3</td></tr>
+</table></div>
+<p><b>Tvůj Mini 5 Pro C0 = podkategorie A1.</b> Jednotlivé lidi smíš přeletět. Shromáždění osob (koncert, trh, náměstí s davem) je zakázané ve všech podkategoriích otevřené kategorie.</p>
+
+<figure>
+<svg viewBox="0 0 720 300" role="img" aria-labelledby="zt">
+<title id="zt">Schéma: kde smí C0 a C1 v A1 a kde dron v A3</title>
+<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="var(--chart)" stroke-width="2" opacity=".5"/></pattern></defs>
+<rect x="0" y="0" width="720" height="300" fill="var(--paper)"/>
+<!-- village -->
+<rect x="250" y="70" width="220" height="150" fill="url(#hatch)" stroke="var(--chart)" stroke-width="2" stroke-dasharray="6 4" rx="12"/>
+<rect x="215" y="35" width="290" height="220" fill="none" stroke="var(--chart)" stroke-width="1.5" rx="40"/>
+<text x="360" y="28" text-anchor="middle" class="svgc">A3: hranice 150 m od zástavby</text>
+<g fill="var(--muted)"><rect x="280" y="95" width="30" height="24"/><rect x="330" y="105" width="34" height="26"/><rect x="390" y="92" width="28" height="22"/><rect x="300" y="160" width="36" height="26"/><rect x="380" y="165" width="30" height="24"/><rect x="430" y="140" width="22" height="30"/></g>
+<text x="360" y="240" text-anchor="middle" class="svgt">obec</text>
+<!-- crowd -->
+<g fill="var(--bad)"><circle cx="560" cy="210" r="4"/><circle cx="572" cy="214" r="4"/><circle cx="566" cy="224" r="4"/><circle cx="580" cy="224" r="4"/><circle cx="552" cy="222" r="4"/><circle cx="574" cy="200" r="4"/><circle cx="588" cy="208" r="4"/></g>
+<circle cx="570" cy="212" r="34" fill="none" stroke="var(--bad)" stroke-width="2"/>
+<line x1="546" y1="188" x2="594" y2="236" stroke="var(--bad)" stroke-width="3"/>
+<text x="570" y="268" text-anchor="middle" class="svgt">shromáždění: nikdy</text>
+<!-- person -->
+<circle cx="120" cy="200" r="5" fill="var(--ink)"/><text x="120" y="225" text-anchor="middle" class="svgm">nezapojená osoba</text>
+<path d="M60 120 Q120 150 180 120" fill="none" stroke="var(--sky)" stroke-width="2.5" stroke-dasharray="5 4"/>
+<text x="120" y="108" text-anchor="middle" class="svgt">C0 smí přeletět, C1 obletí</text>
+<!-- A3 drone far -->
+<text x="640" y="80" text-anchor="middle" class="svgt">A3 létá jen</text>
+<text x="640" y="96" text-anchor="middle" class="svgt">tady venku</text>
+<path d="M630 105 L600 140" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#ar)"/>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--muted)"/></marker></defs>
+</svg>
+<figcaption>Půdorys: A3 vyžaduje 150 m od zástavby a žádné nezapojené osoby. Tvůj C0 smí v A1 létat i v obci a přeletět jednotlivce, C1 by se lidem vyhýbal. Nad shromážděním nesmí nikdo.</figcaption>
+</figure>
+
+<h2>Třídy dronů, které potkáš</h2>
+<div class="tbl"><table>
+<tr><th>Třída</th><th>Hmotnost</th><th>Poznámka</th></tr>
+<tr><td>C0</td><td>pod 250 g</td><td><b>Tvůj Mini 5 Pro</b> (Fly More Combo, standardní baterie)</td></tr>
+<tr><td>C1</td><td>pod 900 g</td><td>Mini 5 Pro z Fly More Combo Plus (baterie Plus). Remote ID, A1/A3 povinně.</td></tr>
+<tr><td>C2</td><td>pod 4 kg</td><td>A2 s osvědčením A2, nízkorychlostní režim</td></tr>
+</table></div>
+
+<h2>Obecná pravidla pro každý let</h2>
+<ul>
+<li><b>Max. 120 m</b> od nejbližšího bodu zemského povrchu. Mini 5 Pro má v EU strop 120 m nad místem vzletu nastavený z výroby.</li>
+<li><b>VLOS</b>: dron musíš vidět vlastníma očima, bez dalekohledu. Displej RC 2 nestačí. Pozorovatel smí stát vedle tebe a hlídat dron, když se díváš na obraz (FPV).</li>
+<li><b>Přednost má vždy pilotované letadlo.</b> Vrtulník záchranky, paragliding, balón: klesni, uhni, případně přistaň.</li>
+<li><b>Nic neshazuj</b> a nepřepravuj nebezpečné zboží.</li>
+<li><b>Nelétej pod vlivem</b> alkoholu, drog, léků, ani unavený nebo nemocný.</li>
+<li><b>V noci</b> musí mít dron s třídou zapnuté zelené zábleskové světlo.</li>
+<li><b>Zeměpisné zóny</b> zkontroluj před každým letem v oficiální mapě <a href="https://dronemap.gov.cz" target="_blank" rel="noopener">DroneMap</a> (od 1. 9. 2025 nahradila DronView). DJI Fly od ledna 2026 bere zóny z oficiálních národních dat, ale odpovědnost je tvoje.</li>
+<li><b>Minimální věk</b> pilota je podle nařízení EU 16 let (stát může snížit). Dítě smí pilotovat pod přímým dohledem pilota s kvalifikací.</li>
+</ul>
+
+<h2>Soukromí</h2>
+<ul>
+<li>Fotka nebo video, na kterém je rozpoznatelný člověk nebo jeho pozemek, může být osobní údaj (GDPR) a zásah do soukromí (občanský zákoník). Natáčej se souhlasem nebo tak, aby lidé nebyli rozpoznatelní.</li>
+<li>Kryj si i vlastní rodinu: fotky z dronu nesou GPS souřadnice v metadatech. Před sdílením je odstraň.</li>
+</ul>
+
+<h2>Nehody a incidenty</h2>
+<p>Nehodu s vážným nebo smrtelným zraněním nebo srážku s letadlem musíš hlásit. V ČR je to <a href="https://www.uzpln.gov.cz" target="_blank" rel="noopener">Ústav pro odborné zjišťování příčin leteckých nehod (ÚZPLN)</a>. Po jakékoli kolizi si ulož letový záznam z DJI Fly.</p>
+
+<h2>Počasí a technika</h2>
+<ul>
+<li>DJI nedoporučuje létat ve větru 12 m/s a víc, v dešti, sněhu, mlze, při bouřce. Vítr ve 100 m bývá výrazně silnější než u země.</li>
+<li>Baterie pod 5 °C ztrácí kapacitu, pod −10 °C se používat nesmí.</li>
+<li>Kovové konstrukce, elektrické vedení a vysílače ruší kompas a GNSS.</li>
+</ul>
+<p class="src">Zdroje: Nařízení (EU) 2019/947 a 2019/945; ÚCL; DJI Mini 5 Pro User Manual v1.0, kap. 2.1–2.3; EASA (zeměpisné zóny a DJI, 2026); ŘLP ČR (DroneMap).</p>
+<div class="mark"><button class="btn" data-done="pravidla">Označit jako prostudované</button></div>
+</section>
+<!-- ============ TEST ============ -->
+<section id="test">
+<h1>Cvičný test</h1>
+<p class="lead">Otázky ve stylu testu ÚCL plus otázky k tvému dronu. Ostrý test v Profilu pilota se ptá jen na pravidla, otázky k Mini 5 Pro jsou tu pro bezpečnost.</p>
+<div class="row">
+  <button class="btn" id="qQuick">Rychlé procvičení (10 otázek)</button>
+  <button class="btn ghost" id="qExam">Zkouška nanečisto (40 otázek, 60 min)</button>
+  <button class="btn ghost" id="qWrong">Jen moje chyby</button>
+</div>
+<div id="quiz"></div>
+<h3>Historie</h3>
+<div id="qhist" class="src">Zatím žádný pokus.</div>
+<div class="mark"><button class="btn" data-done="test">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ DRON ============ -->
+<section id="dron">
+<h1>Dron a ovladač</h1>
+<p class="lead">Co je v krabici, kde co je, jak připravit RC 2 a co znamenají světla. Podrobné výkresy jsou v manuálu, kap. 1.2 (dron a RC 2) a 5.2 (indikátory).</p>
+
+<h2>Obsah Fly More Combo (RC 2)</h2>
+<ul>
+<li>Dron DJI Mini 5 Pro (C0)</li>
+<li>Ovladač DJI RC 2 s 5,5" displejem (DJI Fly je předinstalovaná)</li>
+<li>3× Intelligent Flight Battery (až 36 min letu, reálně kolem 20 až 25 min)</li>
+<li>Obousměrný nabíjecí hub (umí i přelít energii mezi bateriemi a nabíjet telefon)</li>
+<li>Náhradní vrtule, sada ND filtrů (ND8/32/128), brašna, kryt gimbalu</li>
+</ul>
+<div class="warn"><p><b>Nabíječka:</b> USB-C PD nabíječka nemusí být v balení. Pro paralelní nabíjení dvou baterií v hubu je potřeba PD nabíječka aspoň 45 W (DJI doporučuje 65 W) a kabel na 3 A.</p></div>
+
+<h2>Dron</h2>
+<figure>
+<svg viewBox="0 0 640 360" role="img" aria-labelledby="dt">
+<title id="dt">Schéma dronu shora</title>
+<rect width="640" height="360" fill="var(--panel)"/>
+<g stroke="var(--ink)" stroke-width="10" stroke-linecap="round"><line x1="320" y1="180" x2="180" y2="80"/><line x1="320" y1="180" x2="460" y2="80"/><line x1="320" y1="180" x2="180" y2="280"/><line x1="320" y1="180" x2="460" y2="280"/></g>
+<g fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="4 4"><circle cx="180" cy="80" r="62"/><circle cx="460" cy="80" r="62"/><circle cx="180" cy="280" r="62"/><circle cx="460" cy="280" r="62"/></g>
+<g fill="var(--ink)"><circle cx="180" cy="80" r="11"/><circle cx="460" cy="80" r="11"/><circle cx="180" cy="280" r="11"/><circle cx="460" cy="280" r="11"/></g>
+<rect x="270" y="110" width="100" height="160" rx="30" fill="var(--sky-soft)" stroke="var(--ink)" stroke-width="3"/>
+<rect x="290" y="175" width="60" height="85" rx="10" fill="var(--paper)" stroke="var(--muted)" stroke-width="2"/>
+<text x="320" y="222" text-anchor="middle" class="svgm">baterie</text>
+<circle cx="320" cy="100" r="16" fill="var(--ink)"/><circle cx="320" cy="100" r="7" fill="var(--sky)"/>
+<rect x="306" y="120" width="28" height="8" rx="3" fill="var(--chart)"/>
+<g font-weight="700"><text x="320" y="30" text-anchor="middle" class="svgc">PŘEDEK</text></g>
+<g class="svgt">
+<line x1="334" y1="100" x2="520" y2="170" stroke="var(--muted)"/><text x="525" y="174">1 Gimbal a kamera (1")</text>
+<line x1="334" y1="124" x2="520" y2="196" stroke="var(--muted)"/><text x="525" y="200">2 LiDAR vpředu</text>
+<line x1="350" y1="250" x2="520" y2="226" stroke="var(--muted)"/><text x="525" y="230">3 Tlačítko a LED baterie</text>
+<line x1="180" y1="91" x2="60" y2="170" stroke="var(--muted)"/><text x="10" y="186">4 Motor a vrtule</text>
+<line x1="270" y1="180" x2="60" y2="214" stroke="var(--muted)"/><text x="10" y="228">5 Snímače překážek</text>
+<line x1="270" y1="240" x2="60" y2="256" stroke="var(--muted)"/><text x="10" y="270">6 microSD a USB-C</text>
+</g>
+</svg>
+<figcaption>Zjednodušené schéma shora. Dron se zapne sám po rozložení zadního pravého ramene, pokud je baterie aktivovaná. Kryt gimbalu sundej vždy před zapnutím, jinak selže autodiagnostika.</figcaption>
+</figure>
+
+<h3>Stavová světla dronu</h3>
+<div class="tbl"><table>
+<tr><th>Světlo</th><th>Význam</th><th>Co dělat</th></tr>
+<tr><td>Střídavě červená, žlutá, zelená</td><td>Zapínání, autodiagnostika</td><td>Počkej</td></tr>
+<tr><td>4× žlutě</td><td>Zahřívání</td><td>Počkej</td></tr>
+<tr><td>Pomalu zeleně</td><td>GNSS funguje</td><td>Můžeš letět</td></tr>
+<tr><td>2× zeleně opakovaně</td><td>Polohuje podle kamer</td><td>Opatrně, GNSS slabý</td></tr>
+<tr><td>Pomalu žlutě</td><td>Režim ATTI, bez GNSS i kamer</td><td>Nevzlétej</td></tr>
+<tr><td>Rychle žlutě</td><td>Ztráta signálu ovladače</td><td>Viz kapitola Nouze</td></tr>
+<tr><td>Pomalu červeně</td><td>Vzlet zakázán (např. slabá baterie)</td><td>Přečti hlášku v DJI Fly</td></tr>
+<tr><td>Rychle červeně</td><td>Kriticky slabá baterie</td><td>Přistát</td></tr>
+<tr><td>Svítí červeně</td><td>Kritická chyba</td><td>Nelétat</td></tr>
+<tr><td>Střídavě červená a žlutá</td><td>Nutná kalibrace kompasu</td><td>Kalibruj daleko od kovu</td></tr>
+</table></div>
+<p>Stav baterie zjistíš jedním krátkým stiskem tlačítka na baterii (4 LED, každá zhruba 25 %). Čtyři současně blikající LED při nabíjení znamenají poškozenou baterii.</p>
+
+<h2>Ovladač DJI RC 2</h2>
+<p>Klepni na číslo a uvidíš, k čemu prvek slouží.</p>
+<div class="rcwrap">
+<figure style="margin:0">
+<svg viewBox="0 0 520 330" role="img" aria-label="Interaktivní schéma ovladače DJI RC 2">
+<rect width="520" height="330" fill="var(--panel)"/>
+<rect x="150" y="10" width="40" height="70" rx="8" fill="var(--paper)" stroke="var(--muted)" stroke-width="2"/>
+<rect x="330" y="10" width="40" height="70" rx="8" fill="var(--paper)" stroke="var(--muted)" stroke-width="2"/>
+<rect x="40" y="70" width="440" height="230" rx="70" fill="var(--sky-soft)" stroke="var(--ink)" stroke-width="3"/>
+<rect x="155" y="95" width="210" height="125" rx="8" fill="var(--ink)"/>
+<text x="260" y="162" text-anchor="middle" fill="var(--paper)" font-size="13" font-family="Barlow, sans-serif">displej 5,5"</text>
+<circle cx="105" cy="200" r="34" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><circle cx="105" cy="200" r="13" fill="var(--ink)"/>
+<circle cx="415" cy="200" r="34" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><circle cx="415" cy="200" r="13" fill="var(--ink)"/>
+<rect x="220" y="240" width="80" height="20" rx="10" fill="var(--paper)" stroke="var(--ink)"/>
+<circle cx="190" cy="262" r="10" fill="var(--paper)" stroke="var(--ink)"/><circle cx="330" cy="262" r="10" fill="var(--paper)" stroke="var(--ink)"/>
+<g id="hots"></g>
+</svg>
+</figure>
+<div id="rcinfo" aria-live="polite"><h3>Vyber prvek</h3><p class="src">Režim páček je z výroby Mode 2: levá páčka = výška a otáčení, pravá = dopředu, dozadu, do stran.</p></div>
+</div>
+
+
+<h2>RC 2 krok za krokem</h2>
+<p>V balení Combo je RC 2 už spárovaný s dronem a má předinstalovanou DJI Fly. Telefon k létání nepotřebuješ. Podrobnosti najdeš v manuálu, kapitoly 1.1 a 6.1.</p>
+
+<h3>První zapnutí</h3>
+<ol class="steps">
+<li><b>Vyndej páčky</b> z úložných drážek na spodku ovladače a zašroubuj je. Po letu je vrať zpátky, jinak se ulomí v brašně.</li>
+<li><b>Rozlož antény.</b></li>
+<li><b>Zapni RC 2:</b> stiskni krátce a pak stiskni a podrž tlačítko napájení. Jeden krátký stisk ukáže jen stav baterie.</li>
+<li><b>Připoj RC 2 k Wi-Fi</b> doma nebo přes hotspot z telefonu. Internet je potřeba k aktivaci, firmwaru, přihlášení do DJI Fly (platí 90 dní) a aktualizaci zón.</li>
+<li><b>Aktivuj ovladač i dron</b> podle průvodce na displeji a nainstaluj aktualizace firmwaru obou zařízení.</li>
+<li><b>Zabezpeč ovladač:</b> nastav zámek obrazovky. RC 2 obsahuje tvůj účet DJI, záznamy letů i polohy.</li>
+</ol>
+
+<h3>Ovládání displeje</h3>
+<div class="tbl"><table>
+<tr><th>Gesto</th><th>Co udělá</th></tr>
+<tr><td>Tah od levého nebo pravého okraje ke středu</td><td>Zpět na předchozí obrazovku</td></tr>
+<tr><td>Tah zdola nahoru</td><td>Návrat do DJI Fly</td></tr>
+<tr><td>Tah shora dolů v DJI Fly</td><td>Stavová lišta: čas, Wi-Fi, baterie ovladače</td></tr>
+<tr><td>Dvakrát tah shora dolů</td><td>Rychlé nastavení: jas, Wi-Fi, ztlumení</td></tr>
+</table></div>
+<p>Displej má jas 700 nitů a <b>není vodotěsný</b>. Na přímém slunci pomůže stínítko a vyšší jas, který ale rychleji vybíjí baterii.</p>
+
+<h3>Signál: jak držet antény</h3>
+<figure>
+<svg viewBox="0 0 640 210" role="img" aria-labelledby="ant">
+<title id="ant">Správná orientace antén RC 2</title>
+<rect width="640" height="210" fill="var(--panel)"/>
+<path d="M150 105 L560 30 L560 180 Z" fill="var(--ok-bg)" stroke="var(--ok)" stroke-dasharray="5 4"/>
+<rect x="60" y="80" width="90" height="50" rx="14" fill="var(--sky-soft)" stroke="var(--ink)" stroke-width="2"/>
+<rect x="138" y="62" width="10" height="34" rx="3" fill="var(--muted)"/><rect x="138" y="114" width="10" height="34" rx="3" fill="var(--muted)"/>
+<g transform="translate(470 105)"><line x1="-14" y1="-14" x2="14" y2="14" stroke="var(--ink)" stroke-width="4"/><line x1="14" y1="-14" x2="-14" y2="14" stroke="var(--ink)" stroke-width="4"/><circle r="6" fill="var(--ink)"/></g>
+<text x="350" y="100" text-anchor="middle" class="svgt">nejlepší zóna signálu</text>
+<text x="350" y="118" text-anchor="middle" class="svgm">ploché strany antén míří k dronu</text>
+<text x="105" y="160" text-anchor="middle" class="svgt">RC 2</text>
+<text x="470" y="140" text-anchor="middle" class="svgt">dron</text>
+</svg>
+<figcaption>Špičky antén nemají mířit přímo na dron. Signál slábne za stromy, budovami a vlastním tělem, třeba když se k dronu otočíš zády. Při slabém signálu tě DJI Fly vyzve, jak ovladač natočit.</figcaption>
+</figure>
+
+<h3>Nabíjení a údržba</h3>
+<ul>
+<li>Nabíjí se přes USB-C. Před každým letem ho nabij na 100 %, při slabé baterii ovladač pípá.</li>
+<li>Jednou za 3 měsíce ho plně nabij, i když nelétáš.</li>
+<li>Stav baterie: 4 LED, každá zhruba 25 %.</li>
+<li>Když RC 2 zůstane zapnutý a nespojený s dronem, po chvíli pípne a vypne se. Pohnutím páčky se vypnutí zruší.</li>
+<li>Pípání během RTH vypnout nejde, to je v pořádku.</li>
+</ul>
+
+<h3>Funkce, které umí jen RC 2</h3>
+<ul>
+<li><b>Dynamický domovský bod:</b> domov se průběžně posouvá s polohou ovladače (třeba když se při letu přesouváš). Zapneš ho v DJI Fly v nabídce Bezpečnost, Aktualizovat domovský bod. Funguje jen při dobrém GNSS signálu ovladače. Po RTH dron doletí k tobě, přestane s RTH a zůstane viset ve vzduchu.</li>
+<li><b>Autopilot s rotací gimbalu:</b> nastav si Autopilot na tlačítko C2. Když ho stiskneš během otáčení gimbalu kolečkem, gimbal se točí dál sám.</li>
+<li><b>Rotace gimbalu:</b> podrž C1 a otáčej pravým horním kolečkem. Funguje to i pro svislé záběry.</li>
+</ul>
+
+<h3>Když se ovladač s dronem nespojí</h3>
+<ol class="steps">
+<li>Zapni dron i RC 2 a dej je k sobě, nejdál 0,5 m.</li>
+<li>V DJI Fly otevři Ovládání a zvol Znovu spárovat s letadlem. Stavová LED bliká modře.</li>
+<li>Podrž tlačítko napájení dronu déle než 4 sekundy. Dvě pípnutí a zelená LED znamenají, že jsou spárované.</li>
+</ol>
+
+<h3>Letové režimy (přepínač C, N, S)</h3>
+<div class="tbl"><table>
+<tr><th>Režim</th><th>Na co</th><th>Pozor</th></tr>
+<tr><td>C, Cine</td><td>Pomalé, plynulé záběry</td><td>Ideální na první lety</td></tr>
+<tr><td>N, Normal</td><td>Běžné létání, funguje vyhýbání překážkám a inteligentní režimy</td><td>Výchozí volba</td></tr>
+<tr><td>S, Sport</td><td>Nejvyšší rychlost</td><td>Snímače překážek vypnuté, brzdná dráha aspoň 30 m bez větru</td></tr>
+</table></div>
+<p class="src">Zdroj: DJI Mini 5 Pro User Manual v1.0, kap. 1.1, 1.2, 4.6, 5.1–5.3, 5.8, 6.1.</p>
+<div class="mark"><button class="btn" data-done="dron">Označit jako prostudované</button></div>
+</section>
+
+
+<!-- ============ TRENAŽÉR (původní, upravený) ============ -->
+<section id="trenazer">
+<h1>Trenažér páček</h1>
+<p class="lead">Tahej za virtuální páčky myší nebo prstem a sleduj, jak dron reaguje. Ovládání odpovídá režimu Mode 2 na RC 2. Dron je vidět shora, oranžová šipka je jeho předek.</p>
+<div class="sim-grid">
+<div>
+  <div class="field" id="field">
+    <div id="home-pad">H</div>
+    <div id="drone"><svg viewBox="0 0 64 64"><g id="drone-g">
+      <line x1="14" y1="14" x2="50" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
+      <line x1="50" y1="14" x2="14" y2="50" stroke="#2A343F" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="14" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/><circle cx="50" cy="14" r="9" fill="none" stroke="#E8682A" stroke-width="2.5"/>
+      <circle cx="14" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/><circle cx="50" cy="50" r="9" fill="none" stroke="#8794A1" stroke-width="2.5"/>
+      <rect x="24" y="22" width="16" height="22" rx="6" fill="#3A4652"/><circle cx="32" cy="26" r="3" fill="#4A90E2"/>
+      <polygon points="32,12 26,22 38,22" fill="#E8682A"/></g></svg></div>
+    <div class="alt-bar" title="Výška (max. 120 m)"><div class="alt-fill" id="alt-fill"></div></div>
+  </div>
+  <div class="telemetry">
+    <div class="tele"><small>Výška</small><b id="t-alt">0 m</b></div>
+    <div class="tele"><small>Rychlost</small><b id="t-spd">0 m/s</b></div>
+    <div class="tele"><small>Kurz</small><b id="t-hdg">0°</b></div>
+    <div class="tele"><small>Stav</small><b id="t-state">Na zemi</b></div>
+  </div>
+  <div class="task-strip" aria-live="polite"><b id="task-n">Úkol 1 z 6:</b> <span id="task-text"></span></div>
+</div>
+<div class="sticks">
+  <div class="stick-card"><h3>Levá páčka</h3><div class="hint">výška a otáčení</div>
+    <div class="stick-zone" id="stick-l"><span class="axis t">stoupání</span><span class="axis b">klesání</span><span class="axis l">otočit vlevo</span><span class="axis r">otočit vpravo</span><div class="stick-base"></div><div class="stick-knob"></div></div></div>
+  <div class="stick-card"><h3>Pravá páčka</h3><div class="hint">dopředu, dozadu, do stran</div>
+    <div class="stick-zone" id="stick-r"><span class="axis t">dopředu</span><span class="axis b">dozadu</span><span class="axis l">doleva</span><span class="axis r">doprava</span><div class="stick-base"></div><div class="stick-knob"></div></div></div>
+  <div class="row" style="justify-content:center;margin:0">
+    <button class="btn" id="btn-pause">Pauza</button>
+    <button class="btn" id="btn-rth">RTH</button>
+    <button class="btn ghost" id="btn-reset">Znovu</button>
+  </div>
+</div>
+</div>
+<p class="src">Klávesnice (když je otevřená tahle kapitola): <kbd>W</kbd> <kbd>S</kbd> stoupání a klesání, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky = pravá páčka, <kbd>Mezerník</kbd> = Pauza, <kbd>H</kbd> = RTH. Simulace je zjednodušená: bez větru a setrvačnosti. Skutečný dron reaguje měkčeji a ve větru driftuje.</p>
+<div class="note"><p><b>Proč úkol „nosem k sobě“:</b> když dron míří k tobě, pravá páčka doleva ho pošle z tvého pohledu doprava. Tady si to natrénuješ bez rizika, viz plán v kapitole První lety.</p></div>
+<div class="mark"><button class="btn" data-done="trenazer">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ CHECKLIST ============ -->
+<section id="checklist" class="ck">
+<h1>Před startem</h1>
+<p class="lead">Zaškrtnutí se ukládají v prohlížeči. Před každým létacím dnem dej Vynulovat a projdi znovu.</p>
+<div class="row"><button class="btn ghost" id="ckReset">Vynulovat seznam</button></div>
+
+<fieldset><legend>Jednou po vybalení</legend>
+<label><input type="checkbox" data-ck="a0"><span>Vyndej a zašroubuj páčky RC 2, připoj ovladač k Wi-Fi.</span></label>
+<label><input type="checkbox" data-ck="a1"><span>Aktivuj dron i RC 2 v DJI Fly (potřebuješ internet).</span></label>
+<label><input type="checkbox" data-ck="a2"><span>Aktualizuj firmware dronu i ovladače doma na Wi-Fi, ne v terénu.</span></label>
+<label><input type="checkbox" data-ck="a3"><span>Přihlas se do DJI Fly. Bez přihlášení je let omezen na 30 m výšky a 50 m vzdálenosti, přihlášení platí 90 dní.</span></label>
+<label><input type="checkbox" data-ck="a4"><span>Nalep číslo provozovatele na dron (a zadej ho do DJI Fly, pokud to nabídne).</span></label>
+<label><input type="checkbox" data-ck="a5"><span>Rozhodni o DJI Care Refresh (lhůta na koupi po aktivaci je krátká).</span></label>
+<label><input type="checkbox" data-ck="a7"><span>Nastav zámek obrazovky RC 2 a tlačítka C1 a C2 (např. C2 = Autopilot).</span></label>
+<label><input type="checkbox" data-ck="a6"><span>Vlož microSD kartu a naformátuj ji v DJI Fly.</span></label>
+</fieldset>
+
+<fieldset><legend>Den předem</legend>
+<label><input type="checkbox" data-ck="b1"><span>Nabij všechny baterie a RC 2 na 100 %.</span></label>
+<label><input type="checkbox" data-ck="b2"><span>Zkontroluj místo v DroneMap (zóny, omezení, podmínky).</span></label>
+<label><input type="checkbox" data-ck="b3"><span>Předpověď větru v 100 m, srážky, teplota.</span></label>
+<label><input type="checkbox" data-ck="b5"><span>Jednou za 90 dní připoj RC 2 k internetu a přihlas se znovu do DJI Fly, zároveň se aktualizují zóny.</span></label>
+<label><input type="checkbox" data-ck="b4"><span>Platný doklad A1/A3, registrace provozovatele a pojistka v telefonu.</span></label>
+</fieldset>
+
+<fieldset><legend>Na místě</legend>
+<label><input type="checkbox" data-ck="c1"><span>Rozhlédni se: lidé, děti, psi, elektrické vedení, stromy, ptáci, letadla.</span></label>
+<label><input type="checkbox" data-ck="c2"><span>Rovná vzletová plocha, ne vysoká tráva, ne kov, ne střecha auta.</span></label>
+<label><input type="checkbox" data-ck="c3"><span>Sundej kryt gimbalu, pak teprve zapínej.</span></label>
+<label><input type="checkbox" data-ck="c4"><span>Vrtule bez prasklin, správně nasazené podle barevného značení.</span></label>
+<label><input type="checkbox" data-ck="c5"><span>Baterie zacvaknutá, čistá čočka a snímače.</span></label>
+<label><input type="checkbox" data-ck="c6"><span>Antény RC 2 rozložené, plochou stranou k místu letu. Jas displeje nastavený.</span></label>
+</fieldset>
+
+<fieldset><legend>V DJI Fly před vzletem</legend>
+<label><input type="checkbox" data-ck="d1"><span>Výška RTH aspoň 20 m nad nejvyšší překážkou v okolí.</span></label>
+<label><input type="checkbox" data-ck="d2"><span>Při ztrátě signálu: RTH.</span></label>
+<label><input type="checkbox" data-ck="d3"><span>Maximální výška 120 m, maximální vzdálenost podle místa (pro začátek 200 až 300 m).</span></label>
+<label><input type="checkbox" data-ck="d4"><span>Vyhýbání překážkám: Obtékat nebo Brzdit, ne Vypnuto.</span></label>
+<label><input type="checkbox" data-ck="d5"><span>Přepínač režimu na N nebo C.</span></label>
+<label><input type="checkbox" data-ck="d6"><span>Žádné červené ani žluté hlášky, kalibrace kompasu jen když ji aplikace chce.</span></label>
+</fieldset>
+
+<fieldset><legend>Vzlet</legend>
+<label><input type="checkbox" data-ck="e1"><span>Dron zádí k sobě.</span></label>
+<label><input type="checkbox" data-ck="e2"><span>Vzlet do 2 až 3 m, 10 vteřin visení: drží pozici, nezní divně?</span></label>
+<label><input type="checkbox" data-ck="e3"><span>Počkej na hlášku „Home point updated“.</span></label>
+<label><input type="checkbox" data-ck="e4"><span>Vystoupej svisle aspoň 7 m, pak teprve vodorovně (přesné přistání při RTH).</span></label>
+</fieldset>
+
+<fieldset><legend>Po letu</legend>
+<label><input type="checkbox" data-ck="f1"><span>Vypni nejdřív dron, potom ovladač.</span></label>
+<label><input type="checkbox" data-ck="f2"><span>Baterii nech vychladnout, teprve pak nabíjej.</span></label>
+<label><input type="checkbox" data-ck="f5"><span>Páčky RC 2 vyšroubuj a ulož do drážek, antény slož.</span></label>
+<label><input type="checkbox" data-ck="f3"><span>Nasaď kryt gimbalu, vrtule skládej obouručně.</span></label>
+<label><input type="checkbox" data-ck="f4"><span>Na cesty a delší skladování baterie na 30 % nebo méně.</span></label>
+</fieldset>
+<p class="src">Zdroj: DJI Mini 5 Pro User Manual v1.0, kap. 1.1, 2.4, 3.4, 5.3, 5.7, 5.8.</p>
+<div class="mark"><button class="btn" data-done="checklist">Označit jako prostudované</button></div>
+</section>
+<!-- ============ LETY ============ -->
+<section id="lety">
+<h1>První lety a nouzové situace</h1>
+<p class="lead">Prvních pět baterií věnuj jen ovládání, ne natáčení. Vyber louku bez lidí, aspoň 100 × 100 m, bez větru.</p>
+
+<h2>Páčky v režimu Mode 2</h2>
+<figure>
+<svg viewBox="0 0 640 250" role="img" aria-labelledby="st">
+<title id="st">Ovládání páček Mode 2</title>
+<rect width="640" height="250" fill="var(--panel)"/>
+<defs><marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="var(--chart)"/></marker></defs>
+<g>
+<circle cx="160" cy="125" r="78" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><circle cx="160" cy="125" r="16" fill="var(--ink)"/>
+<line x1="160" y1="100" x2="160" y2="58" stroke="var(--chart)" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="160" y1="150" x2="160" y2="192" stroke="var(--chart)" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="135" y1="125" x2="93" y2="125" stroke="var(--chart)" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="185" y1="125" x2="227" y2="125" stroke="var(--chart)" stroke-width="4" marker-end="url(#a2)"/>
+<text x="160" y="38" text-anchor="middle" class="svgt">stoupat</text><text x="160" y="222" text-anchor="middle" class="svgt">klesat</text>
+<text x="50" y="129" text-anchor="middle" class="svgt">otočit</text><text x="50" y="145" text-anchor="middle" class="svgt">vlevo</text>
+<text x="272" y="129" text-anchor="middle" class="svgt">otočit</text><text x="272" y="145" text-anchor="middle" class="svgt">vpravo</text>
+<text x="160" y="245" text-anchor="middle" class="svgc">LEVÁ PÁČKA</text>
+</g>
+<g>
+<circle cx="480" cy="125" r="78" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><circle cx="480" cy="125" r="16" fill="var(--ink)"/>
+<line x1="480" y1="100" x2="480" y2="58" stroke="var(--sky)" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="480" y1="150" x2="480" y2="192" stroke="var(--sky)" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="455" y1="125" x2="413" y2="125" stroke="var(--sky)" stroke-width="4" marker-end="url(#a2)"/>
+<line x1="505" y1="125" x2="547" y2="125" stroke="var(--sky)" stroke-width="4" marker-end="url(#a2)"/>
+<text x="480" y="38" text-anchor="middle" class="svgt">dopředu</text><text x="480" y="222" text-anchor="middle" class="svgt">dozadu</text>
+<text x="372" y="129" text-anchor="middle" class="svgt">doleva</text><text x="590" y="129" text-anchor="middle" class="svgt">doprava</text>
+<text x="480" y="245" text-anchor="middle" class="svgc">PRAVÁ PÁČKA</text>
+</g>
+</svg>
+<figcaption>Čím víc páčku vychýlíš, tím rychleji se dron hýbe. Pusť páčky a dron zabrzdí a visí na místě (pokud má GNSS nebo vidí zem).</figcaption>
+</figure>
+
+<h3>Start a zastavení motorů</h3>
+<p><b>Start:</b> obě páčky současně dolů a dovnitř (nebo dolů a ven), dokud se vrtule neroztočí, pak pusť. Jednodušší je tlačítko automatického vzletu v DJI Fly (podržet pro potvrzení).<br>
+<b>Zastavení po přistání:</b> levou páčku drž dole, dokud se motory nezastaví.<br>
+<b>Nouzové zastavení vrtulí za letu</b> je z výroby nastaveno na „Jen v nouzi“. Nech to tak: vypnuté motory ve vzduchu = pád.</p>
+
+<h2>Tréninkový plán</h2>
+<ol class="steps">
+<li><b>Visení a výška.</b> Vzlet na 3 m, visení, stoupání na 10 m a zpět. Přistát. Třikrát.</li>
+<li><b>Čtverec zádí k sobě.</b> Jen pravá páčka: dopředu, doprava, dozadu, doleva, 20 m strany, výška 10 m.</li>
+<li><b>Otáčení.</b> Na místě o 90° a zpět, pak celé kolo. Sleduj šipku dronu na mapce.</li>
+<li><b>Nosem k sobě.</b> Otoč dron čelem k sobě a leť čtverec. Ovládání stran je obrácené, tohle je nejčastější zdroj nehod.</li>
+<li><b>Kruh kolem bodu.</b> Pravá páčka do strany a současně levá na otáčení. Pak si porovnej s režimem POI.</li>
+<li><b>Test RTH.</b> Odleť 100 m, výška 30 m, podrž tlačítko Pauza/RTH. Sleduj, jak stoupá, letí a přistává. Jedním stiskem RTH zrušíš.</li>
+<li><b>Ruční přistání do čtverce</b> 1 × 1 m (třeba deka). Pomalu, poslední metr velmi jemně.</li>
+</ol>
+<div class="note"><p>Úkoly 1 až 4 si nejdřív projeď bez rizika v kapitole <a href="#trenazer">Trenažér páček</a>.</p></div>
+
+<h2>Návrat domů (RTH)</h2>
+<figure>
+<svg viewBox="0 0 640 240" role="img" aria-labelledby="rt">
+<title id="rt">Profil návratu domů</title>
+<rect width="640" height="240" fill="var(--panel)"/>
+<line x1="20" y1="210" x2="620" y2="210" stroke="var(--ink)" stroke-width="2"/>
+<rect x="290" y="120" width="40" height="90" fill="var(--muted)"/><text x="310" y="114" text-anchor="middle" class="svgm">strom 25 m</text>
+<line x1="20" y1="70" x2="620" y2="70" stroke="var(--chart)" stroke-dasharray="6 5"/><text x="26" y="62" class="svgc">výška RTH 45 m</text>
+<path d="M560 150 L560 70 L80 70 L80 205" fill="none" stroke="var(--sky)" stroke-width="3.5"/>
+<circle cx="560" cy="150" r="7" fill="var(--sky)"/><text x="572" y="155" class="svgt">dron</text>
+<rect x="66" y="205" width="28" height="6" fill="var(--ok)"/><text x="80" y="232" text-anchor="middle" class="svgt">bod vzletu</text>
+<text x="575" y="112" class="svgm">1 stoupá</text><text x="320" y="92" text-anchor="middle" class="svgm">2 letí domů</text><text x="90" y="140" class="svgm">3 klesá a přistává</text>
+</svg>
+<figcaption>Režim Předvolba při horších podmínkách. V režimu Optimální si dron při dobrém světle plánuje trasu sám a výšku RTH může ignorovat. Je-li dron blíž než 50 m, letí domů v aktuální výšce; blíž než 5 m rovnou přistane.</figcaption>
+</figure>
+<ul>
+<li><b>Spouštěče:</b> podržíš tlačítko Pauza/RTH, slabá baterie, nebo ztráta signálu na víc než 6 sekund.</li>
+<li><b>Dynamický domovský bod</b> (jen s RC 2): domov se průběžně posouvá za ovladačem. Užitečné, když se při letu pohybuješ.</li>
+<li>Ve tmě, nad vodou a u tenkých drátů snímače nevidí. RTH nespoléhej na vyhýbání překážkám.</li>
+</ul>
+
+<h2>Nouzové situace</h2>
+<div class="tbl"><table>
+<tr><th>Situace</th><th>Co udělat</th></tr>
+<tr><td>Ztráta orientace</td><td>Jeden stisk Pauza: dron zabrzdí a visí. Podívej se na šipku na mapce, otoč dron nosem od sebe a leť zpět. Nebo podrž RTH.</td></tr>
+<tr><td>Ztráta signálu</td><td>Natoč RC 2 anténami k dronu, popojdi na volné místo. Po 6 s spustí RTH. Po obnovení signálu RTH pokračuje, zrušíš ho stiskem Pauza.</td></tr>
+<tr><td>Varování slabé baterie</td><td>Potvrď RTH. Pokud ho zrušíš, dron při kritické baterii sám přistane a to už nejde zrušit, jen ho můžeš posunout vodorovně na bezpečné místo.</td></tr>
+<tr><td>Režim ATTI (nedrží pozici, driftuje)</td><td>Neboj se, pilotuj ručně, jemné vstupy proti driftu, přistaň co nejdřív. Ve větru dron uletí, pokud nebudeš korigovat.</td></tr>
+<tr><td>Chyba kompasu</td><td>Odleť od kovu a vedení, přistaň, kalibruj podle DJI Fly mimo kovové předměty.</td></tr>
+<tr><td>Silný vítr, dron nepostupuje</td><td>Klesni níž (u země fouká méně), leť proti větru, případně přepni na S (víc výkonu, ale bez snímačů).</td></tr>
+<tr><td>Letadlo, vrtulník, paraglidista</td><td>Okamžitě klesej a uhni. Přednost má vždy pilotované letadlo.</td></tr>
+<tr><td>Pod dron vešel člověk</td><td>Odleť stranou, nikdy nevis nad ním. Přerušit let je vždy v pořádku.</td></tr>
+<tr><td>Dron spadl</td><td>Vyjmi baterii, zkontroluj ji (nafouklá baterie = nenabíjet, odnést na sběr). Ulož letový záznam. Před dalším letem kontrola vrtulí a gimbalu.</td></tr>
+</table></div>
+<p class="src">Zdroj: DJI Mini 5 Pro User Manual v1.0, kap. 3.2–3.4, 5.1, 5.3, 5.4.</p>
+<div class="mark"><button class="btn" data-done="lety">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ TIPY ============ -->
+<section id="tipy">
+<h1>Tipy a triky</h1>
+
+<h2>Lepší záběry</h2>
+<ul>
+<li><b>Režim C</b> a pomalé, plynulé pohyby páček. Kombinuj dva pohyby současně (dopředu a stoupání, bokem a otáčení).</li>
+<li><b>ND filtry</b>: na video drž čas závěrky zhruba na dvojnásobku snímkové frekvence (25p → 1/50 s). Za slunce ND32 až ND128.</li>
+<li><b>48mm Med-Tele</b> (2× zoom) pro portréty krajiny a kompresi perspektivy.</li>
+<li><b>Rotace gimbalu</b> na RC 2: podrž C1 a otáčej kolečkem ovládání kamery. Hodí se na svislé záběry a efekty.</li>
+<li><b>Autopilot</b> (tempomat) si nastav na vlastní tlačítko: dron drží rychlost a pohyb, ty jen jemně koriguješ.</li>
+<li><b>Hyperlapse</b> na mraky, provoz a západy slunce.</li>
+<li>Než natočíš něco důležitého, udělej pár zkušebních snímků a zkontroluj nastavení.</li>
+</ul>
+
+<h2>Inteligentní režimy: kolik místa potřebují</h2>
+<div class="tbl"><table>
+<tr><th>Režim</th><th>Prostor</th></tr>
+<tr><td>Boomerang</td><td>Poloměr 30 m kolem dronu a 10 m nad ním</td></tr>
+<tr><td>Asteroid</td><td>40 m za dronem a 50 m nad ním</td></tr>
+<tr><td>ActiveTrack, osoby</td><td>Vzdálenost 4 až 20 m, výška 0,5 až 50 m. Pohybující se lidi, zvířata ani auta neobletí.</td></tr>
+</table></div>
+<div class="warn"><p>DJI doporučuje <b>nesledovat děti</b> pomocí ActiveTrack. Sledovaný člověk by měl o letu vědět a souhlasit.</p></div>
+
+<h2>Baterie</h2>
+<ul>
+<li>Nabíjej při 5 až 40 °C, ideál 22 až 28 °C. Nikdy hned po letu, nech ji vychladnout.</li>
+<li>V zimě drž baterie v kapse, před vzletem aspoň 10 °C, po vzletu chvíli vis na místě a nech ji zahřát.</li>
+<li>Jednou za 3 měsíce plně nabít, jinak hrozí ztráta záruky na baterii.</li>
+<li>Na cesty a delší uskladnění 30 % nebo méně. Do letadla jen v příručním zavazadle, kapacitu (Wh) najdeš na štítku baterie.</li>
+<li>Nabíjecí hub umí přelít zbytky energie do jedné baterie: podrž funkční tlačítko.</li>
+</ul>
+
+<h2>Soukromí tvé i rodiny</h2>
+<ul>
+<li>DJI Fly má režim <b>Local Data Mode</b>, který omezí přenos dat na internet. Pro aktualizaci zón a přihlášení ho občas musíš vypnout.</li>
+<li>Před sdílením fotek odstraň GPS z metadat (odhalí, kde bydlíš a kde létáte).</li>
+<li>Videa s dětmi nebo sousedy nesdílej veřejně bez souhlasu.</li>
+<li>RC 2 má Wi-Fi a účet DJI: nastav na něm zámek obrazovky, pokud ho půjčuješ.</li>
+</ul>
+
+<h2>Drobnosti, které ušetří nervy</h2>
+<ul>
+<li>Neoddělávej vrtule po každém letu, rychloupínací systém se opotřebovává. Skládej je obouručně.</li>
+<li>Startuj z rovného, ne úplně jednobarevného povrchu. Snímače dole potřebují texturu.</li>
+<li>Nad vodou létej výš a nespoléhej na spodní snímače; voda je pro ně neviditelná.</li>
+<li>Startuješ-li u budov, ověř si po RTH, kde dron skutečně přistává, a poslední metry raději pilotuj ručně.</li>
+<li>Na přímém slunci pomůže stínítko na displej RC 2.</li>
+<li>Rychlé stažení videí do telefonu: QuickTransfer přes boční tlačítko dronu.</li>
+</ul>
+<p class="src">Zdroj: DJI Mini 5 Pro User Manual v1.0, kap. 4.1–4.6, 5.8–5.11.</p>
+<div class="mark"><button class="btn" data-done="tipy">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ POJIŠTĚNÍ ============ -->
+<section id="pojisteni">
+<h1>Pojištění</h1>
+<p class="lead">V podkategorii A1 není v ČR pojištění odpovědnosti povinné. Odpovídáš ale za škodu z provozní činnosti i bez vlastní chyby, takže ho rozumný pilot má.</p>
+
+<h2>Co říká zákon v ČR</h2>
+<div class="tbl"><table>
+<tr><th>Provoz</th><th>Pojištění odpovědnosti</th><th>Minimální limit</th></tr>
+<tr><td>A1 (tvůj Mini 5 Pro)</td><td>Dobrovolné</td><td>–</td></tr>
+<tr><td>A2</td><td>Povinné</td><td>1 mil. Kč na pojistnou událost</td></tr>
+<tr><td>A3</td><td>Povinné nad 4 kg</td><td>podle hmotnosti</td></tr>
+<tr><td>Specifická kategorie</td><td>Povinné</td><td>od 2 mil. Kč podle hmotnosti</td></tr>
+</table></div>
+<p>Povinnost upravuje § 54d zákona č. 49/1997 Sb., o civilním letectví. Rozhoduje kategorie provozu, ne to, jestli létáš rekreačně nebo za peníze. Odpovědnost za škodu z provozní činnosti stojí na § 2924 občanského zákoníku.</p>
+
+<h2>V zahraničí to bývá přísnější</h2>
+<div class="stop">
+<p><b>Itálie</b> vyžaduje pojištění odpovědnosti pro každý dron bez ohledu na hmotnost (italské zóny najdeš v portálu D-Flight). <b>Německo</b> má povinné pojištění pro všechny drony. Před cestou s dronem vždy ověř pravidla cílové země a územní platnost své pojistky.</p>
+</div>
+
+<h2>Na co se ptát pojišťovny</h2>
+<ul>
+<li><b>Územní platnost:</b> celá EU (nebo Evropa), ne jen ČR.</li>
+<li><b>Výslovně bezpilotní letadla</b> a jejich hmotnostní limit (tvůj dron je pod 250 g, třída C0).</li>
+<li><b>Kdo je pojištěn:</b> jen provozovatel, nebo kdokoli, kdo dron pod tvou registrací pilotuje (rodina).</li>
+<li><b>Účel:</b> rekreační, nebo i příležitostná placená práce.</li>
+<li><b>Limit a spoluúčast:</b> zákonné minimum pro A2 je 1 mil. Kč, ale újma na zdraví může být vyšší. Porovnej, kolik stojí vyšší limit.</li>
+<li><b>Výluky:</b> zásah do soukromí, GDPR, škody na pronajatých věcech, let v zakázané zóně.</li>
+<li><b>Potvrzení v angličtině</b> pro cesty.</li>
+</ul>
+<div class="warn">
+<p><b>Pojištění domácnosti a odpovědnosti v běžném životě</b> drony často vylučuje (letadla, prostředky s vlastním pohonem). Zkontroluj výluky ve svých podmínkách, nebo se zeptej na připojištění dronu. Některé pojišťovny nabízejí rekreační pojištění dronu jen pro drony registrované u ÚCL v kategorii Open do 4 kg.</p>
+</div>
+
+<h2>Poškození samotného dronu</h2>
+<ul>
+<li><b>DJI Care Refresh</b>: výměna dronu při poškození, i při ztrátě dronu v letu (dle tarifu). Koupit lze jen v omezené lhůtě po aktivaci, ověř aktuální podmínky na stránce DJI.</li>
+<li><b>Havarijní (all-risk) pojištění</b> dronu nabízejí některé pojišťovny jako doplněk k odpovědnosti.</li>
+</ul>
+
+<h2>Odkazy k pojištění</h2>
+<ul class="links">
+<li><a href="https://letejtezodpovedne.cz/k_uzitecne/pojisteni" target="_blank" rel="noopener">Létejte zodpovědně: pojištění provozovatele dronu</a><span>Přehled povinností podle kategorie provozu</span></li>
+<li><a href="https://www.uniqa.cz/pojisteni-dronu-v-ceske-republice/" target="_blank" rel="noopener">UNIQA: pojištění dronu v ČR</a><span>Příklad nabídky a podmínek rekreačního pojištění</span></li>
+<li><a href="https://dronpro.cz/pojisteni" target="_blank" rel="noopener">DronPro: pojištění dronů</a><span>Tabulka minimálních limitů</span></li>
+<li><a href="https://www.zakonyprolidi.cz/cs/1997-49" target="_blank" rel="noopener">Zákon č. 49/1997 Sb., o civilním letectví</a><span>§ 54d, pojištění odpovědnosti</span></li>
+<li><a href="https://www.dji.com/support/service/djicare-refresh" target="_blank" rel="noopener">DJI Care Refresh</a><span>Podmínky a lhůta pro koupi</span></li>
+<li><a href="https://www.d-flight.it" target="_blank" rel="noopener">D-Flight (Itálie)</a><span>Italské zóny a registrace</span></li>
+</ul>
+<p class="src">Orientační přehled, ne právní ani pojišťovací poradenství. Podmínky konkrétní smlouvy mají přednost.</p>
+<div class="mark"><button class="btn" data-done="pojisteni">Označit jako prostudované</button></div>
+</section>
+
+<!-- ============ ODKAZY ============ -->
+<section id="odkazy">
+<h1>Odkazy</h1>
+<h2>Úřady a pravidla</h2>
+<ul class="links">
+<li><a href="https://dron.caa.gov.cz/" target="_blank" rel="noopener">dron.caa.gov.cz</a><span>Profil pilota a provozovatele, prodloužení A1/A3, test</span></li>
+<li><a href="https://www.caa.gov.cz/provoz/bezpilotni-letadla/pilot-bezpilotniho-systemu/prodlouzeni-platnosti-kvalifikace-dalkove-ridiciho-pilota-a1-3-a-a2/" target="_blank" rel="noopener">ÚCL: prodloužení platnosti A1/3 a A2</a><span>Postup a dokument Udržovací výcvik</span></li>
+<li><a href="https://www.caa.gov.cz/provoz/bezpilotni-letadla/online-skoleni-a-informace-k-vyuziti/" target="_blank" rel="noopener">ÚCL: online školení a informace k využití</a><span>Studijní materiály k udržovacímu výcviku</span></li>
+<li><a href="https://www.caa.gov.cz/provoz/bezpilotni-letadla/faq-casto-kladene-dotazy/" target="_blank" rel="noopener">ÚCL: časté dotazy</a></li>
+<li><a href="https://dronemap.gov.cz" target="_blank" rel="noopener">DroneMap</a><span>Oficiální mapa zeměpisných zón v ČR (web i mobilní aplikace)</span></li>
+<li><a href="https://www.easa.europa.eu/en/domains/civil-drones/naa" target="_blank" rel="noopener">EASA: mapy zón všech členských států</a><span>Před cestou do zahraničí</span></li>
+<li><a href="https://www.uzpln.gov.cz" target="_blank" rel="noopener">ÚZPLN</a><span>Hlášení leteckých nehod</span></li>
+</ul>
+<h2>DJI Mini 5 Pro</h2>
+<ul class="links">
+<li><a href="https://www.dji.com/downloads/products/mini-5-pro" target="_blank" rel="noopener">Stažení: manuál (i česky), Quick Start, Safety Guidelines</a><span>User Manual (Czech) v1.0, kapitoly odpovídají odkazům v aplikaci</span></li>
+<li><a href="https://www.dji.com/mini-5-pro/video" target="_blank" rel="noopener">Oficiální výuková videa</a><span>Vybalení, vrtule, nabíjení, RTH, gimbal</span></li>
+<li><a href="https://www.dji.com/mini-5-pro/specs" target="_blank" rel="noopener">Technické parametry</a></li>
+<li><a href="https://www.dji.com/mini-5-pro/faq" target="_blank" rel="noopener">FAQ</a><span>Certifikace C0 a C1, kompatibilita baterií</span></li>
+<li><a href="https://www.dji.com/downloads/djiapp/dji-fly" target="_blank" rel="noopener">DJI Fly</a></li>
+<li><a href="https://fly-safe.dji.com" target="_blank" rel="noopener">DJI FlySafe</a><span>Odemykání zón (jen když to pravidla dovolí)</span></li>
+</ul>
+<div class="mark"><button class="btn" data-done="odkazy">Označit jako prostudované</button></div>
+</section>
+</main>
+</div>
+<script>
+(function(){
+"use strict";
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+/* ---------- navigation ---------- */
+const ids=$$("main section").map(s=>s.id);
+function show(){
+  let id=(location.hash||"#start").slice(1); if(!ids.includes(id)) id="start";
+  $$("main section").forEach(s=>s.classList.toggle("active",s.id===id));
+  $$("#nav a").forEach(a=>{ if(a.getAttribute("href")==="#"+id) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  requestAnimationFrame(()=>{window.scrollTo(0,0);const c=document.querySelector('#nav a[aria-current]');if(c)c.scrollIntoView({block:"nearest",inline:"center"})});
+}
+window.addEventListener("hashchange",show);
+
+/* ---------- done marks ---------- */
+let done=store.get("m5p.done",[]);
+function paintDone(){
+  $$("#nav a").forEach(a=>{const id=a.getAttribute("href").slice(1);a.parentElement.classList.toggle("done",done.includes(id))});
+  $$("[data-done]").forEach(b=>{const on=done.includes(b.dataset.done);b.textContent=on?"Prostudováno, zrušit označení":"Označit jako prostudované";b.classList.toggle("ghost",on)});
+  const p=Math.round(done.length/ids.length*100); $("#pct").textContent=p+" %"; $("#pbar").style.width=p+"%";
+}
+$$("[data-done]").forEach(b=>b.addEventListener("click",()=>{
+  const id=b.dataset.done; done=done.includes(id)?done.filter(x=>x!==id):[...done,id]; store.set("m5p.done",done); paintDone();
+}));
+
+/* ---------- checklist ---------- */
+let ck=store.get("m5p.ck",{});
+$$("[data-ck]").forEach(i=>{i.checked=!!ck[i.dataset.ck]; i.addEventListener("change",()=>{ck[i.dataset.ck]=i.checked;store.set("m5p.ck",ck)})});
+$("#ckReset").addEventListener("click",()=>{
+  // keep one-time setup items
+  Object.keys(ck).forEach(k=>{if(!k.startsWith("a")) delete ck[k]}); store.set("m5p.ck",ck);
+  $$("[data-ck]").forEach(i=>i.checked=!!ck[i.dataset.ck]);
+});
+
+/* ---------- RC 2 hotspots ---------- */
+const RC=[
+ {x:105,y:200,t:"Páčky",d:"Mode 2: levá páčka nahoru a dolů = stoupání a klesání, do stran = otáčení. Pravá páčka = dopředu, dozadu a do stran. Páčky se před letem vyšroubují z úložného prostoru ve spodní části ovladače."},
+ {x:170,y:30,t:"Antény",d:"Před letem je rozlož. Nejlepší signál je, když ploché strany antén míří k dronu. Při slabém signálu natoč ovladač podle indikátoru v DJI Fly."},
+ {x:352,y:110,t:"Displej 5,5\"",d:"700 nitů, DJI Fly je předinstalovaná. Tažením shora otevřeš stavovou lištu, dvojím tažením rychlé nastavení. Displej není vodotěsný."},
+ {x:190,y:262,t:"Pauza / RTH",d:"Krátký stisk: dron zabrzdí a visí na místě, ukončí i inteligentní režim. Podržení do pípnutí: návrat domů (RTH). Dalším stiskem RTH zrušíš a převezmeš řízení."},
+ {x:260,y:250,t:"Přepínač režimu C, N, S",d:"C = Cine, pomalý a plynulý. N = Normal, výchozí, funguje vyhýbání překážkám. S = Sport, nejrychlejší, snímače překážek vypnuté a brzdná dráha nejméně 30 m."},
+ {x:330,y:262,t:"Zapínání",d:"Krátký stisk ukáže stav baterie ovladače. Krátký stisk a pak podržení zapne nebo vypne. Po letu vypínej nejdřív dron, potom ovladač."},
+ {x:118,y:84,t:"Kolečko gimbalu",d:"Levé horní kolečko naklání kameru nahoru a dolů. Pro plynulé náklony ho otáčej pomalu."},
+ {x:402,y:84,t:"Kolečko ovládání kamery",d:"Pravé horní kolečko, z výroby zoom. Lze přenastavit na expozici, ISO nebo čas závěrky. S podrženým C1 otáčí gimbalem (rotace obrazu)."},
+ {x:82,y:118,t:"Tlačítko záznamu",d:"Jedním stiskem spustíš nebo zastavíš nahrávání videa."},
+ {x:438,y:118,t:"Ostření a spoušť",d:"Namáčknutím zaostříš, domáčknutím vyfotíš."},
+ {x:478,y:200,t:"Zadní tlačítka C1 a C2",d:"Na zadní straně. Funkci nastavíš v DJI Fly: Ovládání, Přizpůsobení tlačítek. Doporučení: C2 = Autopilot (tempomat), C1 = vycentrování gimbalu."},
+ {x:260,y:290,t:"Stavové LED",d:"Zelená = spojeno s dronem. Červená = odpojeno. Bliká červeně = slabá baterie dronu. Bliká azurově = páčky nejsou ve středu. Bliká žlutě = slabá baterie ovladače."}
+];
+const NS="http://www.w3.org/2000/svg", g=$("#hots");
+RC.forEach((h,i)=>{
+  const a=document.createElementNS(NS,"g"); a.setAttribute("class","hot"); a.setAttribute("tabindex","0"); a.setAttribute("role","button"); a.setAttribute("aria-label",h.t);
+  const c=document.createElementNS(NS,"circle"); c.setAttribute("cx",h.x);c.setAttribute("cy",h.y);c.setAttribute("r",12);c.setAttribute("class","ring");
+  const t=document.createElementNS(NS,"text"); t.setAttribute("x",h.x);t.setAttribute("y",h.y+4.5);t.setAttribute("text-anchor","middle");t.textContent=i+1;
+  a.append(c,t); g.append(a);
+  const pick=()=>{$$(".hot").forEach(x=>x.classList.remove("sel"));a.classList.add("sel");$("#rcinfo").innerHTML="<h3>"+(i+1)+". "+h.t+"</h3><p>"+h.d+"</p>"};
+  a.addEventListener("click",pick); a.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}});
+});
+
+/* ---------- quiz ---------- */
+const Q=[
+ ["Jaká je maximální výška letu v otevřené kategorii?",["120 m od nejbližšího bodu zemského povrchu","150 m nad místem vzletu","100 m nad terénem","120 m nad mořem"],0,"Limit je 120 m od nejbližšího bodu zemského povrchu. Mini 5 Pro má v EU z výroby strop 120 m nad místem vzletu, což v kopcovitém terénu není totéž."],
+ ["Co znamená VLOS?",["Pilot udržuje s dronem přímý vizuální kontakt bez optických pomůcek","Pilot sleduje dron na displeji ovladače","Let do vzdálenosti 500 m","Let s pomocí dalekohledu"],0,"VLOS = visual line of sight. Displej ani dalekohled se nepočítají."],
+ ["Jakou vodorovnou vzdálenost musíš v podkategorii A3 dodržet od obytných, obchodních, průmyslových a rekreačních oblastí?",["150 m","50 m","30 m","1 km"],0,"A3 = daleko od lidí: 150 m od těchto oblastí a žádné nezapojené osoby v prostoru letu."],
+ ["Letíš s dronem třídy C1 v podkategorii A1. Jak je to s nezapojenými osobami?",["Přelet nad nimi se neočekává; dojde-li k němu nečekaně, musí být co nejkratší","Smíš nad nimi létat bez omezení","Musíš od nich držet 30 m","V obci nesmíš létat vůbec"],0,"To je hlavní rozdíl mezi C1 a C0 v A1."],
+ ["Smí dron třídy C0 přeletět nad nezapojenou osobou?",["Ano, ale nikdy nad shromážděním osob","Ne, nikdy","Jen s jejím písemným souhlasem","Jen ve výšce nad 50 m"],0,"C0 v A1 smí přeletět nad nezapojenými osobami, nikoli nad shromážděním."],
+ ["Smíš v otevřené kategorii přeletět nad shromážděním osob?",["Ne, v žádné podkategorii","Ano, s dronem C0","Ano, ve výšce nad 100 m","Ano, pokud o tom pořadatel ví"],0,"Shromáždění osob je v otevřené kategorii zakázané vždy."],
+ ["Kdy se musíš registrovat jako provozovatel?",["Když dron má kameru (a není hračka) nebo váží 250 g a víc","Jen u dronů nad 900 g","Jen při komerčním létání","Jen v podkategorii A2"],0,"Kamera = schopnost zachytit osobní údaje, proto registrace i u lehkých dronů."],
+ ["Kde musí být číslo provozovatele?",["Viditelně na dronu a nahrané v systému Remote ID","Jen v telefonu pilota","Jen v profilu na dron.caa.gov.cz","Na ovladači"],0,"Nálepka na dronu a zadání do Remote ID v DJI Fly."],
+ ["Jak dlouho platí doklad o online výcviku A1/A3?",["5 let","2 roky","10 let","Neomezeně"],0,"Doklad A1/A3 i osvědčení A2 platí 5 let."],
+ ["Kdy nejdříve můžeš v ČR prodloužit platnost A1/A3?",["180 dní před koncem platnosti","1 rok před koncem","Kdykoli","Až po skončení platnosti"],0,"Od tohoto dne se v Profilu pilota zpřístupní prodloužení."],
+ ["Co se stane, když platnost A1/A3 vyprší dřív, než ji prodloužíš?",["Musíš kvalifikaci získat znovu stejně jako napoprvé","Máš 6 měsíců na dodatečný test","Prodlouží se automaticky","Stačí zaplatit poplatek"],0,"Po konci platnosti už prodloužení nejde."],
+ ["Jaké jsou podmínky prvotního online testu A1/A3 v ČR?",["40 otázek, 75 % správně, 60 minut","20 otázek, 50 %, 30 minut","30 otázek, 80 %, 45 minut","50 otázek, 70 %, 90 minut"],0,"Na úspěch potřebuješ 30 správných odpovědí ze 40."],
+ ["Blíží se vrtulník letecké záchranné služby. Co uděláš?",["Okamžitě klesnu, uhnu nebo přistanu","Zůstanu na místě, vrtulník mě obletí","Vystoupám nad něj","Pokračuji, pokud jsem pod 120 m"],0,"Pilotované letadlo má vždy přednost."],
+ ["Jakou roli smí mít pozorovatel v otevřené kategorii?",["Stojí vedle pilota a pomáhá udržet dron v dohledu, např. když pilot sleduje obraz","Smí stát 500 m daleko a hlásit polohu","Nahrazuje kvalifikaci pilota","V otevřené kategorii není dovolen"],0,"Pozorovatel musí být u pilota a komunikovat s ním přímo."],
+ ["Smíš z dronu v otevřené kategorii shodit předmět?",["Ne","Ano, do 250 g","Ano, mimo zástavbu","Ano, s pojištěním"],0,"Shazování materiálu a přeprava nebezpečného zboží jsou zakázané."],
+ ["Jaká je maximální vzletová hmotnost pro otevřenou kategorii?",["Méně než 25 kg","Méně než 4 kg","Méně než 900 g","Méně než 50 kg"],0,"Nad 25 kg už jde o specifickou kategorii."],
+ ["Kde najdeš oficiální zeměpisné zóny pro drony v ČR?",["V DroneMap od ŘLP ČR","V DronView","Jen v aplikaci DJI Fly","V Google Maps"],0,"DroneMap nahradila DronView od 1. 9. 2025."],
+ ["Kdo odpovídá za to, že let neporuší omezení zeměpisné zóny?",["Pilot (a provozovatel)","Výrobce dronu","ŘLP ČR","Majitel pozemku"],0,"Geofencing v aplikaci je pomůcka, odpovědnost zůstává na tobě."],
+ ["Smíš řídit dron po jednom pivu?",["Ne, pilot nesmí být pod vlivem alkoholu, drog ani léků ovlivňujících schopnosti","Ano, v podkategorii A1","Ano, pokud letí dron C0","Ano, pokud nelétám nad lidmi"],0,"Platí stejné zásady jako za volantem."],
+ ["Co musí mít dron s označením třídy při nočním letu?",["Zapnuté zelené zábleskové světlo","Povolení ÚCL","Infračervenou kameru","Nic, v noci se nelétá"],0,"V noci se v otevřené kategorii létat smí, ale se zeleným zábleskovým světlem."],
+ ["Natáčíš sousedovu zahradu, na záběrech jsou poznat lidé. Co platí?",["Jde o osobní údaje a zásah do soukromí; potřebuješ souhlas nebo je nesmíš zveřejnit","Ze vzduchu se soukromí neřeší","Stačí létat nad 50 m","Stačí mít pojištění"],0,"GDPR a ochrana osobnosti platí i pro záběry z dronu."],
+ ["Komu se v ČR hlásí letecká nehoda s vážným zraněním?",["ÚZPLN (Ústav pro odborné zjišťování příčin leteckých nehod)","Jen výrobci dronu","Jen pojišťovně","Nikomu, u dronu do 25 kg"],0,"Vážné zranění, smrt nebo srážka s letadlem se hlásí."],
+ ["Je v ČR povinné pojištění odpovědnosti pro provoz v podkategorii A1?",["Ne, je dobrovolné","Ano, min. 1 mil. Kč","Ano, min. 5 mil. Kč","Jen pro drony s kamerou"],0,"Povinné je v A2, v A3 nad 4 kg a ve specifické kategorii. Doporučené je vždy."],
+ ["Jaký je v ČR minimální limit pojištění odpovědnosti pro podkategorii A2?",["1 mil. Kč na pojistnou událost","500 tis. Kč","10 mil. Kč","Limit není stanoven"],0,"Podle § 54d zákona o civilním letectví a navazující vyhlášky."],
+ ["Letíš na dovolenou do Itálie. Jak je to s pojištěním dronu?",["V Itálii je pojištění odpovědnosti povinné pro každý dron","Stačí české pravidlo, v A1 dobrovolné","Povinné jen nad 250 g","Povinné jen pro komerční lety"],0,"Itálie výjimku pro lehké drony nevyužila. Ověř i územní platnost své pojistky."],
+ ["Jaký je rozdíl mezi provozovatelem a pilotem?",["Provozovatel se registruje a odpovídá za provoz, pilot dron řídí; může to být jedna osoba","Jsou to synonyma","Provozovatel je vždy firma","Pilot se registruje, provozovatel dělá test"],0,"Registrace provozovatele a kvalifikace pilota jsou dvě různé věci s vlastní platností."],
+ ["Jaký je podle nařízení EU minimální věk dálkově řídícího pilota v otevřené kategorii?",["16 let","18 let","14 let","Bez omezení"],0,"Členský stát může věk snížit. Mladší piloti mohou létat pod přímým dohledem pilota s kvalifikací."],
+ ["Jakou hmotnost má dron třídy C1?",["Méně než 900 g","Méně než 250 g","Méně než 2 kg","Méně než 4 kg"],0,"C0 < 250 g, C1 < 900 g, C2 < 4 kg."],
+ ["Jakou hmotnost má dron třídy C0?",["Méně než 250 g","Méně než 500 g","Méně než 900 g","Méně než 100 g"],0,"Standardní Mini 5 Pro je C0."],
+ ["Jak daleko od sebe smíš v otevřené kategorii nechat dron odletět?",["Jen tak daleko, abys ho stále viděl (VLOS)","Do 500 m","Do 1 km","Neomezeně, pokud je signál"],0,"Pevná vzdálenost není dána, rozhoduje VLOS. Mini 5 Pro zmizí z dohledu už po pár stech metrech."],
+ ["Jak se obvykle mění vítr s výškou?",["Ve výšce bývá silnější než u země","Ve výšce je vždy slabší","Nemění se","Ve výšce jen mění směr"],0,"Proto kontroluj předpověď větru ve výšce letu a sleduj varování v DJI Fly."],
+ ["Pilot se celý let dívá jen na displej a nemá pozorovatele. Je to v pořádku?",["Ne, porušuje VLOS","Ano, když dron vysílá Remote ID","Ano, v podkategorii A1","Ano, do 120 m"],0,"Bez pozorovatele musíš mít oči hlavně na dronu."],
+ ["V režimu Mode 2 zatlačíš levou páčku nahoru. Co dron udělá?",["Stoupá","Letí dopředu","Nakloní kameru nahoru","Otočí se vpravo"],0,"Levá páčka nahoru a dolů je výška. Dopředu letí dron pravou páčkou.","dron"],
+ ["Ztratil jsi orientaci a nevíš, kam míří předek dronu. Co je nejbezpečnější?",["Stisknout Pauza nebo pustit páčky, podívat se na mapu, případně podržet RTH","Přidat plyn a vystoupat","Přepnout do Sport a rychle přiletět","Vypnout motory"],0,"Dron zabrzdí a visí. Pak v klidu podle šipky na mapě nebo RTH.","dron"],
+ ["Jak natočíš antény RC 2 pro nejlepší signál?",["Plochou stranou k dronu","Špičkami přímo na dron","Složené k ovladači","Na orientaci nezáleží"],0,"Špičky antén vysílají nejslaběji. Drž ploché strany k dronu a nestav se k němu zády.","dron"],
+ ["Co dělá dynamický domovský bod na RC 2?",["Domov se posouvá s polohou ovladače","Dron přistane na nejbližší rovné ploše","Zruší návrat domů","Uloží trasu letu"],0,"Hodí se, když se při letu přesouváš. Po RTH dron doletí k tobě a zůstane viset.","dron"],
+ ["Proč musíš RC 2 občas připojit k internetu?",["Přihlášení do DJI Fly platí 90 dní a aktualizují se zóny a firmware","Bez internetu nefunguje spojení s dronem","Kvůli živému přenosu videa","Nemusíš nikdy"],0,"Bez přihlášení je let omezen na 30 m výšky a 50 m vzdálenosti.","dron"],
+ ["Jakou třídu má v EU dron ze standardního Fly More Combo?",["C0","C1","C2","Bez třídy"],0,"Standardní balení jsou C0, jen Combo Plus s bateriemi Plus je C1.","dron"],
+ ["Co se stane, když do C0 dronu Mini 5 Pro vložíš baterii Plus?",["Překročí limit C0 a přestane být C0","Nic, je to oficiální příslušenství","Stane se z něj C1","Dron nepůjde zapnout"],0,"Proto do svého C0 dronu kupuj jen standardní baterie.","dron"],
+ ["Co udělá krátký stisk tlačítka Pauza/RTH na RC 2?",["Dron zabrzdí a visí na místě","Spustí návrat domů","Vypne motory","Přepne do Sport"],0,"Podržení do pípnutí spustí RTH.","dron"],
+ ["Co dron udělá po ztrátě signálu ovladače (výchozí nastavení)?",["Po 6 s spustí návrat domů","Okamžitě přistane","Visí, dokud nedojde baterie","Letí dál po trase"],0,"Akce při ztrátě signálu se dá změnit na visení nebo přistání; RTH je nejrozumnější.","dron"],
+ ["Co platí v režimu S (Sport)?",["Snímače překážek jsou vypnuté a brzdná dráha je aspoň 30 m","Dron se sám vyhýbá všem překážkám","Rychlost je omezená na 5 m/s","Nefunguje RTH"],0,"Sport jen na otevřeném prostoru, nikdy u stromů a budov.","dron"],
+ ["Dron v režimu ATTI začne driftovat. Co uděláš?",["Řídím ručně jemnými vstupy proti driftu a co nejdřív přistanu","Pustím páčky, dron se zastaví","Přepnu do Sport a vystoupám","Vypnu motory"],0,"V ATTI dron nedrží pozici ani nebrzdí sám.","dron"],
+ ["Co uděláš před zapnutím dronu?",["Sundám kryt gimbalu","Nasadím ND filtr","Zkalibruji kompas","Vyjmu microSD kartu"],0,"Nasazený kryt naruší autodiagnostiku gimbalu.","dron"],
+ ["Jaké omezení platí, když nejsi přihlášený v DJI Fly?",["Výška 30 m a vzdálenost 50 m","Žádné","Jen zakázaný režim Sport","Max. 5 minut letu"],0,"Přihlášení platí 90 dní, pak se musíš přihlásit znovu s internetem.","dron"],
+ ["Kdy po vzletu odletíš od místa startu?",["Až po hlášce, že je zaznamenaný domovský bod","Hned po vzletu","Po 1 minutě visení","Až ve výšce 120 m"],0,"Bez domovského bodu RTH nefunguje správně.","dron"],
+ ["Kdy smíš nabíjet baterii po letu?",["Až vychladne; nabíjí se při 5 až 40 °C","Okamžitě, dokud je teplá","Jen pod 0 °C","Jen v dronu"],0,"Optimum je 22 až 28 °C.","dron"],
+ ["Jak připravíš baterie na cestu letadlem nebo delší uskladnění?",["Vybiju na 30 % nebo méně, převážím v příručním zavazadle","Nabiju na 100 % a dám do kufru","Vybiju na 0 %","Na nabití nezáleží"],0,"Nižší nabití = bezpečnější transport.","dron"],
+ ["Jak nastavíš výšku RTH?",["Aspoň 20 m nad nejvyšší překážkou v okolí","Vždy 120 m","Vždy 20 m","Na nule, ať přistane rychle"],0,"Při RTH se dron ve Předvolbě drží zadané výšky.","dron"],
+ ["Je −2 °C. Co uděláš s baterií?",["Držím ji v teple, před vzletem aspoň 10 °C, po vzletu chvíli visím","Nic, baterie se zahřeje sama","Létám jen v režimu S","Nabiju ji venku"],0,"Studená baterie ztrácí kapacitu i výkon proti větru.","dron"],
+ ["Světla dronu blikají střídavě červeně a žlutě. Co to znamená?",["Je potřeba zkalibrovat kompas","Ztráta signálu","Zahřívání","Vše v pořádku"],0,"Kalibruj daleko od aut, kovu a vedení.","dron"]
+].map((r,i)=>({id:i,q:r[0],o:r[1],a:r[2],e:r[3],tag:r[4]||"pravidla"}));
+
+let run=null, timer=null;
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function start(mode){
+  let pool;
+  if(mode==="wrong"){const w=store.get("m5p.wrong",[]);pool=shuffle(Q.filter(q=>w.includes(q.id)));
+    if(!pool.length){$("#quiz").innerHTML='<div class="note"><p>Zatím nemáš žádné chybné odpovědi. Začni rychlým procvičením.</p></div>';return}}
+  else pool=shuffle(Q).slice(0,mode==="exam"?40:10);
+  run={mode,items:pool.map(q=>({q,order:shuffle([0,1,2,3]),pick:null})),i:0,t0:Date.now()};
+  clearInterval(timer);
+  if(mode==="exam"){timer=setInterval(()=>{const left=3600-Math.floor((Date.now()-run.t0)/1000);const el=$("#qtime");if(el)el.textContent=fmt(left);if(left<=0){clearInterval(timer);finish()}},1000)}
+  render();
+}
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function render(){
+  const it=run.items[run.i], q=it.q, exam=run.mode==="exam";
+  let h='<div class="qcard"><div class="qmeta"><span>Otázka '+(run.i+1)+' z '+run.items.length+(q.tag==="dron"?", k dronu":"")+'</span>'+(exam?'<span>Zbývá <b id="qtime">'+fmt(3600-Math.floor((Date.now()-run.t0)/1000))+'</b></span>':'')+'</div>';
+  h+='<p class="qtext">'+q.q+'</p>';
+  it.order.forEach(k=>{
+    let cls="opt";
+    if(it.pick!==null){ if(exam){ if(k===it.pick) cls+=" chosen"; } else { if(k===q.a) cls+=" right"; else if(k===it.pick) cls+=" wrong"; } }
+    h+='<button class="'+cls+'" data-k="'+k+'"'+(!exam&&it.pick!==null?" disabled":"")+'>'+q.o[k]+'</button>';
+  });
+  if(!exam&&it.pick!==null) h+='<div class="expl"><b>'+(it.pick===q.a?"Správně.":"Správně je: "+q.o[q.a]+".")+'</b> '+q.e+'</div>';
+  h+='<div class="row">';
+  if(exam&&run.i>0) h+='<button class="btn ghost" id="qPrev">Předchozí</button>';
+  const last=run.i===run.items.length-1;
+  h+='<button class="btn" id="qNext"'+(it.pick===null&&!exam?" disabled":"")+'>'+(last?(exam?"Odevzdat test":"Zobrazit výsledek"):"Další otázka")+'</button></div></div>';
+  $("#quiz").innerHTML=h;
+  $$("#quiz .opt").forEach(b=>b.addEventListener("click",()=>{it.pick=+b.dataset.k;
+    if(!exam){let w=store.get("m5p.wrong",[]); if(it.pick!==q.a){if(!w.includes(q.id))w.push(q.id)} else w=w.filter(x=>x!==q.id); store.set("m5p.wrong",w)}
+    render()}));
+  $("#qNext").addEventListener("click",()=>{ if(last) finish(); else {run.i++;render()} });
+  const p=$("#qPrev"); if(p) p.addEventListener("click",()=>{run.i--;render()});
+  $("#quiz").scrollIntoView({block:"nearest"});
+}
+function finish(){
+  clearInterval(timer);
+  const n=run.items.length, ok=run.items.filter(it=>it.pick===it.q.a).length, pct=Math.round(ok/n*100), pass=pct>=75;
+  if(run.mode==="exam"){let w=store.get("m5p.wrong",[]);run.items.forEach(it=>{if(it.pick!==it.q.a){if(!w.includes(it.q.id))w.push(it.q.id)}else w=w.filter(x=>x!==it.q.id)});store.set("m5p.wrong",w)}
+  const hist=store.get("m5p.hist",[]); hist.unshift({d:new Date().toLocaleDateString("cs-CZ"),m:run.mode,ok,n,pct}); store.set("m5p.hist",hist.slice(0,15));
+  let h='<div class="qcard"><p class="result">'+pct+' %</p><p>'+ok+' z '+n+' správně. <span class="pill '+(pass?"ok":"bad")+'">'+(pass?"Prošel bys (75 %)":"Pod hranicí 75 %")+'</span></p>';
+  const wrong=run.items.filter(it=>it.pick!==it.q.a);
+  if(wrong.length){h+='<h3>Projdi si chyby</h3>';wrong.forEach(it=>{h+='<details><summary>'+it.q.q+'</summary><p><b>Správně:</b> '+it.q.o[it.q.a]+(it.pick!==null?'<br><b>Tvoje odpověď:</b> '+it.q.o[it.pick]:'<br>Bez odpovědi')+'</p><p>'+it.q.e+'</p></details>'})}
+  h+='<div class="row"><button class="btn" id="qAgain">Znovu</button></div></div>';
+  $("#quiz").innerHTML=h; const mode=run.mode; $("#qAgain").addEventListener("click",()=>start(mode)); paintHist();
+}
+function paintHist(){
+  const hist=store.get("m5p.hist",[]); if(!hist.length) return;
+  const names={quick:"Procvičení",exam:"Zkouška",wrong:"Chyby"};
+  $("#qhist").innerHTML='<div class="tbl"><table><tr><th>Datum</th><th>Režim</th><th>Výsledek</th></tr>'+hist.map(h=>'<tr><td>'+h.d+'</td><td>'+names[h.m]+'</td><td>'+h.ok+'/'+h.n+' ('+h.pct+' %)</td></tr>').join("")+'</table></div>';
+}
+$("#qQuick").addEventListener("click",()=>start("quick"));
+$("#qExam").addEventListener("click",()=>start("exam"));
+$("#qWrong").addEventListener("click",()=>start("wrong"));
+
+
+/* ---------- simulator ---------- */
+(function sim(){
+  function makeStick(id){
+    const zone=document.getElementById(id),knob=zone.querySelector(".stick-knob"),st={x:0,y:0,active:false};
+    const set=e=>{const r=zone.getBoundingClientRect(),R=r.width*.3;let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);const d=Math.hypot(dx,dy);if(d>R){dx=dx/d*R;dy=dy/d*R}
+      st.x=dx/R;st.y=-dy/R;knob.style.transform="translate(calc(-50% + "+dx+"px),calc(-50% + "+dy+"px))"};
+    zone.addEventListener("pointerdown",e=>{st.active=true;zone.setPointerCapture(e.pointerId);set(e)});
+    zone.addEventListener("pointermove",e=>{if(st.active)set(e)});
+    const rel=()=>{st.active=false;st.x=0;st.y=0;knob.style.transform="translate(-50%,-50%)"};
+    zone.addEventListener("pointerup",rel);zone.addEventListener("pointercancel",rel);
+    return st;
+  }
+  const L=makeStick("stick-l"),RS=makeStick("stick-r"),keys={};
+  const active=()=>document.getElementById("trenazer").classList.contains("active");
+  addEventListener("keydown",e=>{if(!active())return;const k=e.key.toLowerCase();
+    if(["arrowup","arrowdown","arrowleft","arrowright"," "].includes(k))e.preventDefault();
+    if(k===" "){pause();return} if(k==="h"){rth();return} keys[k]=true});
+  addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
+  const kb=()=>({lx:(keys.d?1:0)-(keys.a?1:0),ly:(keys.w?1:0)-(keys.s?1:0),rx:(keys.arrowright?1:0)-(keys.arrowleft?1:0),ry:(keys.arrowup?1:0)-(keys.arrowdown?1:0)});
+  const el=id=>document.getElementById(id), droneEl=el("drone"), MAXALT=120;
+  const TASKS=[
+    "Vzlétni: levou páčku nahoru a vystoupej nad 10 m.",
+    "Otoč se: levou páčkou do strany otoč dron aspoň o 180°.",
+    "Leť: pravou páčkou proleť kus plochy dopředu, do stran i dozadu.",
+    "Nosem k sobě: natoč dron šipkou dolů (k sobě) a pravou páčkou ho popolétni doleva a doprava.",
+    "Zabrzdi: stiskni Pauza (nebo mezerník) a pusť páčky.",
+    "Vrať se: stiskni RTH a nech dron přistát na H.",
+    "Hotovo. Zkoušej dál volně, třeba čtverec nosem k sobě."];
+  let D,task,acc;
+  function reset(){D={x:.5,y:.72,hdg:0,alt:0,mode:"manual",hold:0};task=0;acc={turn:0,fly:0,nose:0};setTask()}
+  function setTask(){el("task-text").textContent=TASKS[task];el("task-n").textContent=task<6?"Úkol "+(task+1)+" z 6:":"Splněno."}
+  function next(i){if(task===i){task++;setTask()}}
+  function pause(){if(D.alt>0){D.mode="pause";D.hold=1.2;next(4)}}
+  function rth(){if(D.alt>0){D.mode="rth";if(task===5){}}}
+  el("btn-pause").addEventListener("click",pause);
+  el("btn-rth").addEventListener("click",rth);
+  el("btn-reset").addEventListener("click",reset);
+  reset();
+  let last=performance.now();
+  function loop(t){
+    const dt=Math.min((t-last)/1000,.05);last=t;const k=kb();
+    let lx=L.active?L.x:k.lx,ly=L.active?L.y:k.ly,rx=RS.active?RS.x:k.rx,ry=RS.active?RS.y:k.ry;
+    if(D.mode==="pause"){D.hold-=dt;if(D.hold<=0)D.mode="manual";lx=ly=rx=ry=0}
+    if(D.mode==="rth"){
+      if(Math.abs(lx)+Math.abs(ly)+Math.abs(rx)+Math.abs(ry)>.6){} // RTH se ruší jen tlačítkem Pauza
+      const dx=.5-D.x,dy=.72-D.y,dist=Math.hypot(dx,dy);
+      if(D.alt<30&&dist>.02) D.alt=Math.min(30,D.alt+8*dt);
+      else if(dist>.01){D.x+=dx/dist*.18*dt;D.y+=dy/dist*.18*dt}
+      else if(D.alt>0) D.alt=Math.max(0,D.alt-5*dt);
+      else {D.mode="manual"; next(5)}
+      rx=ry=0;
+    } else if(D.alt>0||ly>.15){
+      D.alt=Math.max(0,Math.min(MAXALT,D.alt+ly*6*dt));
+      const yaw=lx*120*dt; D.hdg=(D.hdg+yaw+360)%360;
+      if(task===1){acc.turn+=Math.abs(yaw);if(acc.turn>=180)next(1)}
+      if(D.alt>0){
+        const rad=D.hdg*Math.PI/180,sp=.2;
+        D.x+=(Math.sin(rad)*ry+Math.cos(rad)*rx)*sp*dt; D.y+=(-Math.cos(rad)*ry+Math.sin(rad)*rx)*sp*dt;
+        D.x=Math.max(.04,Math.min(.96,D.x));D.y=Math.max(.06,Math.min(.94,D.y));
+        if(task===2&&Math.hypot(rx,ry)>.3){acc.fly+=dt;if(acc.fly>4)next(2)}
+        if(task===3){const nose=Math.abs(((D.hdg-180)+540)%360-180)<35;if(nose&&Math.abs(rx)>.3){acc.nose+=dt;if(acc.nose>2.5)next(3)}}
+      }
+      if(task===0&&D.alt>10)next(0);
+    }
+    droneEl.style.left=(D.x*100)+"%";droneEl.style.top=(D.y*100)+"%";
+    droneEl.style.transform="translate(-50%,-50%) scale("+(1+Math.min(D.alt,60)/60*.5)+")";
+    el("drone-g").setAttribute("transform","rotate("+D.hdg+" 32 32)");
+    el("alt-fill").style.height=(D.alt/MAXALT*100)+"%";
+    const spd=D.mode==="rth"?(D.alt>=30?10:0):Math.hypot(rx,ry)*(D.alt>0?12:0);
+    el("t-alt").textContent=Math.round(D.alt)+" m"; el("t-spd").textContent=spd.toFixed(0)+" m/s";
+    el("t-hdg").textContent=Math.round(D.hdg)+"°";
+    el("t-state").textContent=D.mode==="rth"?"RTH":D.mode==="pause"?"Brzdí":(D.alt>0?"Ve vzduchu":"Na zemi");
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+paintDone(); paintHist(); show();
+})();
+</script>
+</body>
+</html>
