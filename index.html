@@ -190,19 +190,19 @@ summary{cursor:pointer;font-weight:600}
 @media (max-width:980px){.gctl{grid-template-columns:1fr 1fr}.gbtns{grid-column:1/-1;order:-1}.gwrap{aspect-ratio:4/3}}
 
 
-main:has(#trenazer.active){max-width:1760px;padding-top:20px}
+main:has(#trenazer.active){max-width:2200px;padding-top:20px}
 /* v trenažéru se boční menu sbalí nahoru, aby měl ovladač celou šířku */
-.app:has(#trenazer.active){grid-template-columns:1fr}
+.app:has(#trenazer.active){grid-template-columns:minmax(0,1fr)}
 .app:has(#trenazer.active) nav.side{position:sticky;top:0;height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:18px}
 .app:has(#trenazer.active) .brand{font-size:17px;margin:0;flex:none}
 .app:has(#trenazer.active) .brand::before{width:26px;height:26px;background-size:17px}
 .app:has(#trenazer.active) .brand small,.app:has(#trenazer.active) .progress{display:none}
 .app:has(#trenazer.active) nav.side ol{display:flex;overflow-x:auto;gap:4px;margin:0;scrollbar-width:thin}
 .app:has(#trenazer.active) nav.side a{white-space:nowrap;padding:6px 10px;font-size:15px}
-.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
-.simwrap .rc2{grid-template-columns:210px minmax(0,1fr) 210px;gap:14px;padding:18px}
-.simwrap .rc-col .stick-zone{width:200px;height:200px}
-.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:clamp(380px,34vw,560px);border:3px solid #1d262f}
+.simwrap{display:grid;grid-template-columns:minmax(0,1fr) clamp(340px,20vw,480px);gap:16px;align-items:start}
+.simwrap .rc2{grid-template-columns:clamp(210px,13vw,290px) minmax(0,1fr) clamp(210px,13vw,290px);gap:14px;padding:18px}
+.simwrap .rc-col .stick-zone{width:clamp(200px,12vw,270px);height:clamp(200px,12vw,270px)}
+.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:clamp(380px,32vw,680px);border:3px solid #1d262f}
 #cam3d{width:100%;height:100%;display:block}
 .thirds{position:absolute;inset:0;pointer-events:none;background:
  linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% + .5px),transparent calc(66.66% + .5px)),
@@ -259,7 +259,7 @@ main:has(#trenazer.active){max-width:1760px;padding-top:20px}
 kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px}
 @media (max-width:980px){.sim-grid{grid-template-columns:1fr}.sticks{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sticks .row{grid-column:1/-1}.stick-card{padding:8px}.stick-zone{width:150px;height:150px}.field{height:300px}}
 @media (max-width:860px){
-  .app{grid-template-columns:1fr}
+  .app{grid-template-columns:minmax(0,1fr)}
   nav.side{position:sticky;top:0;height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
   .brand small,.progress{display:none}
   .brand{font-size:17px}.brand::before{width:26px;height:26px;background-size:17px}
@@ -742,7 +742,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <!-- ============ TRENAŽÉR (virtuální RC 2) ============ -->
 <section id="trenazer">
 <h1>Trenažér páček</h1>
-<p class="lead">Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
+<p class="lead"><span class="pill ok" style="font-size:12px">verze 2026-10-21c</span> Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
 
 <div class="simwrap">
 <div class="rc2">
@@ -1646,7 +1646,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
           else{G.vy+=((ly*5)-G.vy)*.15;}
           G.hdg-=lx*YAWR[G.fm]*Math.PI/180*dt;
           const sp=SPD[G.fm], fx=Math.sin(G.hdg)*-1, fz=Math.cos(G.hdg)*-1;
-          const tx=(fx*ry + fz*rx)*sp, tz=(fz*ry - fx*rx)*sp; const acc=G.fm==="S"?.035:.06;
+          const tx=(fx*ry - fz*rx)*sp, tz=(fz*ry + fx*rx)*sp; const acc=G.fm==="S"?.035:.06;
           if(G.y>0.1||ly>.2){G.vx+=(tx-G.vx)*acc;G.vz+=(tz-G.vz)*acc}else{G.vx=G.vz=0}
         }
         G.x+=G.vx*dt;G.z+=G.vz*dt;G.y=Math.max(0,Math.min(120,G.y+G.vy*dt));
@@ -1657,7 +1657,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
         paint();
       }
       // render
-      const d=T.drone; d.position.set(G.x,G.y+.4,G.z); d.rotation.set(0,G.hdg,0);
+      const d=T.drone; d.position.set(G.x,G.y+.4,G.z); d.rotation.order="YXZ"; d.rotation.set(0,G.hdg,0);
       d.rotation.x=Math.max(-.35,Math.min(.35,-(G.vx*-Math.sin(G.hdg)+G.vz*-Math.cos(G.hdg))*.03)); d.rotation.z=-(G.vx*Math.cos(G.hdg)-G.vz*Math.sin(G.hdg))*.03;
       T.props.forEach(p=>p.rotation.y+=G.y>0||G.run?.6:0); T.shadow.position.set(G.x,.07,G.z); T.shadow.scale.setScalar(Math.max(.3,1-G.y/150));
       const c=T.cam;
