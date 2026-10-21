@@ -11,7 +11,7 @@ Učební aplikace v jednom HTML souboru pro DJI Mini 5 Pro Fly More Combo (tří
 5. **Cvičný test**: 57 otázek, procvičení 10 otázek, zkouška nanečisto 40 otázek / 60 min / 75 %, opakování chyb
 6. **Dron a ovladač**: obsah balení, schéma dronu, RC 2 krok za krokem, světla, letové režimy
 7. **Trenažér páček**: virtuální RC 2, uprostřed 3D obraz kamery (gimbal, zoom, mřížka třetin), vpravo mapa polohy s výsekem kamery; 9 úkolů včetně záběru shora; náraz do stromu nebo domu = restart z domácího bodu
-8. **3D letová hra**: dron ve 3D (three.js z CDN), 10 bran, překážky, baterie, RTH, kamera za dronem nebo FPV
+8. **3D letová hra**: dron ve 3D (three.js r128 ve složce `vendor`, běží i offline), 10 bran, překážky, baterie, RTH, kamera za dronem nebo FPV
 9. **Před startem**: interaktivní checklist (ukládá se)
 10. **První lety a nouze**: tréninkový plán, RTH, nouzové situace
 11. **Chování a rizika**: ohleduplnost k lidem, kde dron ztrácí hlavu (ocel, vedení, voda, vítr)
@@ -19,7 +19,7 @@ Učební aplikace v jednom HTML souboru pro DJI Mini 5 Pro Fly More Combo (tří
 
 ## Spuštění
 
-Online: https://konias12479.github.io/Wright/ nebo otevři `index.html` v prohlížeči (funguje i offline).
+Online: https://konias12479.github.io/Wright/ nebo stáhni repo (Code → Download ZIP) a otevři `index.html` v prohlížeči. Funguje i offline, jen musí zůstat složka `vendor` vedle `index.html`.
 
 Trenažér: páčky tažením myší nebo prstem; klávesnice `W` `S` výška, `A` `D` otáčení, šipky = pravá páčka, mezerník = Pauza, `H` = RTH.
 

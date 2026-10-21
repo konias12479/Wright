@@ -742,7 +742,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <!-- ============ TRENAŽÉR (virtuální RC 2) ============ -->
 <section id="trenazer">
 <h1>Trenažér páček</h1>
-<p class="lead"><span class="pill ok" style="font-size:12px">verze 2026-10-21c</span> Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
+<p class="lead"><span class="pill ok" style="font-size:12px">verze 2026-10-21d</span> Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
 
 <div class="simwrap">
 <div class="rc2">
@@ -767,7 +767,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
       <div class="hud hud-bl">gimbal <b id="h-tilt">0°</b> zoom <b id="h-zoom">1×</b> výška <b id="h-alt">0 m</b></div>
       <div class="flash" id="flash"></div>
       <div class="crash" id="crash" hidden><div><b id="crash-t">Náraz!</b><span>Restart z domácího bodu…</span></div></div>
-      <div class="camoff" id="camoff" hidden>Obraz kamery potřebuje internet (knihovna three.js). Poloha na mapě funguje i offline.</div>
+      <div class="camoff" id="camoff" hidden>Nepodařilo se načíst knihovnu three.js (složka vendor vedle index.html). Poloha na mapě funguje i bez ní.</div>
     </div>
     <div class="rc-bottom">
       <button class="rcbtn" id="btn-pause">Pauza</button>
@@ -871,7 +871,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
       <div class="stick-zone" id="stick3-r"><div class="stick-base"></div><div class="stick-knob"></div></div></div>
   </div>
 </div>
-<p class="src">Klávesnice: <kbd>W</kbd> <kbd>S</kbd> výška, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky let, <kbd>V</kbd> přepnutí kamery, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> režim, <kbd>H</kbd> RTH. Na mobilu táhni za páčky. Hra načítá knihovnu three.js z internetu, offline nepoběží. Dron má setrvačnost: pusť páčky dřív, než chceš zastavit, přesně jako ve skutečnosti.</p>
+<p class="src">Klávesnice: <kbd>W</kbd> <kbd>S</kbd> výška, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky let, <kbd>V</kbd> přepnutí kamery, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> režim, <kbd>H</kbd> RTH. Na mobilu táhni za páčky. Hra běží i offline, knihovna three.js je ve složce <code>vendor</code> vedle stránky. Dron má setrvačnost: pusť páčky dřív, než chceš zastavit, přesně jako ve skutečnosti.</p>
 <div class="note"><p><b>Co se tu učíš:</b> odhad výšky a vzdálenosti v prostoru, brzdnou dráhu v režimu S, orientaci, když dron letí k tobě, a návyk hlídat baterii. Brány jsou v různých výškách, pořadí je na tobě.</p></div>
 <div class="mark"><button class="btn" data-done="hra">Označit jako prostudované</button></div>
 </section>
@@ -1466,9 +1466,14 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     return '<div class="mobj tree" style="left:'+o.x*100+'%;top:'+o.y*100+'%;width:4%;height:4%"></div>'}).join("");
   const W=100, wx=x=>(x-.5)*W, wz=y=>(y-.5)*W;
   let V=null;
-  function load3(cb){ if(window.THREE){cb();return} if(load3.p){load3.q.push(cb);return} load3.p=true;load3.q=[cb];
-    const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-    sc.onload=()=>load3.q.forEach(f=>f()); sc.onerror=()=>{el("camoff").hidden=false}; document.head.appendChild(sc) }
+  /* three.js r128: nejdřív kopie v repu (funguje offline), záložně CDN */
+  const SRC3=["vendor/three.min.js","https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
+  function load3(cb,fail){ if(window.THREE){cb();return} if(load3.failed){if(fail)fail();return}
+    if(load3.p){load3.q.push(cb);if(fail)load3.f.push(fail);return} load3.p=true;load3.q=[cb];load3.f=[()=>{el("camoff").hidden=false}];if(fail)load3.f.push(fail);
+    const tryNext=i=>{ if(i>=SRC3.length){load3.failed=true;load3.f.forEach(f=>f());return}
+      const sc=document.createElement("script"); sc.src=SRC3[i];
+      sc.onload=()=>{ if(window.THREE)load3.q.forEach(f=>f()); else tryNext(i+1) }; sc.onerror=()=>{sc.remove();tryNext(i+1)}; document.head.appendChild(sc) };
+    tryNext(0) }
   window.__load3=load3;
   function init3(){
     if(V)return; const cv=el("cam3d");
@@ -1587,7 +1592,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
   const L=makeStick("stick3-l"),RS=makeStick("stick3-r"),keys={};
   const active=()=>sec.classList.contains("active");
   let G; const SPD={C:4,N:10,S:16},YAWR={C:60,N:100,S:160};
-  function loadThree(cb){ if(window.THREE){cb();return} if(window.__load3){window.__load3(cb);return} const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"; sc.onload=cb; sc.onerror=()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (jsi offline?)"}; document.head.appendChild(sc) }
+  function loadThree(cb){ window.__load3(cb,()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (chybí složka vendor vedle index.html?)"}) }
   function init(){
     if(inited)return; inited=true;
     const cv=el("g3d"), renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2));

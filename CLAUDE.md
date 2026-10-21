@@ -35,8 +35,9 @@ chystá se na **prodloužení A1/A3** u ÚCL. Aplikace ho na to připravuje a u�
 
 ### 3D hra (`#hra`)
 - Samostatná closure `game()`, vlastní stav `G`, 10 bran, 60 stromů, 12 budov, setrvačnost, kamera za dronem / FPV.
-- three.js **r128** z `cdnjs.cloudflare.com` (UMD), sdílený loader `window.__load3`. Offline nepoběží (zobrazí se hláška).
-- **Ověřeno uživatelem:** 3D obraz v trenažéru se vykresluje a orientace sedí. **Neověřeno:** 3D hra (vykreslení, směr kamery, otáčení) – první věc ke kontrole.
+- three.js **r128** (UMD) je v repu `vendor/three.min.js` (licence MIT v `vendor/three.LICENSE`), záložně z `cdnjs.cloudflare.com`. Sdílený loader `window.__load3(cb, fail)` zkouší zdroje v poli `SRC3` postupně; když selžou oba, ukáže `#camoff` a hlášku ve hře. Běží i offline (i z `file://`).
+- Uživatel **nechce dělit `index.html`** na víc souborů; `vendor/` je jediná výjimka.
+- **Ověřeno uživatelem:** 3D obraz v trenažéru se vykresluje a orientace sedí. 3D hra ověřena v Chromiu 21. 10. (vykreslení, kamera, směry páček). Kolize, brány a RTH zatím jen kontrolou kódu.
 
 ## Obsahová fakta (stav 10/2026) – neměň bez ověření
 - Combo standard = C0 (36 min), Combo Plus = C1 (Plus baterie, 52 min). Plus baterie do C0 dronu = ztráta C0.
@@ -51,4 +52,4 @@ chystá se na **prodloužení A1/A3** u ÚCL. Aplikace ho na to připravuje a u�
 - Každá kapitola končí `<div class="mark"><button class="btn" data-done="ID">`.
 - Zdroje uváděj řádkem `<p class="src">Zdroj: …</p>`.
 - Před commitem: zkontroluj JS syntaxi (`node -e` s `new Function(...)` nad obsahem `<script>`) a projdi kapitoly v prohlížeči (desktop i šířka ~390 px, světlý i tmavý režim).
-- Po úpravě trenažéru zvyš štítek verze v `#trenazer .lead` (`verze 2026-10-21c`), uživatel podle něj pozná, že nemá cache.
+- Po úpravě trenažéru zvyš štítek verze v `#trenazer .lead` (`verze 2026-10-21d`), uživatel podle něj pozná, že nemá cache.
