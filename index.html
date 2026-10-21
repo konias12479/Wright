@@ -190,10 +190,19 @@ summary{cursor:pointer;font-weight:600}
 @media (max-width:980px){.gctl{grid-template-columns:1fr 1fr}.gbtns{grid-column:1/-1;order:-1}.gwrap{aspect-ratio:4/3}}
 
 
-.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px;align-items:start}
-.simwrap .rc2{grid-template-columns:168px minmax(0,1fr) 168px;gap:12px;padding:14px}
-.simwrap .rc-col .stick-zone{width:158px;height:158px}
-.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:360px;border:3px solid #1d262f}
+main:has(#trenazer.active){max-width:1760px;padding-top:20px}
+/* v trenažéru se boční menu sbalí nahoru, aby měl ovladač celou šířku */
+.app:has(#trenazer.active){grid-template-columns:1fr}
+.app:has(#trenazer.active) nav.side{position:sticky;top:0;height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:18px}
+.app:has(#trenazer.active) .brand{font-size:17px;margin:0;flex:none}
+.app:has(#trenazer.active) .brand::before{width:26px;height:26px;background-size:17px}
+.app:has(#trenazer.active) .brand small,.app:has(#trenazer.active) .progress{display:none}
+.app:has(#trenazer.active) nav.side ol{display:flex;overflow-x:auto;gap:4px;margin:0;scrollbar-width:thin}
+.app:has(#trenazer.active) nav.side a{white-space:nowrap;padding:6px 10px;font-size:15px}
+.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.simwrap .rc2{grid-template-columns:210px minmax(0,1fr) 210px;gap:14px;padding:18px}
+.simwrap .rc-col .stick-zone{width:200px;height:200px}
+.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:clamp(380px,34vw,560px);border:3px solid #1d262f}
 #cam3d{width:100%;height:100%;display:block}
 .thirds{position:absolute;inset:0;pointer-events:none;background:
  linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% + .5px),transparent calc(66.66% + .5px)),
@@ -207,18 +216,22 @@ summary{cursor:pointer;font-weight:600}
 .camview .hud-tr{right:22px}.camview .hud-br{right:22px}
 .camoff{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;color:#fff;background:rgba(15,25,35,.6);font-weight:600}
 .camoff[hidden]{display:none}
+.crash{position:absolute;inset:0;display:grid;place-items:center;text-align:center;background:rgba(192,57,43,.55);color:#fff;font:600 16px var(--font)}
+.crash b{display:block;font:700 34px var(--head)}
+.crash[hidden]{display:none}
+#field.hit{outline:3px solid var(--bad)}
 .mapside{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:14px;box-shadow:var(--shadow)}
 .mapside h3{margin:0 0 8px}
 .mapside .field{height:auto;aspect-ratio:1;box-shadow:none;background-size:20px 20px,20px 20px,auto}
 .mapside .src{margin:8px 0 0;font-size:13px}
 #drone svg{overflow:visible}
-.mapside #drone{width:30px;height:30px}
+.mapside #drone{width:38px;height:38px}
 .mapside #home-pad{width:28px;height:28px;font-size:12px}
 .north{position:absolute;left:8px;top:6px;font:700 12px var(--font);color:var(--muted)}
 .mobj{position:absolute;transform:translate(-50%,-50%);border-radius:50%}
 .mobj.tree{background:#2f7d3a}.mobj.house{background:#b58b6a;border-radius:2px}.mobj.pond{background:#4a90e2;opacity:.75}
 .mobj.road{background:#9aa3ad;border-radius:0;transform:none}
-@media (max-width:1250px){.simwrap{grid-template-columns:1fr}.mapside{max-width:360px}}
+@media (max-width:1180px){.simwrap{grid-template-columns:1fr}.mapside{max-width:460px}}
 @media (max-width:980px){.simwrap .rc2{grid-template-columns:1fr 1fr}.camview{height:260px}.simwrap .rc-col .stick-zone{width:150px;height:150px}}
 
 /* ---- simulator ---- */
@@ -753,6 +766,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
       <div class="hud hud-tr"><span id="h-bat">100 %</span> <span id="h-sat">GNSS 14</span></div>
       <div class="hud hud-bl">gimbal <b id="h-tilt">0°</b> zoom <b id="h-zoom">1×</b> výška <b id="h-alt">0 m</b></div>
       <div class="flash" id="flash"></div>
+      <div class="crash" id="crash" hidden><div><b id="crash-t">Náraz!</b><span>Restart z domácího bodu…</span></div></div>
       <div class="camoff" id="camoff" hidden>Obraz kamery potřebuje internet (knihovna three.js). Poloha na mapě funguje i offline.</div>
     </div>
     <div class="rc-bottom">
@@ -826,7 +840,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <li><b>Orbit:</b> pravá páčka do strany a levou současně otáčej, aby objekt zůstal uprostřed.</li>
 <li><b>Zoom zplošťuje perspektivu</b> a zvýrazní každé chvění. Se zoomem létej pomaleji a v režimu C.</li>
 </ul>
-<p class="src">Simulace je zjednodušená: bez větru a setrvačnosti, baterie se vybíjí rychleji než ve skutečnosti. Při 15 % spustí dron sám návrat domů, stejně jako skutečný Mini.</p>
+<p class="src">Náraz do stromu nebo domu let ukončí a dron se po chvíli vrátí na domácí bod; rozpracovaný úkol zůstane. Simulace je zjednodušená: bez větru a setrvačnosti, baterie se vybíjí rychleji než ve skutečnosti. Při 15 % spustí dron sám návrat domů, stejně jako skutečný Mini.</p>
 <div class="mark"><button class="btn" data-done="trenazer">Označit jako prostudované</button></div>
 </section>
 
@@ -1405,7 +1419,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     "Hotovo. Zkus odhalovací záběr: kamera dolů, leť k rybníku a pomalu zvedej gimbal k horizontu."];
   let D,task,acc;
   function reset(){
-    D={x:.5,y:.72,hdg:0,alt:0,mode:"manual",hold:0,fm:"N",tilt:0,zoom:1,rec:false,recT:0,photos:0,bat:100,cruise:null,lowRth:false};
+    D={crash:false,x:.5,y:.72,hdg:0,alt:0,mode:"manual",hold:0,fm:"N",tilt:0,zoom:1,rec:false,recT:0,photos:0,bat:100,cruise:null,lowRth:false};
     task=0;acc={turn:0,fly:0,nose:0};
     el("g-tilt").value=0;el("g-zoom").value=1;setMode("N");paintRec();setTask();
   }
@@ -1488,6 +1502,21 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     cam.fov=82/D.zoom; cam.updateProjectionMatrix(); const hw=24/D.zoom; el("fov").setAttribute("points","32,30 "+(32-hw)+",-26 "+(32+hw)+",-26");
     ren.render(V.sc,cam);
   }
+  function collide(){
+    const px=wx(D.x),pz=wz(D.y);
+    for(const o of OBJ){
+      if(o.t==="tree"){const r=o.h*.28+.4; if(D.alt<o.h&&Math.hypot(px-wx(o.x),pz-wz(o.y))<r)return "strom"}
+      else if(o.t==="house"){if(D.alt<o.h+3&&Math.abs(px-wx(o.x))<o.w*W/2+.4&&Math.abs(pz-wz(o.y))<o.d*W/2+.4)return "dům"}
+    }
+    return null;
+  }
+  function crash(what){
+    D.crash=true;D.mode="pause";D.hold=99;D.cruise=null;if(D.rec)toggleRec();
+    el("crash-t").textContent="Náraz do "+(what==="strom"?"stromu":"domu")+"!";el("crash").hidden=false;el("field").classList.add("hit");
+    crashes++; setTimeout(()=>{const t=task;reset();task=t;setTask();el("crash").hidden=true;el("field").classList.remove("hit");
+      el("task-n").textContent=(task<9?"Úkol "+(task+1)+" z 9:":"Splněno.")+" (nárazů: "+crashes+")"},1600);
+  }
+  let crashes=0;
   const try3=()=>{ if(active()) load3(init3) };
   addEventListener("hashchange",try3); setTimeout(try3,0);
   reset();
@@ -1520,6 +1549,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
         if(task===3){const nose=Math.abs(((D.hdg-180)+540)%360-180)<35;if(nose&&Math.abs(rx)>.3){acc.nose+=dt;if(acc.nose>2.5)next(3)}}
       }
       if(task===0&&D.alt>10)next(0);
+      if(D.alt>0&&!D.crash){const hit=collide(); if(hit)crash(hit)}
       if(D.alt===0&&D.mode!=="rth"&&D.bat<100&&ly<=.15){/* landed manually */}
     }
     droneEl.style.left=(D.x*100)+"%";droneEl.style.top=(D.y*100)+"%";
