@@ -18,7 +18,7 @@ Pak v Claude Code: „Přečti CLAUDE.md a HANDOFF.md a pokračuj podle sekce Da
 
 ## Otevřené body / další kroky
 1. ~~Ověřit 3D hru~~ Hotovo 21. 10.: vykreslení, kamera za dronem i FPV a otáčení ověřeny v Chromiu (desktop i 390 px). Opraveno: pravá páčka do stran letěla obráceně, náklon modelu dronu při jiném kurzu než sever. Opraveno i vodorovné přetékání stránky na mobilu (Pravidla, DroneMap, Trenažér).
-2. **Ověřit, že GitHub Pages servíruje novou verzi** (štítek „verze 2026-10-21d“ v trenažéru, menu se na trenažéru sbalí nahoru).
+2. **Ověřit, že GitHub Pages servíruje novou verzi** (štítek „verze 2026-10-22a“ v trenažéru, menu se na trenažéru sbalí nahoru).
 3. ~~Rozdělení `index.html`~~ Uživatel nechce, zůstává jeden soubor.
 4. ~~Vendorovat three.js~~ Hotovo: `vendor/three.min.js` (r128), CDN jen jako záloha.
 5. Volitelné nápady, které uživatel zatím nechtěl: reset úkolů po nárazu, vítr v simulaci, další scénáře (orbit kolem domu, odhalovací záběr jako úkol s vyhodnocením kompozice).

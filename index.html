@@ -202,6 +202,14 @@ main:has(#trenazer.active){max-width:2200px;padding-top:20px}
 .simwrap{display:grid;grid-template-columns:minmax(0,1fr) clamp(340px,20vw,480px);gap:16px;align-items:start}
 .simwrap .rc2{grid-template-columns:clamp(210px,13vw,290px) minmax(0,1fr) clamp(210px,13vw,290px);gap:14px;padding:18px}
 .simwrap .rc-col .stick-zone{width:clamp(200px,12vw,270px);height:clamp(200px,12vw,270px)}
+.size11{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 14px}
+.size11 details{margin:0;flex:1 1 100%}
+.size11 .info{color:var(--muted);font-size:15px}
+.cal-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:10px 0}
+.cal-row input[type=number]{width:90px;font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit}
+.cal-row input[type=range]{flex:1 1 220px}
+.card11{border:2px dashed var(--blue);border-radius:3.18mm;background:var(--blue-soft);display:grid;place-items:center;font-size:13px;color:var(--blue);text-align:center}
+.camview.is11{margin:0 auto;border:0;border-radius:0;box-shadow:0 0 0 3px #1d262f}
 .camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:clamp(380px,32vw,680px);border:3px solid #1d262f}
 #cam3d{width:100%;height:100%;display:block}
 .thirds{position:absolute;inset:0;pointer-events:none;background:
@@ -742,7 +750,19 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <!-- ============ TRENAŽÉR (virtuální RC 2) ============ -->
 <section id="trenazer">
 <h1>Trenažér páček</h1>
-<p class="lead"><span class="pill ok" style="font-size:12px">verze 2026-10-21d</span> Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
+<p class="lead"><span class="pill ok" style="font-size:12px">verze 2026-10-22a</span> Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr. Tlačítkem „Displej 1:1“ zmenšíš obraz kamery na skutečnou velikost displeje RC 2.</p>
+
+<div class="size11">
+  <button class="btn ghost" id="b-11" aria-pressed="false">Displej 1:1 jako RC 2</button>
+  <span class="info" id="s11-info"></span>
+  <details id="cal11"><summary>Kalibrace velikosti podle tvého monitoru</summary>
+    <p>Prohlížeč nezná fyzickou velikost monitoru, proto ji jednou nastav. Displej RC 2 má úhlopříčku 5,5″ (asi 122 × 69 mm). Stačí jeden ze dvou způsobů:</p>
+    <div class="cal-row"><label for="cal-diag">1. Úhlopříčka monitoru v palcích</label><input type="number" id="cal-diag" min="5" max="100" step="0.1" placeholder="např. 27"><button class="btn" id="cal-diag-b">Použít</button></div>
+    <p class="src">Funguje, jen když je zoom prohlížeče 100 % a okno je na tom monitoru, jehož úhlopříčku zadáváš.</p>
+    <div class="cal-row"><label for="cal-px">2. Přilož platební kartu a posuvníkem dorovnej rámeček na její velikost</label><input type="range" id="cal-px" min="2" max="12" step="0.01"></div>
+    <div class="card11" id="card11">platební karta<br>85,6 × 54 mm</div>
+  </details>
+</div>
 
 <div class="simwrap">
 <div class="rc2">
@@ -1572,6 +1592,30 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
+})();
+
+
+/* ---------- displej 1:1 jako RC 2 (5,5″, 16:9 ≈ 121,8 × 68,5 mm) ---------- */
+(function size11(){
+  const el=id=>document.getElementById(id), cv=el("camview"), mid=cv.parentElement, btn=el("b-11"), info=el("s11-info"), rng=el("cal-px"), card=el("card11");
+  const RC_W=121.8, RC_H=68.5;
+  let pxmm=store.get("m5p.pxmm",null), on=store.get("m5p.is11",false);
+  const cur=()=>pxmm||96/25.4;  // bez kalibrace: nominální CSS milimetr
+  function apply(){
+    btn.setAttribute("aria-pressed",on); btn.classList.toggle("ghost",!on);
+    rng.value=cur(); card.style.width=85.6*cur()+"px"; card.style.height=53.98*cur()+"px";
+    if(!on){cv.classList.remove("is11");cv.style.width=cv.style.height="";info.textContent=pxmm?"":"Před prvním použitím 1:1 nastav kalibraci.";return}
+    const avail=mid.clientWidth; if(!avail)return;
+    const w=RC_W*cur(), h=RC_H*cur(), k=Math.min(1,avail/w);
+    cv.classList.add("is11"); cv.style.width=w*k+"px"; cv.style.height=h*k+"px";
+    info.textContent=(!pxmm?"Nekalibrováno, velikost je jen odhad. ":"")+(k<1?"Na šířku se nevejde, zobrazeno v "+Math.round(k*100)+" % skutečné velikosti.":"Obraz má velikost displeje RC 2. Seď tak, jak budeš držet ovladač, asi 40 cm od očí.");
+  }
+  const save=v=>{pxmm=v;store.set("m5p.pxmm",v);apply()};
+  btn.addEventListener("click",()=>{on=!on;store.set("m5p.is11",on);if(on&&!pxmm)el("cal11").open=true;apply()});
+  rng.addEventListener("input",()=>save(+rng.value));
+  el("cal-diag-b").addEventListener("click",()=>{const d=+el("cal-diag").value;if(d>=5&&d<=100)save(Math.hypot(screen.width,screen.height)/(d*25.4))});
+  addEventListener("resize",apply); addEventListener("hashchange",()=>setTimeout(apply,0));
+  apply(); setTimeout(apply,0);
 })();
 
 
