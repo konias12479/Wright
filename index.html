@@ -190,19 +190,27 @@ summary{cursor:pointer;font-weight:600}
 @media (max-width:980px){.gctl{grid-template-columns:1fr 1fr}.gbtns{grid-column:1/-1;order:-1}.gwrap{aspect-ratio:4/3}}
 
 
-main:has(#trenazer.active){max-width:1760px;padding-top:20px}
+main:has(#trenazer.active){max-width:2200px;padding-top:20px}
 /* v trenažéru se boční menu sbalí nahoru, aby měl ovladač celou šířku */
-.app:has(#trenazer.active){grid-template-columns:1fr}
+.app:has(#trenazer.active){grid-template-columns:minmax(0,1fr)}
 .app:has(#trenazer.active) nav.side{position:sticky;top:0;height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:8px 16px;display:flex;align-items:center;gap:18px}
 .app:has(#trenazer.active) .brand{font-size:17px;margin:0;flex:none}
 .app:has(#trenazer.active) .brand::before{width:26px;height:26px;background-size:17px}
 .app:has(#trenazer.active) .brand small,.app:has(#trenazer.active) .progress{display:none}
 .app:has(#trenazer.active) nav.side ol{display:flex;overflow-x:auto;gap:4px;margin:0;scrollbar-width:thin}
 .app:has(#trenazer.active) nav.side a{white-space:nowrap;padding:6px 10px;font-size:15px}
-.simwrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
-.simwrap .rc2{grid-template-columns:210px minmax(0,1fr) 210px;gap:14px;padding:18px}
-.simwrap .rc-col .stick-zone{width:200px;height:200px}
-.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:clamp(380px,34vw,560px);border:3px solid #1d262f}
+.simwrap{display:grid;grid-template-columns:minmax(0,1fr) clamp(340px,20vw,480px);gap:16px;align-items:start}
+.simwrap .rc2{grid-template-columns:clamp(210px,13vw,290px) minmax(0,1fr) clamp(210px,13vw,290px);gap:14px;padding:18px}
+.simwrap .rc-col .stick-zone{width:clamp(200px,12vw,270px);height:clamp(200px,12vw,270px)}
+.size11{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 14px}
+.size11 details{margin:0;flex:1 1 100%}
+.size11 .info{color:var(--muted);font-size:15px}
+.cal-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:10px 0}
+.cal-row input[type=number]{width:90px;font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit}
+.cal-row input[type=range]{flex:1 1 220px}
+.card11{border:2px dashed var(--blue);border-radius:3.18mm;background:var(--blue-soft);display:grid;place-items:center;font-size:13px;color:var(--blue);text-align:center}
+.camview.is11{margin:0 auto;border:0;border-radius:0;box-shadow:0 0 0 3px #1d262f}
+.camview{position:relative;border-radius:12px;overflow:hidden;background:#9ec9ea;height:clamp(380px,32vw,680px);border:3px solid #1d262f}
 #cam3d{width:100%;height:100%;display:block}
 .thirds{position:absolute;inset:0;pointer-events:none;background:
  linear-gradient(90deg,transparent calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% - .5px),rgba(255,255,255,.55) calc(33.33% + .5px),transparent calc(33.33% + .5px),transparent calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% - .5px),rgba(255,255,255,.55) calc(66.66% + .5px),transparent calc(66.66% + .5px)),
@@ -259,7 +267,7 @@ main:has(#trenazer.active){max-width:1760px;padding-top:20px}
 kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px}
 @media (max-width:980px){.sim-grid{grid-template-columns:1fr}.sticks{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sticks .row{grid-column:1/-1}.stick-card{padding:8px}.stick-zone{width:150px;height:150px}.field{height:300px}}
 @media (max-width:860px){
-  .app{grid-template-columns:1fr}
+  .app{grid-template-columns:minmax(0,1fr)}
   nav.side{position:sticky;top:0;height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top,0px))}
   .brand small,.progress{display:none}
   .brand{font-size:17px}.brand::before{width:26px;height:26px;background-size:17px}
@@ -742,7 +750,19 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
 <!-- ============ TRENAŽÉR (virtuální RC 2) ============ -->
 <section id="trenazer">
 <h1>Trenažér páček</h1>
-<p class="lead">Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr.</p>
+<p class="lead"><span class="pill ok" style="font-size:12px">verze 2026-10-22a</span> Virtuální RC 2: uprostřed vidíš, co zabírá kamera dronu, vpravo jeho polohu na mapě. Tahej za páčky, nakláněj gimbal, zoomuj a uč se skládat záběr. Tlačítkem „Displej 1:1“ zmenšíš obraz kamery na skutečnou velikost displeje RC 2.</p>
+
+<div class="size11">
+  <button class="btn ghost" id="b-11" aria-pressed="false">Displej 1:1 jako RC 2</button>
+  <span class="info" id="s11-info"></span>
+  <details id="cal11"><summary>Kalibrace velikosti podle tvého monitoru</summary>
+    <p>Prohlížeč nezná fyzickou velikost monitoru, proto ji jednou nastav. Displej RC 2 má úhlopříčku 5,5″ (asi 122 × 69 mm). Stačí jeden ze dvou způsobů:</p>
+    <div class="cal-row"><label for="cal-diag">1. Úhlopříčka monitoru v palcích</label><input type="number" id="cal-diag" min="5" max="100" step="0.1" placeholder="např. 27"><button class="btn" id="cal-diag-b">Použít</button></div>
+    <p class="src">Funguje, jen když je zoom prohlížeče 100 % a okno je na tom monitoru, jehož úhlopříčku zadáváš.</p>
+    <div class="cal-row"><label for="cal-px">2. Přilož platební kartu a posuvníkem dorovnej rámeček na její velikost</label><input type="range" id="cal-px" min="2" max="12" step="0.01"></div>
+    <div class="card11" id="card11">platební karta<br>85,6 × 54 mm</div>
+  </details>
+</div>
 
 <div class="simwrap">
 <div class="rc2">
@@ -767,7 +787,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
       <div class="hud hud-bl">gimbal <b id="h-tilt">0°</b> zoom <b id="h-zoom">1×</b> výška <b id="h-alt">0 m</b></div>
       <div class="flash" id="flash"></div>
       <div class="crash" id="crash" hidden><div><b id="crash-t">Náraz!</b><span>Restart z domácího bodu…</span></div></div>
-      <div class="camoff" id="camoff" hidden>Obraz kamery potřebuje internet (knihovna three.js). Poloha na mapě funguje i offline.</div>
+      <div class="camoff" id="camoff" hidden>Nepodařilo se načíst knihovnu three.js (složka vendor vedle index.html). Poloha na mapě funguje i bez ní.</div>
     </div>
     <div class="rc-bottom">
       <button class="rcbtn" id="btn-pause">Pauza</button>
@@ -871,7 +891,7 @@ kbd{font:600 12px var(--font);background:var(--panel);border:1px solid var(--lin
       <div class="stick-zone" id="stick3-r"><div class="stick-base"></div><div class="stick-knob"></div></div></div>
   </div>
 </div>
-<p class="src">Klávesnice: <kbd>W</kbd> <kbd>S</kbd> výška, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky let, <kbd>V</kbd> přepnutí kamery, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> režim, <kbd>H</kbd> RTH. Na mobilu táhni za páčky. Hra načítá knihovnu three.js z internetu, offline nepoběží. Dron má setrvačnost: pusť páčky dřív, než chceš zastavit, přesně jako ve skutečnosti.</p>
+<p class="src">Klávesnice: <kbd>W</kbd> <kbd>S</kbd> výška, <kbd>A</kbd> <kbd>D</kbd> otáčení, šipky let, <kbd>V</kbd> přepnutí kamery, <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> režim, <kbd>H</kbd> RTH. Na mobilu táhni za páčky. Hra běží i offline, knihovna three.js je ve složce <code>vendor</code> vedle stránky. Dron má setrvačnost: pusť páčky dřív, než chceš zastavit, přesně jako ve skutečnosti.</p>
 <div class="note"><p><b>Co se tu učíš:</b> odhad výšky a vzdálenosti v prostoru, brzdnou dráhu v režimu S, orientaci, když dron letí k tobě, a návyk hlídat baterii. Brány jsou v různých výškách, pořadí je na tobě.</p></div>
 <div class="mark"><button class="btn" data-done="hra">Označit jako prostudované</button></div>
 </section>
@@ -1466,9 +1486,14 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
     return '<div class="mobj tree" style="left:'+o.x*100+'%;top:'+o.y*100+'%;width:4%;height:4%"></div>'}).join("");
   const W=100, wx=x=>(x-.5)*W, wz=y=>(y-.5)*W;
   let V=null;
-  function load3(cb){ if(window.THREE){cb();return} if(load3.p){load3.q.push(cb);return} load3.p=true;load3.q=[cb];
-    const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
-    sc.onload=()=>load3.q.forEach(f=>f()); sc.onerror=()=>{el("camoff").hidden=false}; document.head.appendChild(sc) }
+  /* three.js r128: nejdřív kopie v repu (funguje offline), záložně CDN */
+  const SRC3=["vendor/three.min.js","https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"];
+  function load3(cb,fail){ if(window.THREE){cb();return} if(load3.failed){if(fail)fail();return}
+    if(load3.p){load3.q.push(cb);if(fail)load3.f.push(fail);return} load3.p=true;load3.q=[cb];load3.f=[()=>{el("camoff").hidden=false}];if(fail)load3.f.push(fail);
+    const tryNext=i=>{ if(i>=SRC3.length){load3.failed=true;load3.f.forEach(f=>f());return}
+      const sc=document.createElement("script"); sc.src=SRC3[i];
+      sc.onload=()=>{ if(window.THREE)load3.q.forEach(f=>f()); else tryNext(i+1) }; sc.onerror=()=>{sc.remove();tryNext(i+1)}; document.head.appendChild(sc) };
+    tryNext(0) }
   window.__load3=load3;
   function init3(){
     if(V)return; const cv=el("cam3d");
@@ -1570,6 +1595,30 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
 })();
 
 
+/* ---------- displej 1:1 jako RC 2 (5,5″, 16:9 ≈ 121,8 × 68,5 mm) ---------- */
+(function size11(){
+  const el=id=>document.getElementById(id), cv=el("camview"), mid=cv.parentElement, btn=el("b-11"), info=el("s11-info"), rng=el("cal-px"), card=el("card11");
+  const RC_W=121.8, RC_H=68.5;
+  let pxmm=store.get("m5p.pxmm",null), on=store.get("m5p.is11",false);
+  const cur=()=>pxmm||96/25.4;  // bez kalibrace: nominální CSS milimetr
+  function apply(){
+    btn.setAttribute("aria-pressed",on); btn.classList.toggle("ghost",!on);
+    rng.value=cur(); card.style.width=85.6*cur()+"px"; card.style.height=53.98*cur()+"px";
+    if(!on){cv.classList.remove("is11");cv.style.width=cv.style.height="";info.textContent=pxmm?"":"Před prvním použitím 1:1 nastav kalibraci.";return}
+    const avail=mid.clientWidth; if(!avail)return;
+    const w=RC_W*cur(), h=RC_H*cur(), k=Math.min(1,avail/w);
+    cv.classList.add("is11"); cv.style.width=w*k+"px"; cv.style.height=h*k+"px";
+    info.textContent=(!pxmm?"Nekalibrováno, velikost je jen odhad. ":"")+(k<1?"Na šířku se nevejde, zobrazeno v "+Math.round(k*100)+" % skutečné velikosti.":"Obraz má velikost displeje RC 2. Seď tak, jak budeš držet ovladač, asi 40 cm od očí.");
+  }
+  const save=v=>{pxmm=v;store.set("m5p.pxmm",v);apply()};
+  btn.addEventListener("click",()=>{on=!on;store.set("m5p.is11",on);if(on&&!pxmm)el("cal11").open=true;apply()});
+  rng.addEventListener("input",()=>save(+rng.value));
+  el("cal-diag-b").addEventListener("click",()=>{const d=+el("cal-diag").value;if(d>=5&&d<=100)save(Math.hypot(screen.width,screen.height)/(d*25.4))});
+  addEventListener("resize",apply); addEventListener("hashchange",()=>setTimeout(apply,0));
+  apply(); setTimeout(apply,0);
+})();
+
+
 /* ---------- 3D hra (three.js) ---------- */
 (function game(){
   const el=id=>document.getElementById(id);
@@ -1587,7 +1636,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
   const L=makeStick("stick3-l"),RS=makeStick("stick3-r"),keys={};
   const active=()=>sec.classList.contains("active");
   let G; const SPD={C:4,N:10,S:16},YAWR={C:60,N:100,S:160};
-  function loadThree(cb){ if(window.THREE){cb();return} if(window.__load3){window.__load3(cb);return} const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"; sc.onload=cb; sc.onerror=()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (jsi offline?)"}; document.head.appendChild(sc) }
+  function loadThree(cb){ window.__load3(cb,()=>{el("g-msg").textContent="Nepodařilo se načíst three.js (chybí složka vendor vedle index.html?)"}) }
   function init(){
     if(inited)return; inited=true;
     const cv=el("g3d"), renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2));
@@ -1646,7 +1695,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
           else{G.vy+=((ly*5)-G.vy)*.15;}
           G.hdg-=lx*YAWR[G.fm]*Math.PI/180*dt;
           const sp=SPD[G.fm], fx=Math.sin(G.hdg)*-1, fz=Math.cos(G.hdg)*-1;
-          const tx=(fx*ry + fz*rx)*sp, tz=(fz*ry - fx*rx)*sp; const acc=G.fm==="S"?.035:.06;
+          const tx=(fx*ry - fz*rx)*sp, tz=(fz*ry + fx*rx)*sp; const acc=G.fm==="S"?.035:.06;
           if(G.y>0.1||ly>.2){G.vx+=(tx-G.vx)*acc;G.vz+=(tz-G.vz)*acc}else{G.vx=G.vz=0}
         }
         G.x+=G.vx*dt;G.z+=G.vz*dt;G.y=Math.max(0,Math.min(120,G.y+G.vy*dt));
@@ -1657,7 +1706,7 @@ $("#qWrong").addEventListener("click",()=>start("wrong"));
         paint();
       }
       // render
-      const d=T.drone; d.position.set(G.x,G.y+.4,G.z); d.rotation.set(0,G.hdg,0);
+      const d=T.drone; d.position.set(G.x,G.y+.4,G.z); d.rotation.order="YXZ"; d.rotation.set(0,G.hdg,0);
       d.rotation.x=Math.max(-.35,Math.min(.35,-(G.vx*-Math.sin(G.hdg)+G.vz*-Math.cos(G.hdg))*.03)); d.rotation.z=-(G.vx*Math.cos(G.hdg)-G.vz*Math.sin(G.hdg))*.03;
       T.props.forEach(p=>p.rotation.y+=G.y>0||G.run?.6:0); T.shadow.position.set(G.x,.07,G.z); T.shadow.scale.setScalar(Math.max(.3,1-G.y/150));
       const c=T.cam;
